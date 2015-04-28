@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6221" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="projectClassCell" rowHeight="90" id="KGk-i7-Jjw" customClass="StuProjectClassCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9on-8L-2om">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="89.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <inset key="titleEdgeInsets" minX="-45" minY="35" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="20"/>
+                        <state key="normal" title="科研项目" image="project_keyan">
+                            <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afg-kW-IsN">
+                        <rect key="frame" x="80" y="0.0" width="80" height="89.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <inset key="titleEdgeInsets" minX="-45" minY="35" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="20"/>
+                        <state key="normal" title="毕业设计" image="project_bishe">
+                            <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nq6-h0-EL8">
+                        <rect key="frame" x="160" y="0.0" width="80" height="89.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <inset key="titleEdgeInsets" minX="-45" minY="35" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="20"/>
+                        <state key="normal" title="课程设计" image="project_keshe">
+                            <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lbt-6O-R5C">
+                        <rect key="frame" x="240" y="0.0" width="80" height="89.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <inset key="titleEdgeInsets" minX="-45" minY="35" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="20"/>
+                        <state key="normal" title="实训项目" image="projet_shixun">
+                            <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="afg-kW-IsN" firstAttribute="height" secondItem="9on-8L-2om" secondAttribute="height" id="2eQ-BF-4ub"/>
+                    <constraint firstAttribute="bottom" secondItem="9on-8L-2om" secondAttribute="bottom" id="6gK-Bo-hze"/>
+                    <constraint firstItem="Nq6-h0-EL8" firstAttribute="leading" secondItem="afg-kW-IsN" secondAttribute="trailing" id="6tH-7U-54C"/>
+                    <constraint firstItem="9on-8L-2om" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="8So-Ce-bgE"/>
+                    <constraint firstAttribute="trailing" secondItem="Lbt-6O-R5C" secondAttribute="trailing" id="AFy-p9-5cR"/>
+                    <constraint firstItem="afg-kW-IsN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="EM4-8Q-dgM"/>
+                    <constraint firstAttribute="bottom" secondItem="afg-kW-IsN" secondAttribute="bottom" id="MIN-hn-3Pj"/>
+                    <constraint firstItem="afg-kW-IsN" firstAttribute="height" secondItem="Lbt-6O-R5C" secondAttribute="height" id="OBb-yA-1hS"/>
+                    <constraint firstItem="Lbt-6O-R5C" firstAttribute="leading" secondItem="Nq6-h0-EL8" secondAttribute="trailing" id="Vko-7X-hbm"/>
+                    <constraint firstAttribute="bottom" secondItem="Nq6-h0-EL8" secondAttribute="bottom" id="Wa8-nH-Zr8"/>
+                    <constraint firstItem="afg-kW-IsN" firstAttribute="width" secondItem="Nq6-h0-EL8" secondAttribute="width" id="WwZ-tW-NbA"/>
+                    <constraint firstItem="Lbt-6O-R5C" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="XNf-89-V4h"/>
+                    <constraint firstItem="afg-kW-IsN" firstAttribute="width" secondItem="9on-8L-2om" secondAttribute="width" id="XXh-kU-9Nd"/>
+                    <constraint firstItem="9on-8L-2om" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bL5-ZR-6SA"/>
+                    <constraint firstItem="afg-kW-IsN" firstAttribute="height" secondItem="Nq6-h0-EL8" secondAttribute="height" id="bSk-Zq-SKB"/>
+                    <constraint firstItem="afg-kW-IsN" firstAttribute="width" secondItem="Lbt-6O-R5C" secondAttribute="width" id="dZ3-et-ohd"/>
+                    <constraint firstAttribute="bottom" secondItem="Lbt-6O-R5C" secondAttribute="bottom" id="hHy-5u-rxO"/>
+                    <constraint firstItem="afg-kW-IsN" firstAttribute="leading" secondItem="9on-8L-2om" secondAttribute="trailing" id="qJJ-J5-CCe"/>
+                    <constraint firstItem="Nq6-h0-EL8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="qbK-ZZ-eBV"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bisheButton" destination="afg-kW-IsN" id="DTa-np-6YS"/>
+                <outlet property="kesheButton" destination="Nq6-h0-EL8" id="R7x-gK-Ny4"/>
+                <outlet property="keyanButton" destination="9on-8L-2om" id="HMg-Bq-P7M"/>
+                <outlet property="shixunButton" destination="Lbt-6O-R5C" id="rxH-hp-0p7"/>
+            </connections>
+            <point key="canvasLocation" x="236" y="347"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="project_bishe" width="42" height="42"/>
+        <image name="project_keshe" width="47" height="39"/>
+        <image name="project_keyan" width="42" height="42"/>
+        <image name="projet_shixun" width="42" height="42"/>
+    </resources>
+</document>

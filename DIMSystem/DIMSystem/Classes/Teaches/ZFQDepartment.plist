@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>dep001</key>
+		<string>计算机学院</string>
+	</dict>
+	<dict>
+		<key>dep002</key>
+		<string>纺织学院</string>
+	</dict>
+	<dict>
+		<key>dep003</key>
+		<string>能源与环境学院</string>
+	</dict>
+	<dict>
+		<key>dep004</key>
+		<string>机电学院</string>
+	</dict>
+	<dict>
+		<key>dep005</key>
+		<string>电子信息学院</string>
+	</dict>
+	<dict>
+		<key>dep006</key>
+		<string>材料与化工学院</string>
+	</dict>
+	<dict>
+		<key>dep007</key>
+		<string>建筑工程学院</string>
+	</dict>
+	<dict>
+		<key>dep008</key>
+		<string>服装学院</string>
+	</dict>
+	<dict>
+		<key>dep009</key>
+		<string>艺术设计</string>
+	</dict>
+	<dict>
+		<key>dep010</key>
+		<string>经济管理学院</string>
+	</dict>
+	<dict>
+		<key>dep011</key>
+		<string>新闻与传播学院</string>
+	</dict>
+</array>
+</plist>

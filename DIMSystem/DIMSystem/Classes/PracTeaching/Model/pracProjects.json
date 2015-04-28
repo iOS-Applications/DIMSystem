@@ -1,0 +1,112 @@
+{
+    "type": "MultiPolygon",
+    "data": [
+             {
+             "PraPrj_id": "1",
+             "PraPrj_title": "基于iOS的教研室管理系统",
+             "PraPrj_source": "其他",
+             "PraPrj_type": "研究",
+             "PraPrj_sign": "1",
+             "PraPrj_teacher": "潘磊",
+             "PraPrj_job": "副教授",
+             "PraPrj_stuNum": "3",
+             "PraPrj_descript1": "教研室的科研、教学信息繁多。使用智能终端能，可以在填写表格时，能快速获得所需信息。本课题的设计系统分为客户端App和服务器端平台。",
+             "PraPrj_descript2":"（1）服务器端设计，包括后台软件、数据库设计（共同）（Linux或Windows平台均可）；（2）客户端教师科研、教学等信息App设计（iOS）（1人）；（3） 客户端竞赛、学生等信息App设计（iOS）（1人）；（4）客户端质量工程、实习、实训等信息App设计（1人）"
+             },
+             {
+             "PraPrj_id": "2",
+             "PraPrj_title": "“网络系统集成”课程平台的设计与实现",
+             "PraPrj_source": "社会服务",
+             "PraPrj_type": "设计",
+             "PraPrj_sign": "1",
+             "PraPrj_teacher": "潘磊",
+             "PraPrj_job": "副教授",
+             "PraPrj_stuNum": "3",
+             "PraPrj_descript1": "“网络系统集成”课程2014年被立项为中原工学院优秀课程建设计划，需要建设一个以课程信息为主的课程平台。",
+             "PraPrj_descript2":"（1）课程平台的分析和设计（共同）；（2）教学基本资源系统（课件、微视频等）的设计（1人）；（3）教学答疑系统（1人）；（4）教学扩展资源系统（1人）；（5）手机客户端（共同，可选）；"
+             },
+             {
+             "PraPrj_id": "3",
+             "PraPrj_title": "“Linux程序设计”课程教学软件的设计与实现",
+             "PraPrj_source": "社会服务",
+             "PraPrj_type": "设计",
+             "PraPrj_sign": "1",
+             "PraPrj_teacher": "潘磊",
+             "PraPrj_job": "副教授",
+             "PraPrj_stuNum": "3",
+             "PraPrj_descript1": "“网络系统集成”课程2014年被立项为中原工学院优秀课程建设计划，需要建设一个以课程信息为主的课程平台。",
+             "PraPrj_descript2":"（1）课程平台的分析和设计（共同）；（2）教学基本资源系统（课件、微视频等）的设计（1人）；（3）教学答疑系统（1人）；（4）教学扩展资源系统（1人）；（5）手机客户端（共同，可选）；"
+             },
+             {
+             "PraPrj_id": "4",
+             "PraPrj_title": "“网络系统集成”课程平台的设计与实现",
+             "PraPrj_source": "社会服务",
+             "PraPrj_type": "设计",
+             "PraPrj_sign": "1",
+             "PraPrj_teacher": "潘磊",
+             "PraPrj_job": "副教授",
+             "PraPrj_stuNum": "3",
+             "PraPrj_descript1": "“网络系统集成”课程2014年被立项为中原工学院优秀课程建设计划，需要建设一个以课程信息为主的课程平台。",
+             "PraPrj_descript2":"（1）课程平台的分析和设计（共同）；（2）教学基本资源系统（课件、微视频等）的设计（1人）；（3）教学答疑系统（1人）；（4）教学扩展资源系统（1人）；（5）手机客户端（共同，可选）；"
+             },
+             {
+             "PraPrj_id": "3",
+             "PraPrj_title": "“网络系统集成”课程平台的设计与实现",
+             "PraPrj_source": "社会服务",
+             "PraPrj_type": "设计",
+             "PraPrj_sign": "1",
+             "PraPrj_teacher": "潘磊",
+             "PraPrj_job": "副教授",
+             "PraPrj_stuNum": "3",
+             "PraPrj_descript1": "“网络系统集成”课程2014年被立项为中原工学院优秀课程建设计划，需要建设一个以课程信息为主的课程平台。",
+             "PraPrj_descript2":"（1）课程平台的分析和设计（共同）；（2）教学基本资源系统（课件、微视频等）的设计（1人）；（3）教学答疑系统（1人）；（4）教学扩展资源系统（1人）；（5）手机客户端（共同，可选）；"
+             },
+             {
+             "PraPrj_id": "3",
+             "PraPrj_title": "“网络系统集成”课程平台的设计与实现",
+             "PraPrj_source": "社会服务",
+             "PraPrj_type": "设计",
+             "PraPrj_sign": "1",
+             "PraPrj_teacher": "潘磊",
+             "PraPrj_job": "副教授",
+             "PraPrj_stuNum": "3",
+             "PraPrj_descript1": "“网络系统集成”课程2014年被立项为中原工学院优秀课程建设计划，需要建设一个以课程信息为主的课程平台。",
+             "PraPrj_descript2":"（1）课程平台的分析和设计（共同）；（2）教学基本资源系统（课件、微视频等）的设计（1人）；（3）教学答疑系统（1人）；（4）教学扩展资源系统（1人）；（5）手机客户端（共同，可选）；"
+             },
+             {
+             "PraPrj_id": "3",
+             "PraPrj_title": "“网络系统集成”课程平台的设计与实现",
+             "PraPrj_source": "社会服务",
+             "PraPrj_type": "设计",
+             "PraPrj_sign": "1",
+             "PraPrj_teacher": "潘磊",
+             "PraPrj_job": "副教授",
+             "PraPrj_stuNum": "3",
+             "PraPrj_descript1": "“网络系统集成”课程2014年被立项为中原工学院优秀课程建设计划，需要建设一个以课程信息为主的课程平台。",
+             "PraPrj_descript2":"（1）课程平台的分析和设计（共同）；（2）教学基本资源系统（课件、微视频等）的设计（1人）；（3）教学答疑系统（1人）；（4）教学扩展资源系统（1人）；（5）手机客户端（共同，可选）；"
+             },
+             {
+             "PraPrj_id": "3",
+             "PraPrj_title": "“网络系统集成”课程平台的设计与实现",
+             "PraPrj_source": "社会服务",
+             "PraPrj_type": "设计",
+             "PraPrj_sign": "1",
+             "PraPrj_teacher": "潘磊",
+             "PraPrj_job": "副教授",
+             "PraPrj_stuNum": "3",
+             "PraPrj_descript1": "“网络系统集成”课程2014年被立项为中原工学院优秀课程建设计划，需要建设一个以课程信息为主的课程平台。",
+             "PraPrj_descript2":"（1）课程平台的分析和设计（共同）；（2）教学基本资源系统（课件、微视频等）的设计（1人）；（3）教学答疑系统（1人）；（4）教学扩展资源系统（1人）；（5）手机客户端（共同，可选）；"
+             },
+             {
+             "PraPrj_id": "3",
+             "PraPrj_title": "“网络系统集成”课程平台的设计与实现",
+             "PraPrj_source": "社会服务",
+             "PraPrj_type": "设计",
+             "PraPrj_sign": "1",
+             "PraPrj_teacher": "潘磊",
+             "PraPrj_job": "副教授",
+             "PraPrj_stuNum": "3",
+             "PraPrj_descript1": "“网络系统集成”课程2014年被立项为中原工学院优秀课程建设计划，需要建设一个以课程信息为主的课程平台。",
+             "PraPrj_descript2":"（1）课程平台的分析和设计（共同）；（2）教学基本资源系统（课件、微视频等）的设计（1人）；（3）教学答疑系统（1人）；（4）教学扩展资源系统（1人）；（5）手机客户端（共同，可选）；"
+             }]
+}

@@ -1,0 +1,393 @@
+{
+    "data": [
+             {
+             "PraPrj_id": "149",
+             "tea_id": "352432135",
+             "PraPrj_title": "基于iOS的教研室信息管理系统",
+             "pro_state": "1",
+             "pro_timeLimit": "2014_11~2015_6",
+             "PraPrj_sign": "1",
+             "pro_stu": [
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "张三",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "lisi",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "小明",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "周华健",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         }
+                         ]
+             },
+             {
+             "PraPrj_id": "133",
+             "tea_id": "352432135",
+             "PraPrj_title": "宝贝计划",
+             "pro_state": "1",
+             "pro_timeLimit": "2014_11~2015_6",
+             "PraPrj_sign": "1",
+             "pro_stu": [
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "网聊",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "lisi",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         }
+                         ]
+             },
+             {
+             "PraPrj_id": "155",
+             "tea_id": "352432135",
+             "PraPrj_title": "韩流圈",
+             "pro_state": "1",
+             "pro_timeLimit": "2014_11~2015_6",
+             "PraPrj_sign": "2",
+             "pro_stu": [
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "张三",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "lisi",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         }
+                         ]
+             },
+             {
+             "PraPrj_id": "132",
+             "tea_id": "352432135",
+             "PraPrj_title": "基于iOS的run 5K",
+             "pro_state": "1",
+             "pro_timeLimit": "2014_11~2015_6",
+             "PraPrj_sign": "1",
+             "pro_stu": [
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "张三",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "lisi",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         }
+                         ]
+             },
+             {
+             "PraPrj_id": "149",
+             "tea_id": "352432135",
+             "PraPrj_title": "基于iOS的教研室信息管理系统",
+             "pro_state": "1",
+             "pro_timeLimit": "2014_11~2015_6",
+             "PraPrj_sign": "1",
+             "pro_stu": [
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "张三",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "lisi",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         }
+                         ]
+             },
+             {
+             "PraPrj_id": "149",
+             "tea_id": "352432135",
+             "PraPrj_title": "基于iOS的教研室信息管理系统",
+             "pro_state": "1",
+             "pro_timeLimit": "2014_11~2015_6",
+             "PraPrj_sign": "1",
+             "pro_stu": [
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "刘德华",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "成龙",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "小明",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "周华健",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "周杰轮",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "齐秦",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         }
+                         ]
+             },
+             {
+             "PraPrj_id": "149",
+             "tea_id": "352432135",
+             "PraPrj_title": "基于iOS的教研室信息管理系统",
+             "pro_state": "1",
+             "pro_timeLimit": "2014_11~2015_6",
+             "PraPrj_sign": "1",
+             "pro_stu": [
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "张三",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "lisi",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         }
+                         ]
+             },
+             {
+             "PraPrj_id": "149",
+             "tea_id": "352432135",
+             "PraPrj_title": "基于iOS的教研室信息管理系统",
+             "pro_state": "1",
+             "pro_timeLimit": "2014_11~2015_6",
+             "PraPrj_sign": "1",
+             "pro_stu": [
+                         {
+                         "stu_num": "201100834208",
+                         "stu_name": "张三",
+                         "stu_age": "25",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         },
+                         {
+                         "stu_num": "201100834209",
+                         "stu_name": "lisi",
+                         "stu_age": "22",
+                         "stu_sex": "男",
+                         "stu_depart": "计算机学院",
+                         "stu_major": "软件工程",
+                         "stu_class": "112",
+                         "stu_post": "学生",
+                         "stu_address": "河南郑州",
+                         "stu_phone": "18739910620",
+                         "stu_email": "781826057@qq.com",
+                         "stu_remarks": "beizhu"
+                         }
+                         ]
+             }
+             ],
+    "success": "1"
+}
