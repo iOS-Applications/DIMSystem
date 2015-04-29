@@ -54,6 +54,7 @@
 		B162A7F41AEF2900004B1BE7 /* ZFQMajor.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F01AEF2900004B1BE7 /* ZFQMajor.plist */; };
 		B162A7F51AEF2900004B1BE7 /* ZFQJob.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F11AEF2900004B1BE7 /* ZFQJob.plist */; };
 		B162A7F61AEF2900004B1BE7 /* ZFQDepartInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F21AEF2900004B1BE7 /* ZFQDepartInfo.plist */; };
+		B1D9D99C1AF0AB310065714B /* ZFQSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */; };
 		CC0251251ADB798C00F65C95 /* DIMTextHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0251241ADB798C00F65C95 /* DIMTextHeight.m */; };
 		CC234F381AD26D6500406280 /* TSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CC234F2E1AD26D6500406280 /* TSActionSheet.m */; };
 		CC234F391AD26D6500406280 /* TSPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC234F301AD26D6500406280 /* TSPopoverController.m */; };
@@ -207,6 +208,8 @@
 		B162A7F01AEF2900004B1BE7 /* ZFQMajor.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZFQMajor.plist; sourceTree = "<group>"; };
 		B162A7F11AEF2900004B1BE7 /* ZFQJob.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZFQJob.plist; sourceTree = "<group>"; };
 		B162A7F21AEF2900004B1BE7 /* ZFQDepartInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZFQDepartInfo.plist; sourceTree = "<group>"; };
+		B1D9D99A1AF0AB310065714B /* ZFQSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQSearchController.h; sourceTree = "<group>"; };
+		B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQSearchController.m; sourceTree = "<group>"; };
 		CC0251231ADB798C00F65C95 /* DIMTextHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMTextHeight.h; sourceTree = "<group>"; };
 		CC0251241ADB798C00F65C95 /* DIMTextHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMTextHeight.m; sourceTree = "<group>"; };
 		CC02512F1ADC19C200F65C95 /* PracShiXun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracShiXun.h; sourceTree = "<group>"; };
@@ -841,6 +844,8 @@
 				B162A7DE1AEF26EB004B1BE7 /* ZFQTeacherHomeController.m */,
 				B162A7E01AEF2701004B1BE7 /* ZFQTeachersController.h */,
 				B162A7E11AEF2701004B1BE7 /* ZFQTeachersController.m */,
+				B1D9D99A1AF0AB310065714B /* ZFQSearchController.h */,
+				B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */,
 				CCDBA90B1AE0E8B900A735FE /* ZFQTeacherEditController.h */,
 				CCDBA90C1AE0E8B900A735FE /* ZFQTeacherEditController.m */,
 				CCDBA90D1AE0E8B900A735FE /* ZFQTeacherEditController.xib */,
@@ -1056,6 +1061,7 @@
 				12724BDC1AE0E26100356E0C /* MJArgument.m in Sources */,
 				CC234F3A1AD26D6500406280 /* TSPopoverPopoverView.m in Sources */,
 				CC6DCDEB1ADEC970006CB380 /* PracMyBiShe.m in Sources */,
+				B1D9D99C1AF0AB310065714B /* ZFQSearchController.m in Sources */,
 				12724BAE1AE0E23800356E0C /* StuInfoCheckVC.m in Sources */,
 				CC4B1B3C1ADD6CEE00A04EFD /* pracScientific.m in Sources */,
 				CC665FDA1AD1261B003F86FE /* main.m in Sources */,
