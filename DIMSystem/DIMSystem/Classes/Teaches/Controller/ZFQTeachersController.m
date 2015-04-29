@@ -8,12 +8,20 @@
 
 #import "ZFQTeachersController.h"
 #import "ZFQDepartmentHeaderView.h"
+#import "ZFQMecroDefine.h"
+#import "ZFQSearchController.h"
 
 @interface ZFQTeachersController () <UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *folds;   //保存每一个section是否展开的状态,初始值都是YES,表示都是折叠状态
-    NSArray *departs; //    
+    NSArray *departs;        //
+    CGFloat keyboardHeight;
+    
+    ZFQSearchController *searchResultController;
 }
+
+@property (nonatomic,strong) UISearchBar *mySearchBar;
+
 @end
 
 @implementation ZFQTeachersController
@@ -33,9 +41,30 @@
     _myTableView.delegate = self;
     _myTableView.sectionHeaderHeight = 44;
     
+    //添加searchBar
+    _myTableView.tableHeaderView = self.mySearchBar;
+    
+    //设置搜索结果controller
+    searchResultController = [[ZFQSearchController alloc] initWithController:self searchBar:self.mySearchBar];    
     [self.view addSubview:_myTableView];
     
     self.title = @"选择";
+}
+
+- (UISearchBar *)mySearchBar
+{
+    if (_mySearchBar == nil) {
+        _mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, _myTableView.frame.size.width, 44)];
+        _mySearchBar.placeholder = @"输入关键字";
+        _mySearchBar.searchBarStyle = UISearchBarStyleMinimal;
+    }
+    return _mySearchBar;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    searchResultController = nil;
 }
 
 #pragma mark - tableView delegate
@@ -106,6 +135,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    NSLog(@"realse teachers");
+}
 
 
 @end

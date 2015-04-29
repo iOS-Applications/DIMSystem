@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZFQTeachersController : UIViewController
+@interface ZFQTeachersController : UIViewController 
 
 @property (nonatomic,strong) UITableView *myTableView;
 
