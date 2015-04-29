@@ -58,7 +58,7 @@
     [SVProgressHUD showWithStatus:@"正在加载..."];
     
     ZFQTeacherInfoController * __weak weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //这是json解析的结果
         NSDictionary *info = @{
                                @"data":@{
@@ -240,6 +240,7 @@
     teacherVC.completionBlk = ^(NSDictionary *myTeacherInfo) {
         //设置信息
         [weakSelf settingTeacherInfo:myTeacherInfo];
+        weakSelf.teacherInfo = [myTeacherInfo mutableCopy];
     };
     
     UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:teacherVC];

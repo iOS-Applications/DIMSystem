@@ -16,10 +16,6 @@
 
 @interface ZFQTeacherEditController () <DropDownChooseDataSource,DropDownChooseDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 {
-    //    NSArray *departments;       //部门
-    //    NSDictionary *departmentDic;
-    //    NSArray *jobs;              //职位
-    
     DropDownListView *majorListView;
     NSString *currDepartmentKey;
     
@@ -27,11 +23,13 @@
     
     UITextField *currFocusField;
     CGFloat preOffsetY;
+    NSInteger departIndex;      //学院的index
 }
 
 @property (nonatomic,strong) NSArray *departments;
 @property (nonatomic,strong) NSDictionary *departmentDic;;
 @property (nonatomic,strong) NSArray *jobs;
+@property (nonatomic,strong) NSArray *departmentInfo;
 
 @end
 
@@ -49,7 +47,6 @@
     //添加关闭键盘gesture
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction:)];
     tapGesture.cancelsTouchesInView = NO;
-//    tapGesture.delegate = self;
     [_myScrollView addGestureRecognizer:tapGesture];
     _myScrollView.delegate = self;
     //添加键盘显示观察者
@@ -209,15 +206,6 @@
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册中选取", nil];
     [actionSheet showInView:self.view];
 }
-
-//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-//{
-//    if ([gestureRecognizer.view isEqual:_myScrollView]) {
-//        return YES;
-//    } else {
-//        return NO;
-//    }
-//}
 
 #pragma mark - actionSheet delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -393,6 +381,14 @@
     return _jobs;
 }
 
+- (NSArray *)departmentInfo
+{
+    if (_departmentInfo == nil) {
+        _departmentInfo = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ZFQDepartInfo" ofType:@"plist"]];
+    }
+    return _departmentInfo;
+}
+
 #pragma mark - DropDownListView delegate dataSource
 
 - (void)dropDownListView:(DropDownListView *)listView chooseAtSection:(NSInteger)section index:(NSInteger)index
@@ -471,23 +467,70 @@
     }
 }
 
-
 - (NSInteger)defaultShowSection:(NSInteger)section dropDownListView:(DropDownListView *)listView
 {
     switch (listView.tag) {
         case 100: {          //性别
+            //获取
             NSString *tempGender = _teacherInfo[@"gender"];
-            
+            if ([tempGender isEqualToString:@"男"]) {
+                return 0;
+            } else {
+                return 1;
+            }
             break;
         }
-        case 101:           //学院
-            break;
-        case 102:           //专业
-            break;
-        case 103:           //职称
-            break;
+            
+        case 101:   {         //学院
+            NSString *departName = _teacherInfo[@"department"];
+            departIndex = [self indexOfDrowListTitle:departName];
+            return departIndex;
+        }
+        case 102:  {         //专业
+            NSString *majorName = _teacherInfo[@"major"];
+            NSDictionary *info = self.departmentInfo[departIndex];
+            NSArray *array = info[@"list"];
+            NSInteger index = 0;
+            BOOL exist = NO;
+            for (NSString *name in array) {
+                if ([name isEqualToString:majorName]) {
+                    exist = YES;
+                    break;
+                }
+                index ++;
+            }
+            index = (exist == YES) ? index : 0;
+            return index;
+        }
+        case 103: {          //职称
+            NSString *jobName = _teacherInfo[@"job"];
+            NSInteger index = 0;
+            BOOL exist = NO;
+            for (NSString *tempName in self.jobs) {
+                if ([jobName isEqualToString:tempName]) {
+                    exist = YES;
+                    break;
+                }
+                index ++;
+            }
+            index = (exist == YES) ? index : 0;
+            return index;
+        }
     }
     return 0;
+}
+
+- (NSInteger)indexOfDrowListTitle:(NSString *)title
+{
+    NSArray *array = self.departmentInfo;
+    __block NSInteger index = 0;
+    for (NSInteger index = 0; index < array.count; index ++) {
+        NSString *tempStr = [array[index] objectForKey:[NSString stringWithFormat:@"dep%zi",index + 1]];
+        if ([tempStr isEqualToString:title]) {
+            return index;
+        }
+    }
+    return index;
 }
 
 #pragma mark - 辅助函数
