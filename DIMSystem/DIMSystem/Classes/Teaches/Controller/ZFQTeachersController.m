@@ -43,7 +43,7 @@
     
     //添加searchBar
     _myTableView.tableHeaderView = self.mySearchBar;
-    
+
     //设置搜索结果controller
     searchResultController = [[ZFQSearchController alloc] initWithController:self searchBar:self.mySearchBar];    
     [self.view addSubview:_myTableView];
@@ -57,6 +57,15 @@
         _mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, _myTableView.frame.size.width, 44)];
         _mySearchBar.placeholder = @"输入关键字";
         _mySearchBar.searchBarStyle = UISearchBarStyleMinimal;
+        
+        //添加分割线
+        CGFloat searchBarHeight = _mySearchBar.frame.size.height;
+        CGFloat searchBarWidth = _mySearchBar.frame.size.width;
+        CALayer *separatorLayer = [CALayer layer];
+        separatorLayer.bounds = CGRectMake(0, searchBarHeight - 1, searchBarWidth, 1);
+        separatorLayer.position = CGPointMake(searchBarWidth/2, searchBarHeight - 0.5);
+        separatorLayer.backgroundColor = ZFQ_RGB(214, 214, 214, 1).CGColor;
+        [_mySearchBar.layer addSublayer:separatorLayer];
     }
     return _mySearchBar;
 }
