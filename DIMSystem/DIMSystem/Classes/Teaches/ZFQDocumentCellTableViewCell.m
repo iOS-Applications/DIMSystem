@@ -48,17 +48,22 @@
     self.thumbImgView.center = CGPointMake(imgViewWidth/2 + marginLeft, self.contentView.frame.size.height/2);
     
     //设置nameLabel的位置
-    CGFloat maxX = CGRectGetMaxX(self.thumbImgView.frame);
     CGRect originFrame = CGRectZero;
     [self.fileNameLabel sizeToFit];
-    originFrame = self.fileNameLabel.frame;
-    originFrame.origin = CGPointMake(maxX + 2 * marginLeft, marginTop);
-    self.fileNameLabel.frame = originFrame;
+    CGFloat fileNameMaxX = CGRectGetMaxX(self.fileNameLabel.frame);
+    if (fileNameMaxX > self.frame.size.width - marginLeft) {
+        //修改其宽度
+        originFrame = self.fileNameLabel.frame;
+        originFrame.size.width = self.frame.size.width - marginLeft - CGRectGetMinX(self.fileNameLabel.frame);
+        self.fileNameLabel.frame = originFrame;
+    }
+    CGFloat centerX = CGRectGetMaxX(self.thumbImgView.frame) + marginLeft + self.fileNameLabel.frame.size.width/2;
+    self.fileNameLabel.center = CGPointMake(centerX, contentHeight/2 - marginTop);
     
     //设置fileSizeLabel的位置
     [self.fileSizeLabel sizeToFit];
     originFrame = self.fileSizeLabel.frame;
-    originFrame.origin = CGPointMake(maxX + 2 * marginLeft, contentHeight - marginTop - originFrame.size.height);
+    originFrame.origin = CGPointMake(self.fileNameLabel.frame.origin.x, contentHeight - marginTop - originFrame.size.height);
     self.fileSizeLabel.frame = originFrame;
 }
 
@@ -124,7 +129,15 @@
     
     self.thumbImgView.image = img;
     
-    self.fileNameLabel.text = zfqDocument.name;
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    NSDictionary *attr = @{
+                           NSForegroundColorAttributeName:ZFQ_RGB(14, 14, 14, 1),
+                           NSFontAttributeName:[UIFont systemFontOfSize:15],
+                           NSParagraphStyleAttributeName:style
+                           };
+    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:zfqDocument.name attributes:attr];
+    self.fileNameLabel.attributedText = attrStr;
     self.fileSizeLabel.text = [self stringFromFileSize:zfqDocument.fileSize];
     
     [self layoutIfNeeded];
