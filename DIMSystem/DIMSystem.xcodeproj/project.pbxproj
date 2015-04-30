@@ -54,6 +54,7 @@
 		B162A7F41AEF2900004B1BE7 /* ZFQMajor.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F01AEF2900004B1BE7 /* ZFQMajor.plist */; };
 		B162A7F51AEF2900004B1BE7 /* ZFQJob.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F11AEF2900004B1BE7 /* ZFQJob.plist */; };
 		B162A7F61AEF2900004B1BE7 /* ZFQDepartInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F21AEF2900004B1BE7 /* ZFQDepartInfo.plist */; };
+		B196D21B1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = B196D21A1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m */; };
 		B1D9D99C1AF0AB310065714B /* ZFQSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */; };
 		CC0251251ADB798C00F65C95 /* DIMTextHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0251241ADB798C00F65C95 /* DIMTextHeight.m */; };
 		CC234F381AD26D6500406280 /* TSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CC234F2E1AD26D6500406280 /* TSActionSheet.m */; };
@@ -208,6 +209,8 @@
 		B162A7F01AEF2900004B1BE7 /* ZFQMajor.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZFQMajor.plist; sourceTree = "<group>"; };
 		B162A7F11AEF2900004B1BE7 /* ZFQJob.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZFQJob.plist; sourceTree = "<group>"; };
 		B162A7F21AEF2900004B1BE7 /* ZFQDepartInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZFQDepartInfo.plist; sourceTree = "<group>"; };
+		B196D2191AF1C1730064650E /* SVProgressHUD+ZFQCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD+ZFQCustom.h"; sourceTree = "<group>"; };
+		B196D21A1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD+ZFQCustom.m"; sourceTree = "<group>"; };
 		B1D9D99A1AF0AB310065714B /* ZFQSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQSearchController.h; sourceTree = "<group>"; };
 		B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQSearchController.m; sourceTree = "<group>"; };
 		CC0251231ADB798C00F65C95 /* DIMTextHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMTextHeight.h; sourceTree = "<group>"; };
@@ -522,6 +525,8 @@
 			children = (
 				CCDBA9261AE0E8B900A735FE /* UIImage+CropPortraint.h */,
 				CCDBA9271AE0E8B900A735FE /* UIImage+CropPortraint.m */,
+				B196D2191AF1C1730064650E /* SVProgressHUD+ZFQCustom.h */,
+				B196D21A1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m */,
 			);
 			name = Catogray;
 			sourceTree = "<group>";
@@ -1086,6 +1091,7 @@
 				B162A7E21AEF2701004B1BE7 /* ZFQTeachersController.m in Sources */,
 				CCAE2C661AD5484A004E9173 /* NewsSchoolViewController.m in Sources */,
 				CC6DCDEE1ADEC996006CB380 /* PracMyShiXun.m in Sources */,
+				B196D21B1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m in Sources */,
 				CCDBA93C1AE0E8B900A735FE /* UIImage+CropPortraint.m in Sources */,
 				12724BE21AE0E26100356E0C /* NSObject+MJCoding.m in Sources */,
 				CC4B1B371ADD16B000A04EFD /* PracPrjCell.m in Sources */,
