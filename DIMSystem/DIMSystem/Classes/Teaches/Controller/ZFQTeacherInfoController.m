@@ -14,9 +14,9 @@
 #import "ZFQTeacherHomeController.h"
 #import "UIImage+CropPortraint.h"
 #import <MessageUI/MessageUI.h>
-#import "SVProgressHUD.h"
 #import "Teacher.h"
 #import "SQBBaseView.h"
+#import "SVProgressHUD+ZFQCustom.h"
 
 @interface ZFQTeacherInfoController () <MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate>
 {
@@ -33,7 +33,6 @@
     UILabel *majorLabel;
     UILabel *jobLabel;
     
-//    NSMutableDictionary *teacherInfo;
 }
 
 @property (nonatomic,strong,readwrite) NSMutableDictionary *teacherInfo;
@@ -53,9 +52,7 @@
     [super viewDidLoad];
     
     //请求网络，完成后解析出json数据,这个解析出的为一个字典
-    [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
-    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
-    [SVProgressHUD showWithStatus:@"正在加载..."];
+    [SVProgressHUD showZFQHUDWithStatus:@"正在加载..."];
     
     ZFQTeacherInfoController * __weak weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
