@@ -55,6 +55,18 @@
 		B162A7F51AEF2900004B1BE7 /* ZFQJob.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F11AEF2900004B1BE7 /* ZFQJob.plist */; };
 		B162A7F61AEF2900004B1BE7 /* ZFQDepartInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F21AEF2900004B1BE7 /* ZFQDepartInfo.plist */; };
 		B196D21B1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = B196D21A1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m */; };
+		B196D21E1AF1C6470064650E /* ZFQDocumentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B196D21D1AF1C6470064650E /* ZFQDocumentsController.m */; };
+		B196D2211AF1C8830064650E /* ZFQDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = B196D2201AF1C8830064650E /* ZFQDocument.m */; };
+		B196D2241AF1CAC60064650E /* ZFQDocumentCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B196D2231AF1CAC60064650E /* ZFQDocumentCellTableViewCell.m */; };
+		B196D2261AF1D9710064650E /* zfq_icon_txt.png in Resources */ = {isa = PBXBuildFile; fileRef = B196D2251AF1D9710064650E /* zfq_icon_txt.png */; };
+		B196D22A1AF1D97D0064650E /* zfq_icon_xls.png in Resources */ = {isa = PBXBuildFile; fileRef = B196D2271AF1D97D0064650E /* zfq_icon_xls.png */; };
+		B196D22B1AF1D97D0064650E /* zfq_icon_doc.png in Resources */ = {isa = PBXBuildFile; fileRef = B196D2281AF1D97D0064650E /* zfq_icon_doc.png */; };
+		B196D22C1AF1D97D0064650E /* zfq_icon_ppt.png in Resources */ = {isa = PBXBuildFile; fileRef = B196D2291AF1D97D0064650E /* zfq_icon_ppt.png */; };
+		B196D22E1AF1D98B0064650E /* zfq_icon_zip.png in Resources */ = {isa = PBXBuildFile; fileRef = B196D22D1AF1D98B0064650E /* zfq_icon_zip.png */; };
+		B196D2301AF1DABE0064650E /* zfq_icon_pdf.png in Resources */ = {isa = PBXBuildFile; fileRef = B196D22F1AF1DABE0064650E /* zfq_icon_pdf.png */; };
+		B196D2321AF1DB760064650E /* zfq_icon_other.png in Resources */ = {isa = PBXBuildFile; fileRef = B196D2311AF1DB760064650E /* zfq_icon_other.png */; };
+		B196D2341AF1FCCE0064650E /* ZFQDocs.json in Resources */ = {isa = PBXBuildFile; fileRef = B196D2331AF1FCCE0064650E /* ZFQDocs.json */; };
+		B196D23B1AF23C7E0064650E /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B196D23A1AF23C7E0064650E /* QuickLook.framework */; };
 		B1D9D99C1AF0AB310065714B /* ZFQSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */; };
 		CC0251251ADB798C00F65C95 /* DIMTextHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0251241ADB798C00F65C95 /* DIMTextHeight.m */; };
 		CC234F381AD26D6500406280 /* TSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CC234F2E1AD26D6500406280 /* TSActionSheet.m */; };
@@ -211,6 +223,21 @@
 		B162A7F21AEF2900004B1BE7 /* ZFQDepartInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZFQDepartInfo.plist; sourceTree = "<group>"; };
 		B196D2191AF1C1730064650E /* SVProgressHUD+ZFQCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD+ZFQCustom.h"; sourceTree = "<group>"; };
 		B196D21A1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD+ZFQCustom.m"; sourceTree = "<group>"; };
+		B196D21C1AF1C6470064650E /* ZFQDocumentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQDocumentsController.h; sourceTree = "<group>"; };
+		B196D21D1AF1C6470064650E /* ZFQDocumentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQDocumentsController.m; sourceTree = "<group>"; };
+		B196D21F1AF1C8830064650E /* ZFQDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQDocument.h; sourceTree = "<group>"; };
+		B196D2201AF1C8830064650E /* ZFQDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQDocument.m; sourceTree = "<group>"; };
+		B196D2221AF1CAC60064650E /* ZFQDocumentCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQDocumentCellTableViewCell.h; sourceTree = "<group>"; };
+		B196D2231AF1CAC60064650E /* ZFQDocumentCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQDocumentCellTableViewCell.m; sourceTree = "<group>"; };
+		B196D2251AF1D9710064650E /* zfq_icon_txt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zfq_icon_txt.png; sourceTree = "<group>"; };
+		B196D2271AF1D97D0064650E /* zfq_icon_xls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zfq_icon_xls.png; sourceTree = "<group>"; };
+		B196D2281AF1D97D0064650E /* zfq_icon_doc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zfq_icon_doc.png; sourceTree = "<group>"; };
+		B196D2291AF1D97D0064650E /* zfq_icon_ppt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zfq_icon_ppt.png; sourceTree = "<group>"; };
+		B196D22D1AF1D98B0064650E /* zfq_icon_zip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zfq_icon_zip.png; sourceTree = "<group>"; };
+		B196D22F1AF1DABE0064650E /* zfq_icon_pdf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zfq_icon_pdf.png; sourceTree = "<group>"; };
+		B196D2311AF1DB760064650E /* zfq_icon_other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zfq_icon_other.png; sourceTree = "<group>"; };
+		B196D2331AF1FCCE0064650E /* ZFQDocs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ZFQDocs.json; sourceTree = "<group>"; };
+		B196D23A1AF23C7E0064650E /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		B1D9D99A1AF0AB310065714B /* ZFQSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQSearchController.h; sourceTree = "<group>"; };
 		B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQSearchController.m; sourceTree = "<group>"; };
 		CC0251231ADB798C00F65C95 /* DIMTextHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMTextHeight.h; sourceTree = "<group>"; };
@@ -325,6 +352,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B196D23B1AF23C7E0064650E /* QuickLook.framework in Frameworks */,
 				CC77D5DE1AD16D6C00612506 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,6 +514,7 @@
 		B162A7E31AEF28B8004B1BE7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B196D2331AF1FCCE0064650E /* ZFQDocs.json */,
 				B162A7EF1AEF2900004B1BE7 /* ZFQDepartment.plist */,
 				B162A7F01AEF2900004B1BE7 /* ZFQMajor.plist */,
 				B162A7F11AEF2900004B1BE7 /* ZFQJob.plist */,
@@ -498,6 +527,13 @@
 		B162A7E41AEF28CC004B1BE7 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				B196D22D1AF1D98B0064650E /* zfq_icon_zip.png */,
+				B196D2271AF1D97D0064650E /* zfq_icon_xls.png */,
+				B196D2281AF1D97D0064650E /* zfq_icon_doc.png */,
+				B196D2291AF1D97D0064650E /* zfq_icon_ppt.png */,
+				B196D22F1AF1DABE0064650E /* zfq_icon_pdf.png */,
+				B196D2251AF1D9710064650E /* zfq_icon_txt.png */,
+				B196D2311AF1DB760064650E /* zfq_icon_other.png */,
 				B162A7E51AEF28E1004B1BE7 /* avatar_default.png */,
 				B162A7E61AEF28E1004B1BE7 /* avatar_default@2x.png */,
 				B162A7E71AEF28E1004B1BE7 /* buddy_header_arrow.png */,
@@ -516,6 +552,8 @@
 				CCDBA9191AE0E8B900A735FE /* EmotionView.m */,
 				CCDBA91D1AE0E8B900A735FE /* SQBBaseView.h */,
 				CCDBA91E1AE0E8B900A735FE /* SQBBaseView.m */,
+				B196D2221AF1CAC60064650E /* ZFQDocumentCellTableViewCell.h */,
+				B196D2231AF1CAC60064650E /* ZFQDocumentCellTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -562,6 +600,7 @@
 		CC665F871AD122F6003F86FE = {
 			isa = PBXGroup;
 			children = (
+				B196D23A1AF23C7E0064650E /* QuickLook.framework */,
 				CC02512F1ADC19C200F65C95 /* PracShiXun.h */,
 				CC77D5DD1AD16D6C00612506 /* QuartzCore.framework */,
 				CC665F921AD122F6003F86FE /* DIMSystem */,
@@ -851,6 +890,8 @@
 				B162A7E11AEF2701004B1BE7 /* ZFQTeachersController.m */,
 				B1D9D99A1AF0AB310065714B /* ZFQSearchController.h */,
 				B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */,
+				B196D21C1AF1C6470064650E /* ZFQDocumentsController.h */,
+				B196D21D1AF1C6470064650E /* ZFQDocumentsController.m */,
 				CCDBA90B1AE0E8B900A735FE /* ZFQTeacherEditController.h */,
 				CCDBA90C1AE0E8B900A735FE /* ZFQTeacherEditController.m */,
 				CCDBA90D1AE0E8B900A735FE /* ZFQTeacherEditController.xib */,
@@ -880,6 +921,8 @@
 			children = (
 				CCDBA91B1AE0E8B900A735FE /* Teacher.h */,
 				CCDBA91C1AE0E8B900A735FE /* Teacher.m */,
+				B196D21F1AF1C8830064650E /* ZFQDocument.h */,
+				B196D2201AF1C8830064650E /* ZFQDocument.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -980,6 +1023,7 @@
 				12724BB91AE0E23800356E0C /* StuProjectVC.xib in Resources */,
 				B162A7EB1AEF28E1004B1BE7 /* avatar_default@2x.png in Resources */,
 				B162A7F41AEF2900004B1BE7 /* ZFQMajor.plist in Resources */,
+				B196D22C1AF1D97D0064650E /* zfq_icon_ppt.png in Resources */,
 				12724BB51AE0E23800356E0C /* StuTabBarVC.xib in Resources */,
 				12724BC71AE0E23800356E0C /* StuSearchHeaderView.xib in Resources */,
 				B162A7F31AEF2900004B1BE7 /* ZFQDepartment.plist in Resources */,
@@ -987,19 +1031,25 @@
 				CC6DCDE21ADE317F006CB380 /* PracShiXun.xib in Resources */,
 				12724BB71AE0E23800356E0C /* StuMessageVC.xib in Resources */,
 				12724BC31AE0E23800356E0C /* StuDetailCell.xib in Resources */,
+				B196D2261AF1D9710064650E /* zfq_icon_txt.png in Resources */,
 				12724BC11AE0E23800356E0C /* ProjectHeaderView.xib in Resources */,
 				CCAE2C9C1AD55B8E004E9173 /* Images.xcassets in Resources */,
 				12724BAF1AE0E23800356E0C /* StuInfoCheckVC.xib in Resources */,
 				CCDBA93A1AE0E8B900A735FE /* SVProgressHUD.bundle in Resources */,
+				B196D22B1AF1D97D0064650E /* zfq_icon_doc.png in Resources */,
 				CCDBA9331AE0E8B900A735FE /* ZFQTeacherViewController.xib in Resources */,
 				B162A7EC1AEF28E1004B1BE7 /* buddy_header_arrow.png in Resources */,
 				CCAE2C9F1AD55C56004E9173 /* newsData.json in Resources */,
+				B196D2321AF1DB760064650E /* zfq_icon_other.png in Resources */,
 				12724BB11AE0E23800356E0C /* StuActionVC.xib in Resources */,
+				B196D2301AF1DABE0064650E /* zfq_icon_pdf.png in Resources */,
 				B162A7F51AEF2900004B1BE7 /* ZFQJob.plist in Resources */,
 				12724BC51AE0E23800356E0C /* StuProjectClassCell.xib in Resources */,
 				B162A7F61AEF2900004B1BE7 /* ZFQDepartInfo.plist in Resources */,
+				B196D22A1AF1D97D0064650E /* zfq_icon_xls.png in Resources */,
 				CCAE2CAA1AD5656E004E9173 /* newsCell.xib in Resources */,
 				B162A7EA1AEF28E1004B1BE7 /* avatar_default.png in Resources */,
+				B196D22E1AF1D98B0064650E /* zfq_icon_zip.png in Resources */,
 				12724BBF1AE0E23800356E0C /* DMStudentCell.xib in Resources */,
 				CCE0A5CA1ADABBD9000AD1E2 /* newsDetailTempCell.xib in Resources */,
 				B162A7ED1AEF28E1004B1BE7 /* buddy_header_bg.png in Resources */,
@@ -1010,6 +1060,7 @@
 				CCDBA9311AE0E8B900A735FE /* ZFQTeacherInfoController.xib in Resources */,
 				CC33E5951ADFC8050093D262 /* PracTabBarVC.xib in Resources */,
 				CC6DCDE71ADE4014006CB380 /* PracPrjDetail.xib in Resources */,
+				B196D2341AF1FCCE0064650E /* ZFQDocs.json in Resources */,
 				CC33E5901ADFA9A10093D262 /* PracMyBiSheDetail.xib in Resources */,
 				CCDBA9341AE0E8B900A735FE /* down_dark.png in Resources */,
 				CCE0A5C31ADA8C4E000AD1E2 /* newsDetaileHeaderView.xib in Resources */,
@@ -1059,6 +1110,7 @@
 				CC234F381AD26D6500406280 /* TSActionSheet.m in Sources */,
 				CCDBA93E1AE0E8B900A735FE /* ZFQGeneralService.m in Sources */,
 				12724BB81AE0E23800356E0C /* StuProjectVC.m in Sources */,
+				B196D21E1AF1C6470064650E /* ZFQDocumentsController.m in Sources */,
 				12724BC01AE0E23800356E0C /* ProjectHeaderView.m in Sources */,
 				12724BC61AE0E23800356E0C /* StuSearchHeaderView.m in Sources */,
 				12724BE31AE0E26100356E0C /* NSObject+MJKeyValue.m in Sources */,
@@ -1066,6 +1118,7 @@
 				12724BDC1AE0E26100356E0C /* MJArgument.m in Sources */,
 				CC234F3A1AD26D6500406280 /* TSPopoverPopoverView.m in Sources */,
 				CC6DCDEB1ADEC970006CB380 /* PracMyBiShe.m in Sources */,
+				B196D2211AF1C8830064650E /* ZFQDocument.m in Sources */,
 				B1D9D99C1AF0AB310065714B /* ZFQSearchController.m in Sources */,
 				12724BAE1AE0E23800356E0C /* StuInfoCheckVC.m in Sources */,
 				CC4B1B3C1ADD6CEE00A04EFD /* pracScientific.m in Sources */,
@@ -1077,6 +1130,7 @@
 				B162A7DC1AEF2697004B1BE7 /* ZFQDepartmentHeaderView.m in Sources */,
 				CC234F391AD26D6500406280 /* TSPopoverController.m in Sources */,
 				CCDBA92E1AE0E8B900A735FE /* ZFQTeacherEditController.m in Sources */,
+				B196D2241AF1CAC60064650E /* ZFQDocumentCellTableViewCell.m in Sources */,
 				12724BB41AE0E23800356E0C /* StuTabBarVC.m in Sources */,
 				CCDBA9301AE0E8B900A735FE /* ZFQTeacherInfoController.m in Sources */,
 				CC665FD81AD1261B003F86FE /* ViewController.m in Sources */,

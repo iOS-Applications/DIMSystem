@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <QuickLook/QuickLook.h>
 
 typedef NS_ENUM(NSInteger, ZFQDocumentType) {
     ZFQDocumentTypeDOC,
@@ -18,7 +19,7 @@ typedef NS_ENUM(NSInteger, ZFQDocumentType) {
     ZFQDocumentTypeOther
 };
 
-@interface ZFQDocument : NSObject
+@interface ZFQDocument : NSObject <QLPreviewItem>
 
 @property (nonatomic,strong) NSString *name;        //文件名
 @property (nonatomic) double fileSize;             //文件大小
