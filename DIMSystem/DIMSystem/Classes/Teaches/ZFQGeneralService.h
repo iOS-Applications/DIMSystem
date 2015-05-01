@@ -25,4 +25,6 @@
 + (NSString *)avatarURLString;
 + (NSString *)documentURLString;
 
++ (NSString *)documentsDirectory;
+
 @end

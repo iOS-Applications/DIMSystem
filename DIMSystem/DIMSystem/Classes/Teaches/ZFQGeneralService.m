@@ -127,9 +127,17 @@
 
 + (NSString *)documentURLString
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = paths[0];
     return documentPath;
 }
 
+// 程序启动时运行
++ (NSString *)documentsDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths lastObject];
+    NSLog(@"Documents directory%@", documentsDirectory);
+    return documentsDirectory;
+}
 @end

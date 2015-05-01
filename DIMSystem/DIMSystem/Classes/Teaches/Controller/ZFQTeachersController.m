@@ -45,7 +45,7 @@
     _myTableView.tableHeaderView = self.mySearchBar;
 
     //设置搜索结果controller
-    searchResultController = [[ZFQSearchController alloc] initWithController:self searchBar:self.mySearchBar];    
+    searchResultController = [[ZFQSearchController alloc] initWithController:self searchBar:self.mySearchBar];
     [self.view addSubview:_myTableView];
     
     self.title = @"选择";
@@ -56,7 +56,7 @@
     if (_mySearchBar == nil) {
         _mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, _myTableView.frame.size.width, 44)];
         _mySearchBar.placeholder = @"输入关键字";
-        _mySearchBar.searchBarStyle = UISearchBarStyleMinimal;
+        _mySearchBar.searchBarStyle = UISearchBarStyleMinimal; //UISearchBarStyleProminent UISearchBarStyleMinimal
         
         //添加分割线
         CGFloat searchBarHeight = _mySearchBar.frame.size.height;

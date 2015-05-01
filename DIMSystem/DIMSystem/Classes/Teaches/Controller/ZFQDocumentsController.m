@@ -9,10 +9,13 @@
 #import "ZFQDocumentsController.h"
 #import "ZFQDocumentCellTableViewCell.h"
 #import "ZFQDocument.h"
+#import "ZFQGeneralService.h"
+
+#import <QuickLook/QuickLook.h>
 
 NSString * const zfqDocCellID = @"zfqDocCellID";
 
-@interface ZFQDocumentsController () <UITableViewDataSource,UITableViewDelegate>
+@interface ZFQDocumentsController () <UITableViewDataSource,UITableViewDelegate,QLPreviewControllerDataSource> //
 {
     NSArray *docs;     //保存文档信息list
 }
@@ -23,6 +26,8 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"文档";
     
     _myTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _myTableView.dataSource = self;
@@ -36,12 +41,14 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ZFQDocs" ofType:@"json"];
     NSData *datas = [NSData dataWithContentsOfFile:filePath];
     docs = [NSJSONSerialization JSONObjectWithData:datas options:NSJSONReadingMutableContainers error:NULL];
+    
+    [ZFQGeneralService documentsDirectory];
 }
 
 #pragma mark - tableView datasource delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return docs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -53,7 +60,26 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70;
+    return 60;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    QLPreviewController *previewController = [[QLPreviewController alloc] init];
+    previewController.dataSource = self;
+    [self.navigationController pushViewController:previewController animated:YES];
+}
+
+//#pragma mark - QLPreviewDatasource
+- (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller
+{
+    return 1;
+}
+
+- (id <QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index
+{
+    NSDictionary *dic = docs[_myTableView.indexPathForSelectedRow.row];
+    return [[ZFQDocument alloc] initWithDocInfo:dic];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,7 +87,5 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 @end

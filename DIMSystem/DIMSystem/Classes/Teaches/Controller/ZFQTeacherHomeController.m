@@ -8,6 +8,7 @@
 
 #import "ZFQTeacherHomeController.h"
 #import "ZFQTeacherInfoController.h"
+#import "ZFQDocumentsController.h"
 #import "ZFQTeachersController.h"
 
 NSString * const cellID = @"cellID";
@@ -95,9 +96,9 @@ NSString * const cellID = @"cellID";
             ZFQTeacherInfoController *teahcerInfoVC = [[ZFQTeacherInfoController alloc] init];
             [self.navigationController pushViewController:teahcerInfoVC animated:YES];
         } else {
-            
+            ZFQDocumentsController *docVC = [[ZFQDocumentsController alloc] init];
+            [self.navigationController pushViewController:docVC animated:YES];
         }
-        
     } else if (indexPath.section == 1) {
         ZFQTeachersController *teachersVC = [[ZFQTeachersController alloc] init];
         [self.navigationController pushViewController:teachersVC animated:YES];

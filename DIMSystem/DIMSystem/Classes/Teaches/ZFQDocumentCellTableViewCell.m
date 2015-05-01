@@ -39,9 +39,8 @@
     
     //设置thubImgView的位置
     if (self.thumbImgView.image != nil) {
-        UIImage *img = self.thumbImgView.image;
-        imgViewWidth = img.size.width;
-        imgViewHeight = img.size.height;
+        imgViewWidth = 32;
+        imgViewHeight = 32;
     }
     CGFloat contentHeight = self.contentView.frame.size.height;
     self.thumbImgView.bounds = CGRectMake(0, 0, imgViewWidth, imgViewHeight);

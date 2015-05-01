@@ -20,8 +20,6 @@ NSString * const zfqSearchCellID = @"cell";
 @end
 @implementation ZFQSearchController
 
-
-
 - (instancetype)initWithController:(UIViewController *)controller searchBar:(UISearchBar *)searchBar
 {
     self = [super init];
@@ -29,12 +27,17 @@ NSString * const zfqSearchCellID = @"cell";
         width = controller.view.frame.size.width;
         height = controller.view.frame.size.height;
         
-//        UIViewController * __weak weakController = contentController;
-//        UIViewController * __strong strongController = weakController;
         contentController = controller;
+        
         searchBar.delegate = self;
+        
+        //思路
+        /* 1.应用一个带navagationBar的controoler作为subViewController
+         * 2.在这个控制器的navgationBar上有一个searchBar
+        */
+        
         //添加键盘观察者
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboarFrameDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboarFrameDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
     }
     return self;
 }
@@ -42,7 +45,8 @@ NSString * const zfqSearchCellID = @"cell";
 - (UITableView *)resultTableView
 {
     if (_resultTableView == nil) {
-        CGRect resultFrame = CGRectMake(0, 64, width, height - 64 - 210);
+//        CGRect resultFrame = CGRectMake(0, 64, width, height - 64 - 210);
+        CGRect resultFrame = CGRectMake(0, 64, width, height);
         _resultTableView = [[UITableView alloc] initWithFrame:resultFrame style:UITableViewStylePlain];
         _resultTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _resultTableView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
@@ -65,15 +69,18 @@ NSString * const zfqSearchCellID = @"cell";
     return _results;
 }
 
+/*
 - (void)keyboarFrameDidChanged:(NSNotification *)notification
 {
     NSDictionary *info = [notification userInfo];
     NSValue *aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGFloat keyboardHeight = [aValue CGRectValue].size.height;
-    CGRect originFrame = _resultTableView.frame;
-    originFrame.size.height = height - 64 - keyboardHeight;
-    _resultTableView.frame = originFrame;
-}
+//    CGRect originFrame = _resultTableView.frame;
+//    originFrame.size.height = height - 64 - keyboardHeight;
+//    _resultTableView.frame = originFrame;
+}*/
+ 
+ 
 #pragma mark - searchBar delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
@@ -123,6 +130,9 @@ NSString * const zfqSearchCellID = @"cell";
                        ];
     
     self.results = [array copy];
+    
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
+    
     //发起请求
 //    NSArray *arrray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:<#(NSURL *)#>] options:<#(NSJSONReadingOptions)#> error:<#(NSError *__autoreleasing *)#>]
     [self.resultTableView reloadData];
