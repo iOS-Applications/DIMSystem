@@ -17,4 +17,10 @@
     [SVProgressHUD showWithStatus:status];
 }
 
++ (void)showZFQErrorWithStatus:(NSString *)string
+{
+    [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD showErrorWithStatus:string];
+}
 @end

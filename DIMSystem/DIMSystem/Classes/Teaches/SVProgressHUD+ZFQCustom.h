@@ -11,5 +11,6 @@
 @interface SVProgressHUD (ZFQCustom)
 
 + (void)showZFQHUDWithStatus:(NSString *)status;
++ (void)showZFQErrorWithStatus:(NSString *)string;
 
 @end

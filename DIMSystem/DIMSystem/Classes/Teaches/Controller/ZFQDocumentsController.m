@@ -12,10 +12,12 @@
 #import "ZFQGeneralService.h"
 
 #import <QuickLook/QuickLook.h>
+#import "ZFQDocPreviewController.h"
+#import "SVProgressHUD+ZFQCustom.h"
 
 NSString * const zfqDocCellID = @"zfqDocCellID";
 
-@interface ZFQDocumentsController () <UITableViewDataSource,UITableViewDelegate,QLPreviewControllerDataSource> //
+@interface ZFQDocumentsController () <UITableViewDataSource,UITableViewDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate> 
 {
     NSArray *docs;     //保存文档信息list
 }
@@ -67,7 +69,16 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 {
     QLPreviewController *previewController = [[QLPreviewController alloc] init];
     previewController.dataSource = self;
-    [self.navigationController pushViewController:previewController animated:YES];
+    previewController.delegate = self;
+
+    NSDictionary *dic = docs[_myTableView.indexPathForSelectedRow.row];
+    ZFQDocument *doc = [[ZFQDocument alloc] initWithDocInfo:dic];
+    if ([QLPreviewController canPreviewItem:doc]) {
+        [self.navigationController pushViewController:previewController animated:YES];
+    } else {
+        [SVProgressHUD showZFQErrorWithStatus:@"该文件不存在"];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 //#pragma mark - QLPreviewDatasource
@@ -80,6 +91,16 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 {
     NSDictionary *dic = docs[_myTableView.indexPathForSelectedRow.row];
     return [[ZFQDocument alloc] initWithDocInfo:dic];
+}
+
+- (BOOL)previewController:(QLPreviewController *)controller shouldOpenURL:(NSURL *)url forPreviewItem:(id <QLPreviewItem>)item
+{
+    ZFQDocument *doc = item;
+    if (doc.previewItemURL == nil) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning
