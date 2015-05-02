@@ -13,4 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (nonatomic,strong,readonly) NSMutableDictionary *teacherInfo;
 
+@property (nonatomic) BOOL showEditItem;      //是否显示编辑按钮，默认是YES
+@property (nonatomic) NSString *idNum;        //教工号,
+
 @end

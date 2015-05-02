@@ -7,103 +7,11 @@
 //
 
 #import "ZFQSearchController.h"
+#import "ZFQTeacherInfoController.h"
 
 NSString * const zfqSearchCellID = @"cell";
 
-@interface ZFQSearchController() <UITableViewDelegate,UITableViewDataSource>
-{
-    CGFloat width;
-    CGFloat height;
-    UIViewController *contentController;
-}
-@property (nonatomic,strong) NSMutableArray *results;
-@end
-@implementation ZFQSearchController
-
-- (instancetype)initWithController:(UIViewController *)controller searchBar:(UISearchBar *)searchBar
-{
-    self = [super init];
-    if (self) {
-        width = controller.view.frame.size.width;
-        height = controller.view.frame.size.height;
-        
-        contentController = controller;
-        
-        searchBar.delegate = self;
-        
-        //思路
-        /* 1.应用一个带navagationBar的controoler作为subViewController
-         * 2.在这个控制器的navgationBar上有一个searchBar
-        */
-        
-        //添加键盘观察者
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboarFrameDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    }
-    return self;
-}
-
-- (UITableView *)resultTableView
-{
-    if (_resultTableView == nil) {
-//        CGRect resultFrame = CGRectMake(0, 64, width, height - 64 - 210);
-        CGRect resultFrame = CGRectMake(0, 64, width, height);
-        _resultTableView = [[UITableView alloc] initWithFrame:resultFrame style:UITableViewStylePlain];
-        _resultTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _resultTableView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-        _resultTableView.tag = 123;
-        _resultTableView.delegate = self;
-        _resultTableView.dataSource = self;
-        //设置tableViewfooterView,为了让内容可见
-//        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 50)];
-//        _resultTableView.tableFooterView = footerView;
-    }
-    return _resultTableView;
-}
-
-- (NSMutableArray *)results
-{
-    if (_results == nil) {
-        _results = [[NSMutableArray alloc] init];
-    }
-    
-    return _results;
-}
-
 /*
-- (void)keyboarFrameDidChanged:(NSNotification *)notification
-{
-    NSDictionary *info = [notification userInfo];
-    NSValue *aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGFloat keyboardHeight = [aValue CGRectValue].size.height;
-//    CGRect originFrame = _resultTableView.frame;
-//    originFrame.size.height = height - 64 - keyboardHeight;
-//    _resultTableView.frame = originFrame;
-}*/
- 
- 
-#pragma mark - searchBar delegate
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-{
-    //隐藏导航栏
-    [contentController.navigationController setNavigationBarHidden:YES animated:YES];
-    [searchBar setShowsCancelButton:YES animated:YES];
-    
-    //添加搜索结果视图
-    if (self.resultTableView.superview == nil) {
-        [contentController.view addSubview:self.resultTableView];
-    }
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar setShowsCancelButton:NO animated:YES];
-    [contentController.navigationController setNavigationBarHidden:NO animated:YES];
-    [searchBar endEditing:YES];
-    
-    //remove resultTableView
-    [self.resultTableView removeFromSuperview];
-}
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSArray *array = @[
@@ -137,10 +45,38 @@ NSString * const zfqSearchCellID = @"cell";
 //    NSArray *arrray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:<#(NSURL *)#>] options:<#(NSJSONReadingOptions)#> error:<#(NSError *__autoreleasing *)#>]
     [self.resultTableView reloadData];
 }
+*/
+
+@implementation ZFQSearchController
+
+- (instancetype)initWithSearchDisplayController:(UISearchDisplayController *)searchDisplayController
+                                   didSelectRow:(void (^)(UITableView *tableView , NSIndexPath *indexPath))didSelectRow
+{
+    self = [super init];
+    if (self) {
+        self.didSelectRow = didSelectRow;
+        mySearchDisplayController = searchDisplayController;
+        mySearchDisplayController.delegate = self;
+        mySearchDisplayController.searchResultsDataSource = self;
+        mySearchDisplayController.searchResultsDelegate = self;
+        mySearchDisplayController.searchBar.delegate = self;
+    }
+    return self;
+}
+
+- (instancetype)initWithDidSelectRow:(void (^)(UITableView *tableView , NSIndexPath *indexPath))didSelectRow
+{
+    self = [super init];
+    if (self) {
+        self.didSelectRow = didSelectRow;
+    }
+    return self;
+}
+
 #pragma mark - tableView datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self results].count;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -149,23 +85,41 @@ NSString * const zfqSearchCellID = @"cell";
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:zfqSearchCellID];
     }
-    NSDictionary *dic = [self results][indexPath.row];
-    cell.textLabel.text = dic[@"name"];
+//    NSDictionary *dic = [self results][indexPath.row];
+//    cell.textLabel.text = dic[@"name"];
+    cell.textLabel.text = @"aa";
     return cell;
 }
 
-#pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"选中");
+    if (self.didSelectRow) {
+        self.didSelectRow(tableView,indexPath);
+    }
 }
 
+#pragma mark - UISearchBar delegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    //开始请求 及显示等待动画
+    
+    //刷新数据
+    [mySearchDisplayController.searchResultsTableView reloadData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    //取消请求 及等待动画
+}
 - (void)dealloc
 {
-    NSLog(@"realse search");
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+    NSLog(@"release search");
 }
+
 @end
+
+
+
 
 
 

@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface ZFQSearchController : NSObject <UISearchBarDelegate>
+@interface ZFQSearchController : NSObject <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>
+{
+    UISearchDisplayController *mySearchDisplayController;
+}
+@property (nonatomic,copy) void (^didSelectRow)(UITableView *tableView , NSIndexPath *indexPath);
 
-@property (nonatomic,strong) UITableView *resultTableView;
 
-- (instancetype)initWithController:(UIViewController *)controller;
-- (instancetype)initWithController:(UIViewController *)controller searchBar:(UISearchBar *)searchBar;
+- (instancetype)initWithSearchDisplayController:(UISearchDisplayController *)searchDisplayController
+                                   didSelectRow:(void (^)(UITableView *tableView , NSIndexPath *indexPath))didSelectRow;
 
 @end

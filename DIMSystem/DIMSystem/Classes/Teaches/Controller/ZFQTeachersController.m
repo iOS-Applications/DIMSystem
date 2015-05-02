@@ -10,6 +10,7 @@
 #import "ZFQDepartmentHeaderView.h"
 #import "ZFQMecroDefine.h"
 #import "ZFQSearchController.h"
+#import "ZFQTeacherInfoController.h"
 
 @interface ZFQTeachersController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -18,6 +19,8 @@
     CGFloat keyboardHeight;
     
     ZFQSearchController *searchResultController;
+    
+    UISearchDisplayController *searchDisplayController;
 }
 
 @property (nonatomic,strong) UISearchBar *mySearchBar;
@@ -40,13 +43,21 @@
     _myTableView.dataSource = self;
     _myTableView.delegate = self;
     _myTableView.sectionHeaderHeight = 44;
+    _myTableView.tag = 1012;
     
     //添加searchBar
     _myTableView.tableHeaderView = self.mySearchBar;
-
-    //设置搜索结果controller
-    searchResultController = [[ZFQSearchController alloc] initWithController:self searchBar:self.mySearchBar];
+    self.mySearchBar.delegate = self;
     [self.view addSubview:_myTableView];
+    
+    ZFQTeachersController * __weak weakSelf = self;
+    searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:self.mySearchBar contentsController:self];
+    searchResultController = [[ZFQSearchController alloc] initWithSearchDisplayController:searchDisplayController didSelectRow:^(UITableView *tableView, NSIndexPath *indexPath) {
+        ZFQTeacherInfoController *teacherInfo = [[ZFQTeacherInfoController alloc] init];
+        teacherInfo.showEditItem = NO;
+        teacherInfo.idNum = @"4123";
+        [weakSelf.navigationController pushViewController:teacherInfo animated:YES];
+    }];
     
     self.title = @"选择";
 }
@@ -73,7 +84,6 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    searchResultController = nil;
 }
 
 #pragma mark - tableView delegate
@@ -110,6 +120,19 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return departs.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag == 1012) {
+        //
+    } else {
+        ZFQTeacherInfoController *teacherInfo = [[ZFQTeacherInfoController alloc] init];
+        teacherInfo.showEditItem = NO;
+        teacherInfo.idNum = @"4123";
+        [self.navigationController pushViewController:teacherInfo animated:YES];
+        [self.navigationController setNavigationBarHidden:NO];
+    }
 }
 
 #pragma mark - tableView dataSource

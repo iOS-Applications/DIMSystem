@@ -41,6 +41,14 @@
 
 @implementation ZFQTeacherInfoController
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _showEditItem = YES;
+    }
+    return self;
+}
 /*
  - (void)loadView
  {
@@ -51,6 +59,11 @@
 {
     [super viewDidLoad];
     
+    if (self.idNum == nil || [self.idNum isKindOfClass:[NSNull class]] || [self.idNum isEqualToString:@""]) {
+        //加载当前登录的老师的信息
+    } else {
+        //加载教工号为idNum的老师的信息
+    }
     //请求网络，完成后解析出json数据,这个解析出的为一个字典
     [SVProgressHUD showZFQHUDWithStatus:@"正在加载..."];
     
@@ -81,10 +94,12 @@
         [SVProgressHUD dismiss];
     });
     
-    //设置编辑按钮
-    UIBarButtonItem *editItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(tapEditItemAction:)];
-    editItem.enabled = NO;
-    self.navigationItem.rightBarButtonItem = editItem;
+    if (self.showEditItem == YES) {
+        //设置编辑按钮
+        UIBarButtonItem *editItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(tapEditItemAction:)];
+        editItem.enabled = NO;
+        self.navigationItem.rightBarButtonItem = editItem;
+    }
 }
 
 - (void)addSubViewWithTeacher:(Teacher *)teacher
