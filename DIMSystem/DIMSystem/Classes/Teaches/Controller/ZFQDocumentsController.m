@@ -12,7 +12,6 @@
 #import "ZFQGeneralService.h"
 
 #import <QuickLook/QuickLook.h>
-#import "ZFQDocPreviewController.h"
 #import "SVProgressHUD+ZFQCustom.h"
 
 NSString * const zfqDocCellID = @"zfqDocCellID";
