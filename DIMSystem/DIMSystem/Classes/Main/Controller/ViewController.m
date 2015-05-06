@@ -19,6 +19,7 @@
 #import "ZFQTeacherEditController.h"
 #import "ZFQTeacherInfoController.h"
 #import "ZFQTeacherHomeController.h"
+#import "LoginViewController.h"
 
 @interface ViewController ()
 
@@ -42,8 +43,9 @@
 {
     TSActionSheet *actionSheet = [[TSActionSheet alloc] initWithTitle:nil];
     [actionSheet destructiveButtonWithTitle:@"注册登录" block:^{
-        NSLog(@"注册登录");
-       
+//        NSLog(@"注册登录");
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self presentViewController:loginVC animated:YES completion:nil];
         
     }];
 

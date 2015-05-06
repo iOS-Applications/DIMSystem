@@ -42,6 +42,8 @@
 		12724BE21AE0E26100356E0C /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 12724BD71AE0E26100356E0C /* NSObject+MJCoding.m */; };
 		12724BE31AE0E26100356E0C /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12724BD91AE0E26100356E0C /* NSObject+MJKeyValue.m */; };
 		12724BE41AE0E26100356E0C /* NSObject+MJMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 12724BDB1AE0E26100356E0C /* NSObject+MJMember.m */; };
+		B11B2B191AF5120C004BF09A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B11B2B171AF5120C004BF09A /* LoginViewController.m */; };
+		B11B2B1A1AF5120C004BF09A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B11B2B181AF5120C004BF09A /* LoginViewController.xib */; };
 		B162A7DC1AEF2697004B1BE7 /* ZFQDepartmentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B162A7DB1AEF2697004B1BE7 /* ZFQDepartmentHeaderView.m */; };
 		B162A7DF1AEF26EB004B1BE7 /* ZFQTeacherHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B162A7DE1AEF26EB004B1BE7 /* ZFQTeacherHomeController.m */; };
 		B162A7E21AEF2701004B1BE7 /* ZFQTeachersController.m in Sources */ = {isa = PBXBuildFile; fileRef = B162A7E11AEF2701004B1BE7 /* ZFQTeachersController.m */; };
@@ -67,6 +69,7 @@
 		B196D2321AF1DB760064650E /* zfq_icon_other.png in Resources */ = {isa = PBXBuildFile; fileRef = B196D2311AF1DB760064650E /* zfq_icon_other.png */; };
 		B196D2341AF1FCCE0064650E /* ZFQDocs.json in Resources */ = {isa = PBXBuildFile; fileRef = B196D2331AF1FCCE0064650E /* ZFQDocs.json */; };
 		B196D23B1AF23C7E0064650E /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B196D23A1AF23C7E0064650E /* QuickLook.framework */; };
+		B1AF44F61AF5AFBA0017B01A /* DLRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B1AF44F51AF5AFBA0017B01A /* DLRadioButton.m */; };
 		B1D9D99C1AF0AB310065714B /* ZFQSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */; };
 		CC0251251ADB798C00F65C95 /* DIMTextHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0251241ADB798C00F65C95 /* DIMTextHeight.m */; };
 		CC234F381AD26D6500406280 /* TSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CC234F2E1AD26D6500406280 /* TSActionSheet.m */; };
@@ -206,6 +209,9 @@
 		12724BD91AE0E26100356E0C /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
 		12724BDA1AE0E26100356E0C /* NSObject+MJMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJMember.h"; sourceTree = "<group>"; };
 		12724BDB1AE0E26100356E0C /* NSObject+MJMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJMember.m"; sourceTree = "<group>"; };
+		B11B2B161AF5120C004BF09A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		B11B2B171AF5120C004BF09A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		B11B2B181AF5120C004BF09A /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		B162A7DA1AEF2697004B1BE7 /* ZFQDepartmentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQDepartmentHeaderView.h; sourceTree = "<group>"; };
 		B162A7DB1AEF2697004B1BE7 /* ZFQDepartmentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQDepartmentHeaderView.m; sourceTree = "<group>"; };
 		B162A7DD1AEF26EB004B1BE7 /* ZFQTeacherHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQTeacherHomeController.h; sourceTree = "<group>"; };
@@ -238,6 +244,8 @@
 		B196D2311AF1DB760064650E /* zfq_icon_other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zfq_icon_other.png; sourceTree = "<group>"; };
 		B196D2331AF1FCCE0064650E /* ZFQDocs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ZFQDocs.json; sourceTree = "<group>"; };
 		B196D23A1AF23C7E0064650E /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		B1AF44F41AF5AFBA0017B01A /* DLRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLRadioButton.h; sourceTree = "<group>"; };
+		B1AF44F51AF5AFBA0017B01A /* DLRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLRadioButton.m; sourceTree = "<group>"; };
 		B1D9D99A1AF0AB310065714B /* ZFQSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQSearchController.h; sourceTree = "<group>"; };
 		B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQSearchController.m; sourceTree = "<group>"; };
 		CC0251231ADB798C00F65C95 /* DIMTextHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMTextHeight.h; sourceTree = "<group>"; };
@@ -511,6 +519,16 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
+		B11B2B151AF511D2004BF09A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B11B2B161AF5120C004BF09A /* LoginViewController.h */,
+				B11B2B171AF5120C004BF09A /* LoginViewController.m */,
+				B11B2B181AF5120C004BF09A /* LoginViewController.xib */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		B162A7E31AEF28B8004B1BE7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -577,6 +595,15 @@
 				CCDBA92D1AE0E8B900A735FE /* ZFQMecroDefine.h */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		B1AF44F31AF5AF920017B01A /* DLRadioButton */ = {
+			isa = PBXGroup;
+			children = (
+				B1AF44F41AF5AFBA0017B01A /* DLRadioButton.h */,
+				B1AF44F51AF5AFBA0017B01A /* DLRadioButton.m */,
+			);
+			name = DLRadioButton;
 			sourceTree = "<group>";
 		};
 		CC234F2C1AD26D6500406280 /* TSPopover */ = {
@@ -648,6 +675,7 @@
 		CC665FBD1AD1261B003F86FE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B11B2B151AF511D2004BF09A /* Login */,
 				CCDBA9091AE0E8B900A735FE /* Teaches */,
 				12724B7D1AE0E23800356E0C /* Students */,
 				CCAE2C961AD5554C004E9173 /* NewsSchool */,
@@ -719,6 +747,7 @@
 		CC665FD21AD1261B003F86FE /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				B1AF44F31AF5AF920017B01A /* DLRadioButton */,
 				12724BC81AE0E26100356E0C /* MJExtension */,
 				CC234F2C1AD26D6500406280 /* TSPopover */,
 			);
@@ -1028,6 +1057,7 @@
 				12724BC71AE0E23800356E0C /* StuSearchHeaderView.xib in Resources */,
 				B162A7F31AEF2900004B1BE7 /* ZFQDepartment.plist in Resources */,
 				12724BB31AE0E23800356E0C /* StuDetailVC.xib in Resources */,
+				B11B2B1A1AF5120C004BF09A /* LoginViewController.xib in Resources */,
 				CC6DCDE21ADE317F006CB380 /* PracShiXun.xib in Resources */,
 				12724BB71AE0E23800356E0C /* StuMessageVC.xib in Resources */,
 				12724BC31AE0E23800356E0C /* StuDetailCell.xib in Resources */,
@@ -1137,9 +1167,11 @@
 				CC234F3C1AD26D6500406280 /* UIBarButtonItem+WEPopover.m in Sources */,
 				CCAE2C621AD5476A004E9173 /* CustomVIew.m in Sources */,
 				CC4B1B2E1ADCB70D00A04EFD /* PracProjectsOfItem.m in Sources */,
+				B11B2B191AF5120C004BF09A /* LoginViewController.m in Sources */,
 				12724BDF1AE0E26100356E0C /* MJMethod.m in Sources */,
 				CCDBA9361AE0E8B900A735FE /* EmotionView.m in Sources */,
 				CC33E58F1ADFA9A10093D262 /* PracMyBiSheDetail.m in Sources */,
+				B1AF44F61AF5AFBA0017B01A /* DLRadioButton.m in Sources */,
 				12724BDD1AE0E26100356E0C /* MJIvar.m in Sources */,
 				CCE0A5CE1ADAC6C0000AD1E2 /* newsDetailTableViewCell.m in Sources */,
 				B162A7E21AEF2701004B1BE7 /* ZFQTeachersController.m in Sources */,
