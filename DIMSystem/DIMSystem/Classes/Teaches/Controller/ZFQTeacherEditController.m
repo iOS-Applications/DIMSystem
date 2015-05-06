@@ -95,7 +95,7 @@
     nameTextField.frame = originFrame;
     [_myScrollView addSubview:nameTextField];
     nameTextField.delegate = self;
-    nameTextField.text = _teacherInfo[@"name"];
+    nameTextField.text = _teacherInfo[@"t_name"];
     
     //性别
     UILabel *genderLabel = [ZFQGeneralService labelWithTitle:@"性别:"];
@@ -118,7 +118,7 @@
     teacherIDTextField.center = CGPointMake(nameTextField.frame.origin.x + originFrame.size.width/2, centerY);
     [_myScrollView addSubview:teacherIDTextField];
     teacherIDTextField.delegate = self;
-    teacherIDTextField.text = _teacherInfo[@"idNum"];
+    teacherIDTextField.text = _teacherInfo[@"t_id"];
     
     CGFloat paddingV = 40;
     //-----------联系方式---------
@@ -135,7 +135,7 @@
     mobileTextField.frame = originFrame;
     [_myScrollView addSubview:mobileTextField];
     mobileTextField.delegate = self;
-    mobileTextField.text = _teacherInfo[@"mobile"];
+    mobileTextField.text = _teacherInfo[@"t_mobile"];
     
     //QQ号
     qqTextField = [ZFQGeneralService textFieldWithPlaceholder:@"qq号" width:mobileTextField.frame.size.width];
@@ -144,7 +144,7 @@
     qqTextField.frame = originFrame;
     [_myScrollView addSubview:qqTextField];
     qqTextField.delegate = self;
-    qqTextField.text = _teacherInfo[@"qq"];
+    qqTextField.text = _teacherInfo[@"t_qq"];
     
     //邮箱
     emailTextField = [ZFQGeneralService textFieldWithPlaceholder:@"邮箱" width:mobileTextField.frame.size.width + 20];
@@ -153,7 +153,7 @@
     emailTextField.frame = originFrame;
     [_myScrollView addSubview:emailTextField];
     emailTextField.delegate = self;
-    emailTextField.text = _teacherInfo[@"email"];
+    emailTextField.text = _teacherInfo[@"t_email"];
     
     //--------------职位信息------------
     UILabel *jobInfoLabel = [ZFQGeneralService labelWithTitle:@"职位信息" fontSize:14];
@@ -397,8 +397,10 @@
         case 101:{              //学院
             if (currDepartmentKey != nil) {
                 //刷新专业
+                departIndex = index;
                 [majorListView reloadMyTableViewDataInSection:section];
             }
+            
             break;
         }
         case 102: {             //专业
@@ -472,7 +474,7 @@
     switch (listView.tag) {
         case 100: {          //性别
             //获取
-            NSString *tempGender = _teacherInfo[@"gender"];
+            NSString *tempGender = _teacherInfo[@"t_gender"];
             if ([tempGender isEqualToString:@"男"]) {
                 return 0;
             } else {
@@ -482,12 +484,12 @@
         }
             
         case 101:   {         //学院
-            NSString *departName = _teacherInfo[@"department"];
+            NSString *departName = _teacherInfo[@"t_faculty"];
             departIndex = [self indexOfDrowListTitle:departName];
             return departIndex;
         }
         case 102:  {         //专业
-            NSString *majorName = _teacherInfo[@"major"];
+            NSString *majorName = _teacherInfo[@"t_major"];
             NSDictionary *info = self.departmentInfo[departIndex];
             NSArray *array = info[@"list"];
             NSInteger index = 0;
@@ -503,7 +505,7 @@
             return index;
         }
         case 103: {          //职称
-            NSString *jobName = _teacherInfo[@"job"];
+            NSString *jobName = _teacherInfo[@"t_job"];
             NSInteger index = 0;
             BOOL exist = NO;
             for (NSString *tempName in self.jobs) {
