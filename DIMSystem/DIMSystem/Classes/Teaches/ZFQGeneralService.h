@@ -27,4 +27,7 @@
 
 + (NSString *)documentsDirectory;
 
+//--------获取accessId,用来判断是否登陆------
++ (NSString *)accessId;
+
 @end

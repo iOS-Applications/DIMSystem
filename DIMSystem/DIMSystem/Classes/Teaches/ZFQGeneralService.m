@@ -8,6 +8,7 @@
 
 #import "ZFQGeneralService.h"
 #import "ZFQMecroDefine.h"
+#import "commenConst.h"
 
 @implementation ZFQGeneralService
 
@@ -139,5 +140,11 @@
     NSString *documentsDirectory = [paths lastObject];
     NSLog(@"Documents directory%@", documentsDirectory);
     return documentsDirectory;
+}
+
++ (NSString *)accessId
+{
+    NSString *accessId = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessId];
+    return accessId;
 }
 @end
