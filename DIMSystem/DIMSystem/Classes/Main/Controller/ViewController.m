@@ -43,8 +43,9 @@
 {
     TSActionSheet *actionSheet = [[TSActionSheet alloc] initWithTitle:nil];
     [actionSheet destructiveButtonWithTitle:@"注册登录" block:^{
-//        NSLog(@"注册登录");
-        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        LoginViewController *loginVC = [[LoginViewController alloc] initWithLoginSuccessBlock:^{
+            NSLog(@"登陆成功");
+        }];
         [self presentViewController:loginVC animated:YES completion:nil];
         
     }];

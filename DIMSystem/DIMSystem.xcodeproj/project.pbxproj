@@ -53,6 +53,7 @@
 		B130D4FA1AF9B5F8000A48AB /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = B130D4EF1AF9B5F8000A48AB /* AFURLRequestSerialization.m */; };
 		B130D4FB1AF9B5F8000A48AB /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = B130D4F11AF9B5F8000A48AB /* AFURLResponseSerialization.m */; };
 		B130D4FC1AF9B5F8000A48AB /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B130D4F31AF9B5F8000A48AB /* AFURLSessionManager.m */; };
+		B130D5001AF9B98B000A48AB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B130D4FF1AF9B98B000A48AB /* Reachability.m */; };
 		B162A7DC1AEF2697004B1BE7 /* ZFQDepartmentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B162A7DB1AEF2697004B1BE7 /* ZFQDepartmentHeaderView.m */; };
 		B162A7DF1AEF26EB004B1BE7 /* ZFQTeacherHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B162A7DE1AEF26EB004B1BE7 /* ZFQTeacherHomeController.m */; };
 		B162A7E21AEF2701004B1BE7 /* ZFQTeachersController.m in Sources */ = {isa = PBXBuildFile; fileRef = B162A7E11AEF2701004B1BE7 /* ZFQTeachersController.m */; };
@@ -240,6 +241,8 @@
 		B130D4F11AF9B5F8000A48AB /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		B130D4F21AF9B5F8000A48AB /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		B130D4F31AF9B5F8000A48AB /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		B130D4FE1AF9B98B000A48AB /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B130D4FF1AF9B98B000A48AB /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		B162A7DA1AEF2697004B1BE7 /* ZFQDepartmentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQDepartmentHeaderView.h; sourceTree = "<group>"; };
 		B162A7DB1AEF2697004B1BE7 /* ZFQDepartmentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQDepartmentHeaderView.m; sourceTree = "<group>"; };
 		B162A7DD1AEF26EB004B1BE7 /* ZFQTeacherHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQTeacherHomeController.h; sourceTree = "<group>"; };
@@ -583,6 +586,15 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		B130D4FD1AF9B977000A48AB /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				B130D4FE1AF9B98B000A48AB /* Reachability.h */,
+				B130D4FF1AF9B98B000A48AB /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		B162A7E31AEF28B8004B1BE7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,6 +813,7 @@
 		CC665FD21AD1261B003F86FE /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				B130D4FD1AF9B977000A48AB /* Reachability */,
 				B130D4E01AF9B5F8000A48AB /* AFNetworking */,
 				B1AF44F31AF5AF920017B01A /* DLRadioButton */,
 				12724BC81AE0E26100356E0C /* MJExtension */,
@@ -1249,6 +1262,7 @@
 				B130D4FB1AF9B5F8000A48AB /* AFURLResponseSerialization.m in Sources */,
 				12724BDE1AE0E26100356E0C /* MJMember.m in Sources */,
 				12724BBD1AE0E23800356E0C /* DMStuProject.m in Sources */,
+				B130D5001AF9B98B000A48AB /* Reachability.m in Sources */,
 				CC4B1B331ADD09C600A04EFD /* PracProjectsModel.m in Sources */,
 				CC6DCDE61ADE4014006CB380 /* PracPrjDetail.m in Sources */,
 				12724BB21AE0E23800356E0C /* StuDetailVC.m in Sources */,
