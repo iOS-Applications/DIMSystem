@@ -13,6 +13,10 @@
 
 #import "DropDownListView.h"
 #import "UIImage+CropPortraint.h"
+#import "SVProgressHUD+ZFQCustom.h"
+#import "Reachability.h"
+#import "AFNetworking.h"
+#import "commenConst.h"
 
 @interface ZFQTeacherEditController () <DropDownChooseDataSource,DropDownChooseDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 {
@@ -30,6 +34,7 @@
 @property (nonatomic,strong) NSDictionary *departmentDic;;
 @property (nonatomic,strong) NSArray *jobs;
 @property (nonatomic,strong) NSArray *departmentInfo;
+//@property (nonatomic,strong) BOOL updateSuccess;        //是否更新成功，默认是NO
 
 @end
 
@@ -40,6 +45,7 @@
     [super viewDidLoad];
     
     preOffsetY = 0;
+//    self.updateSuccess = NO;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(tapCancelItemAction)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(tapCompleteItemAction)];
@@ -51,6 +57,9 @@
     _myScrollView.delegate = self;
     //添加键盘显示观察者
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    //添加kvo
+//    [self addObserver:self forKeyPath:@"updateSuccess" options:NSKeyValueObservingOptionNew context:NULL];
     
     CGRect originFrame = CGRectZero;
     //-------个人信息----------
@@ -119,6 +128,7 @@
     [_myScrollView addSubview:teacherIDTextField];
     teacherIDTextField.delegate = self;
     teacherIDTextField.text = _teacherInfo[@"t_id"];
+    teacherIDTextField.enabled = NO;
     
     CGFloat paddingV = 40;
     //-----------联系方式---------
@@ -260,23 +270,49 @@
 {
     //0.将图片保存到Documents中
     
-    NSDictionary *teacherInfo = [self teacherInfoUsingEncoding:YES];
+    NSDictionary *teacherInfo = [self teacherInfoUsingEncoding:NO];
+    ZFQTeacherEditController * __weak weakSelf = self;
+    
+    [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
+        if (isReachable) {
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            NSString *postURL = [kHost stringByAppendingString:@"/updateTeacherInfo"];
+            [manager POST:postURL parameters:teacherInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary *dic = responseObject;
+                NSNumber *status = dic[@"status"];
+                if (status.integerValue == 200) {
+                    [SVProgressHUD showZFQSuccessWithStatus:@"已保存"];
+                    [weakSelf dismissEditViewControllerWithTeacherInfo:teacherInfo];
+                } else {
+                    NSString *msg = dic[@"msg"];
+                    [SVProgressHUD showZFQErrorWithStatus:msg];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [SVProgressHUD showZFQErrorWithStatus:@"请求失败"];
+            }];
+        } else {
+            [SVProgressHUD showZFQErrorWithStatus:@"网络不给力"];
+        }
+    }];
+    
+    
     //1.先上传数据到服务器，若成功，则把数据直接给teacherInfoVC
     //2.上传完成后再关闭该VC
-    if (self.completionBlk != nil) {
-        self.completionBlk([self teacherInfoUsingEncoding:NO]);
-    }
-    [self.presentingViewController dismissViewControllerAnimated:NO completion:^{
-        //        ZFQ_LOG(@"完成编辑");
-    }];
 }
 
+- (void)dismissEditViewControllerWithTeacherInfo:(NSDictionary *)teacherInfo
+{
+    if (self.completionBlk != nil) {
+        self.completionBlk(teacherInfo);   //[self teacherInfoUsingEncoding:NO]
+    }
+    [self.presentingViewController dismissViewControllerAnimated:NO completion:NULL];
+}
 - (NSDictionary *)teacherInfoUsingEncoding:(BOOL)usingEcoding
 {
     if (usingEcoding == YES) {
         //这里的图片应该进行base64编码
         NSDictionary *teacherInfo = @{
-                                      @"name":[nameTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                      @"t_name":[nameTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                       @"idNum":[teacherIDTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                       @"gender":[genderDropListView.currentTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                       @"mobile":[mobileTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
@@ -291,24 +327,24 @@
         NSData *avatarData = UIImagePNGRepresentation(avatarBtn.imageView.image);
         
         NSDictionary *teacherInfo = @{
-                                      @"name":nameTextField.text,
-                                      @"idNum":teacherIDTextField.text,
-                                      @"gender":genderDropListView.currentTitle,
-                                      @"mobile":mobileTextField.text,
-                                      @"qq":qqTextField.text,
-                                      @"email":emailTextField.text,
-                                      @"department":departmentListView.currentTitle,
-                                      @"major":majorListView.currentTitle,
-                                      @"job":jobListView.currentTitle
+                                      @"t_name":nameTextField.text,
+                                      @"t_id":teacherIDTextField.text,
+                                      @"t_gender":genderDropListView.currentTitle,
+                                      @"t_mobile":mobileTextField.text,
+                                      @"t_qq":qqTextField.text,
+                                      @"t_email":emailTextField.text,
+                                      @"t_faculty":departmentListView.currentTitle,
+                                      @"t_major":majorListView.currentTitle,
+                                      @"t_job":jobListView.currentTitle
                                       };
-        NSMutableDictionary *mutableInfo = [teacherInfo mutableCopy];
-        if (avatarData == nil) {
-            [mutableInfo setObject:[NSNull null] forKey:@"avatar"];
-        } else {
-            [mutableInfo setObject:avatarData forKey:@"avatar"];
-        }
+//        NSMutableDictionary *mutableInfo = [teacherInfo mutableCopy];
+//        if (avatarData == nil) {
+//            [mutableInfo setObject:[NSNull null] forKey:@"avatar"];
+//        } else {
+//            [mutableInfo setObject:avatarData forKey:@"avatar"];
+//        }
         
-        return mutableInfo;
+        return teacherInfo;
     }
 }
 
@@ -354,6 +390,17 @@
         [_myScrollView setContentOffset:CGPointMake(0, _myScrollView.contentOffset.y+result+10) animated:YES];
     }
 }
+
+#pragma mark - kvo
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//    if (object == self && [keyPath isEqualToString:@"updateSuccess"]) {
+//        NSNumber *result = change[NSKeyValueChangeNewKey];
+//        if (result.boolValue == YES) {
+//            <#statements#>
+//        }
+//    }
+//}
 
 #pragma mark - getter
 - (NSArray *)departments

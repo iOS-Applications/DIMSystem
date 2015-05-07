@@ -11,6 +11,7 @@
 #import "ZFQMecroDefine.h"
 #import "ZFQSearchController.h"
 #import "ZFQTeacherInfoController.h"
+#import "ZFQGeneralService.h"
 
 @interface ZFQTeachersController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -129,7 +130,7 @@
     } else {
         ZFQTeacherInfoController *teacherInfo = [[ZFQTeacherInfoController alloc] init];
         teacherInfo.showEditItem = NO;
-        teacherInfo.idNum = @"4123";
+        teacherInfo.idNum = [ZFQGeneralService accessId];
         [self.navigationController pushViewController:teacherInfo animated:YES];
         [self.navigationController setNavigationBarHidden:NO];
     }

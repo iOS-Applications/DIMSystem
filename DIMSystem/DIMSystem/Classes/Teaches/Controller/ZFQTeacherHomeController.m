@@ -10,6 +10,7 @@
 #import "ZFQTeacherInfoController.h"
 #import "ZFQDocumentsController.h"
 #import "ZFQTeachersController.h"
+#import "ZFQGeneralService.h"
 
 NSString * const cellID = @"cellID";
 
@@ -94,6 +95,7 @@ NSString * const cellID = @"cellID";
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             ZFQTeacherInfoController *teahcerInfoVC = [[ZFQTeacherInfoController alloc] init];
+            teahcerInfoVC.idNum = [ZFQGeneralService accessId];
             [self.navigationController pushViewController:teahcerInfoVC animated:YES];
         } else {
             ZFQDocumentsController *docVC = [[ZFQDocumentsController alloc] init];

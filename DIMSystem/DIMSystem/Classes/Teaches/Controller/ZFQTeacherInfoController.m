@@ -17,6 +17,9 @@
 #import "Teacher.h"
 #import "SQBBaseView.h"
 #import "SVProgressHUD+ZFQCustom.h"
+#import "AFNetworking.h"
+#import "Reachability.h"
+#import "commenConst.h"
 
 @interface ZFQTeacherInfoController () <MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate>
 {
@@ -61,39 +64,36 @@
     
     if (self.idNum == nil || [self.idNum isKindOfClass:[NSNull class]] || [self.idNum isEqualToString:@""]) {
         //加载当前登录的老师的信息
+        [SVProgressHUD showZFQHUDWithStatus:@"您尚未登陆，请登陆"];
     } else {
         //加载教工号为idNum的老师的信息
+        [SVProgressHUD showZFQHUDWithStatus:@"正在加载..."];
+        ZFQTeacherInfoController * __weak weakSelf = self;
+//        [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
+//            if (isReachable) {
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                NSDictionary *param = @{@"idNum":weakSelf.idNum};
+                NSString *getURL = [kHost stringByAppendingString:@"/teacherInfo"];
+                [manager GET:getURL parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSDictionary *dic = responseObject;
+                    weakSelf.teacherInfo = dic[@"data"];
+                    Teacher *teacher = [Teacher teacherFromInfo:dic];
+                    //显示subView
+                    [self addSubViewWithTeacher:teacher];
+                    //让编辑按钮可用
+                    weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
+                    [SVProgressHUD dismiss];
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    [SVProgressHUD showZFQErrorWithStatus:@"请求失败"];
+                }];
+//            } else {
+//                [SVProgressHUD showZFQErrorWithStatus:@"网络不给力"];
+//            }
+//        }];
+        
+        
     }
-    //请求网络，完成后解析出json数据,这个解析出的为一个字典
-    [SVProgressHUD showZFQHUDWithStatus:@"正在加载..."];
-    
-    ZFQTeacherInfoController * __weak weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //这是json解析的结果
-        NSDictionary *info = @{
-                               @"data":@{
-                                       @"name":@"张三",
-                                       @"gender":@"男",
-                                       @"idNum":@"201100834128",
-                                       @"mobile":@"13141187980",
-                                       @"qq":@"1586687169",
-                                       @"email":@"1586687169@qq.com",
-                                       @"department":@"计算机学院",
-                                       @"major":@"软件工程",
-                                       @"job":@"讲师"
-                                       },
-                               @"status":@(200),
-                               @"msg":@""
-                               };
-        weakSelf.teacherInfo = info[@"data"];
-        Teacher *teacher = [Teacher teacherFromInfo:info];
-        //显示subView
-        [self addSubViewWithTeacher:teacher];
-        //让编辑按钮可用
-        weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
-        [SVProgressHUD dismiss];
-    });
-    
+
     if (self.showEditItem == YES) {
         //设置编辑按钮
         UIBarButtonItem *editItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(tapEditItemAction:)];
@@ -268,18 +268,17 @@
         }
     }
    
+    nameLabel.text = myTeacherInfo[@"t_name"];
+    genderLabel.text = myTeacherInfo[@"t_gender"];
+    idNumLabel.text = myTeacherInfo[@"t_id"];
     
-    nameLabel.text = myTeacherInfo[@"name"];
-    genderLabel.text = myTeacherInfo[@"gender"];
-    idNumLabel.text = myTeacherInfo[@"idNum"];
+    mobileLabel.text = myTeacherInfo[@"t_mobile"];
+    qqLabel.text = myTeacherInfo[@"t_qq"];
+    emailLabel.text = myTeacherInfo[@"t_email"];
     
-    mobileLabel.text = myTeacherInfo[@"mobile"];
-    qqLabel.text = myTeacherInfo[@"qq"];
-    emailLabel.text = myTeacherInfo[@"email"];
-    
-    departmentLabel.text = myTeacherInfo[@"department"];
-    majorLabel.text = myTeacherInfo[@"major"];
-    jobLabel.text = myTeacherInfo[@"job"];
+    departmentLabel.text = myTeacherInfo[@"t_faculty"];
+    majorLabel.text = myTeacherInfo[@"t_major"];
+    jobLabel.text = myTeacherInfo[@"t_job"];
 }
 
 #pragma mark - 打电话/发短信
