@@ -15,19 +15,19 @@
     Teacher *teacher = [[Teacher alloc] init];
     NSDictionary *dataDic = [info objectForKey:@"data"];
     
-    UIImage *avatarImg = [info objectForKey:@"avatar"];
-    teacher.avatarData = UIImagePNGRepresentation(avatarImg);
-    teacher.name = [dataDic objectForKey:@"name"];
-    teacher.gender = [dataDic objectForKey:@"gender"];
-    teacher.idNum = [dataDic objectForKey:@"idNum"];
+//    UIImage *avatarImg = [info objectForKey:@"avatar"];
+//    teacher.avatarData = UIImagePNGRepresentation(avatarImg);
+    teacher.name = [dataDic objectForKey:@"t_name"];
+    teacher.gender = [dataDic objectForKey:@"t_gender"];
+    teacher.idNum = [dataDic objectForKey:@"t_id"];
     
-    teacher.mobile = [dataDic objectForKey:@"mobile"];
-    teacher.qq = [dataDic objectForKey:@"qq"];
-    teacher.email = [dataDic objectForKey:@"email"];
+    teacher.mobile = [dataDic objectForKey:@"t_mobile"];
+    teacher.qq = [dataDic objectForKey:@"t_qq"];
+    teacher.email = [dataDic objectForKey:@"t_email"];
     
-    teacher.department = [dataDic objectForKey:@"department"];
-    teacher.major = [dataDic objectForKey:@"major"];
-    teacher.job = [dataDic objectForKey:@"job"];
+    teacher.department = [dataDic objectForKey:@"t_faculty"];
+    teacher.major = [dataDic objectForKey:@"t_major"];
+    teacher.job = [dataDic objectForKey:@"t_job"];
     
     return teacher;
 }
