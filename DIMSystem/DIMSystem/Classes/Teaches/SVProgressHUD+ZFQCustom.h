@@ -12,5 +12,6 @@
 
 + (void)showZFQHUDWithStatus:(NSString *)status;
 + (void)showZFQErrorWithStatus:(NSString *)string;
++ (void)showZFQSuccessWithStatus:(NSString *)string;
 
 @end

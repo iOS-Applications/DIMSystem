@@ -23,4 +23,11 @@
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD showErrorWithStatus:string];
 }
+
++ (void)showZFQSuccessWithStatus:(NSString *)string
+{
+    [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD showSuccessWithStatus:string];
+}
 @end
