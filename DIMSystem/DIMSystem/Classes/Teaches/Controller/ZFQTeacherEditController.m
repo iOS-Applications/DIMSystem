@@ -246,10 +246,33 @@
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     UIImage *smallImg = [image portraintWithSize:avatarBtn.bounds.size];
+    NSData *imgData = UIImagePNGRepresentation(smallImg);
     [avatarBtn setImage:smallImg forState:UIControlStateNormal];
     //获取cell
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+    
+        //上传图片
+        [SVProgressHUD showZFQHUDWithStatus:@"正在上传"];
+        NSString *postURL = [kHost stringByAppendingString:@"/uploadAvatar"];
+        NSDictionary *param = @{@"idNum":[ZFQGeneralService accessId]};
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager POST:postURL parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            [formData appendPartWithFileData:imgData name:@"file" fileName:@"aaaa.png" mimeType:@"image/png"];
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *dic = responseObject;
+            NSNumber *status = dic[@"status"];
+            if (status.integerValue == 200) {
+                [SVProgressHUD showZFQSuccessWithStatus:@"上传成功"];
+            } else {
+                [SVProgressHUD showZFQSuccessWithStatus:@"上传失败"];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [SVProgressHUD showZFQErrorWithStatus:@"上传失败"];
+        }];
+        
+    }];
 }
 
 - (void)tapBackItemAction
