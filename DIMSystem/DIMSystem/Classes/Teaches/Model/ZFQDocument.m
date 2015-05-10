@@ -15,9 +15,9 @@
 {
     self = [super init];
     if (self) {
-        self.name = docInfo[@"name"];
+        self.name = docInfo[@"file_name"];
         
-        NSNumber *sizeNum = docInfo[@"fileSize"];
+        NSNumber *sizeNum = docInfo[@"file_size"];
         self.fileSize = sizeNum.doubleValue;
         
         NSString *extention = [self.name pathExtension];

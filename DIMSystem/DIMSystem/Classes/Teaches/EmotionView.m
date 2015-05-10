@@ -16,19 +16,19 @@
 @end
 
 @implementation EmotionView
-/*
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         emotionLabel = [[UILabel alloc] init];
         emotionLabel.font = [UIFont systemFontOfSize:38];
-        emotionLabel.textColor = IOUS_GRAY_COLOR;
+        emotionLabel.textColor = [UIColor grayColor];
         [self addSubview:emotionLabel];
         
         titleLabel = [[UILabel alloc] init];
         titleLabel.font = [UIFont systemFontOfSize:14];
-        titleLabel.textColor = IOUS_GRAY_COLOR;
+        titleLabel.textColor = [UIColor grayColor];
         [self addSubview:titleLabel];
     }
     return self;
@@ -92,5 +92,5 @@
     }
     self.frame = CGRectMake(0,0,width,height);
 }
-*/
+
 @end

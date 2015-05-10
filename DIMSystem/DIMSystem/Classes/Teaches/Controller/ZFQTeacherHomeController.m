@@ -11,6 +11,7 @@
 #import "ZFQDocumentsController.h"
 #import "ZFQTeachersController.h"
 #import "ZFQGeneralService.h"
+#import "SVProgressHUD.h"
 
 NSString * const cellID = @"cellID";
 
@@ -23,6 +24,10 @@ NSString * const cellID = @"cellID";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //设置SVD颜色
+    [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
     //添加返回按钮
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];

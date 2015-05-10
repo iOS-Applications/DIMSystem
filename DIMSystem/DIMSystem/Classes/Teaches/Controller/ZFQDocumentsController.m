@@ -10,9 +10,13 @@
 #import "ZFQDocumentCellTableViewCell.h"
 #import "ZFQDocument.h"
 #import "ZFQGeneralService.h"
-
+#import "AFNetworking.h"
+#import "Reachability.h"
 #import <QuickLook/QuickLook.h>
 #import "SVProgressHUD+ZFQCustom.h"
+#import "commenConst.h"
+#import "ZFQMecroDefine.h"
+#import "EmotionView.h"
 
 NSString * const zfqDocCellID = @"zfqDocCellID";
 
@@ -29,6 +33,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
     [super viewDidLoad];
     
     self.title = @"文档";
+    self.view.backgroundColor = [UIColor whiteColor];
     
     _myTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _myTableView.dataSource = self;
@@ -39,11 +44,50 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
     [_myTableView registerClass:[ZFQDocumentCellTableViewCell class] forCellReuseIdentifier:zfqDocCellID];
     
     //加载数据
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ZFQDocs" ofType:@"json"];
-    NSData *datas = [NSData dataWithContentsOfFile:filePath];
-    docs = [NSJSONSerialization JSONObjectWithData:datas options:NSJSONReadingMutableContainers error:NULL];
+    ZFQDocumentsController * __weak weakSelf = self;
+    [SVProgressHUD showWithStatus:@"正在加载..."];
+    [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
+        if (isReachable) {
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            NSString *getURL = [kHost stringByAppendingString:@"/teacherDocs"];
+            NSDictionary *param = @{@"idNum":[ZFQGeneralService accessId]};
+            [manager GET:getURL parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary *dic = responseObject;
+                NSNumber *status = dic[@"status"];
+                if (status.integerValue == 200) {
+                    docs = dic[@"files"];
+                    if (docs.count == 0) {
+                        [weakSelf showPlaceHolderView];
+                    }
+                    [weakSelf.myTableView reloadData];
+                    [SVProgressHUD dismiss];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [SVProgressHUD showErrorWithStatus:@"请求失败"];
+            }];
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"网络不给力"];
+        }
+    }];
     
-    [ZFQGeneralService documentsDirectory];
+}
+
+- (void)showPlaceHolderView
+{
+    _myTableView.hidden = YES;
+    [self showEmotionViewWithEmotion:@"⊙﹏⊙" title:@"您还没有教学资料"];
+}
+
+- (void)showEmotionViewWithEmotion:(NSString *)emotion title:(NSString *)title
+{
+    EmotionView  *emotionView = [[EmotionView alloc] init];
+    [self.view addSubview:emotionView];
+    
+    emotionView.hidden = NO;
+    emotionView.emotionStr = emotion;
+    emotionView.title = title;
+    
+    emotionView.center = CGPointMake(ZFQ_ScreenWidth/2, (ZFQ_ScreenHeight - emotionView.frame.size.height)/2.0f);
 }
 
 #pragma mark - tableView datasource delegate

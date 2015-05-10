@@ -135,8 +135,11 @@
                            NSFontAttributeName:[UIFont systemFontOfSize:15],
                            NSParagraphStyleAttributeName:style
                            };
-    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:zfqDocument.name attributes:attr];
-    self.fileNameLabel.attributedText = attrStr;
+    if (zfqDocument.name != nil) {
+        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:zfqDocument.name attributes:attr];
+        self.fileNameLabel.attributedText = attrStr;
+    }
+    
     self.fileSizeLabel.text = [self stringFromFileSize:zfqDocument.fileSize];
     
     [self layoutIfNeeded];
