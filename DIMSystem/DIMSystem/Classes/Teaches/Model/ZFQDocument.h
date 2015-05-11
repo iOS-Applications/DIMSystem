@@ -27,4 +27,6 @@ typedef NS_ENUM(NSInteger, ZFQDocumentType) {
 
 - (instancetype)initWithDocInfo:(NSDictionary *)docInfo;
 
+- (NSString *)docPath;
+
 @end

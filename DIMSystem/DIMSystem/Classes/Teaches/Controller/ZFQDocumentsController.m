@@ -47,7 +47,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
     ZFQDocumentsController * __weak weakSelf = self;
     [SVProgressHUD showWithStatus:@"正在加载..."];
     [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
-        if (isReachable) {
+        if (1) {  //isReachable
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             NSString *getURL = [kHost stringByAppendingString:@"/teacherDocs"];
             NSDictionary *param = @{@"idNum":[ZFQGeneralService accessId]};
@@ -70,6 +70,8 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
         }
     }];
     
+    //打印document路径
+    [ZFQGeneralService documentsDirectory];
 }
 
 - (void)showPlaceHolderView
@@ -100,6 +102,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 {
     ZFQDocumentCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:zfqDocCellID];
     [cell bindModel:[[ZFQDocument alloc] initWithDocInfo:docs[indexPath.row]]];
+//    [cell settingProgress:0.6];
     return cell;
 }
 
@@ -110,18 +113,69 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //先判断本地是否有这个文件，没有就去下载
     QLPreviewController *previewController = [[QLPreviewController alloc] init];
     previewController.dataSource = self;
     previewController.delegate = self;
 
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     NSDictionary *dic = docs[_myTableView.indexPathForSelectedRow.row];
     ZFQDocument *doc = [[ZFQDocument alloc] initWithDocInfo:dic];
-    if ([QLPreviewController canPreviewItem:doc]) {
-        [self.navigationController pushViewController:previewController animated:YES];
-    } else {
-        [SVProgressHUD showZFQErrorWithStatus:@"该文件不存在"];
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    //获取当前cell
+    ZFQDocumentCellTableViewCell *cell = (ZFQDocumentCellTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell.isExist) {
+        if ([QLPreviewController canPreviewItem:doc]) {
+            [self.navigationController pushViewController:previewController animated:YES];
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"不支持的文件类型"];
+            return;
+        }
     }
+
+    //去下载
+    NSDictionary *docInfo = docs[indexPath.row];
+    NSString *fileName = docInfo[@"file_name"];     //docInfo[@"file_name"]
+    NSString *idNum = [ZFQGeneralService accessId];
+    
+    [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
+        if (1) {  //isReachable
+            
+            NSString *urlStr = [NSString stringWithFormat:@"%@/downloadTeacherDocs?idNum=%@&fileName=%@",kHost,idNum,fileName];
+            NSString *encodingStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSURL *url = [NSURL URLWithString:encodingStr];
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+            [request setHTTPMethod:@"GET"];
+            [request setTimeoutInterval:30];
+            [request setValue:@"utf-8" forHTTPHeaderField:@"Accept-Encoding"];
+            
+            AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+            
+            //获取要写的文件路径
+            NSString *docPath = [[ZFQGeneralService documentURLString] stringByAppendingString:@"/doc"];
+            NSString *destPath = [docPath stringByAppendingPathComponent:fileName];
+            operation.outputStream = [NSOutputStream outputStreamToFileAtPath:destPath append:NO];
+            
+            [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+                //设置进度
+                CGFloat progress = totalBytesRead/(CGFloat)totalBytesExpectedToRead;
+                [cell settingProgress:progress];
+            }];
+            [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+//                    [SVProgressHUD showSuccessWithStatus:@"下载成功"];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [SVProgressHUD showErrorWithStatus:@"下载失败"];
+            }];
+            [operation start];
+            
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"网络不给力"];
+        }
+    }];     //end Reachability
+        
+
 }
 
 //#pragma mark - QLPreviewDatasource

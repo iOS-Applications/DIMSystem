@@ -40,8 +40,45 @@
     return self;
 }
 
+- (NSString *)docPath
+{
+    NSString *path = [ZFQGeneralService documentURLString];
+    //创建doc文件夹
+    NSString *docPath = [path stringByAppendingPathComponent:@"doc"];
+    //判断doc文件夹是否存在
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDirectory = NO;
+    BOOL result = [fileManager fileExistsAtPath:docPath isDirectory:&isDirectory];
+    if (isDirectory == YES) {
+        return docPath;
+    } else {
+        result = [fileManager createDirectoryAtPath:docPath withIntermediateDirectories:NO attributes:nil error:NULL];
+        if (result == YES) {
+            return docPath;
+        } else {
+            return nil;
+        }
+    }
+}
+
 - (NSURL *)previewItemURL
 {
+    NSString *docPath = [self docPath];
+    if (docPath != nil) {
+        //判断文件是否存在
+        NSString *filePath = [docPath stringByAppendingPathComponent:self.name];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL result = [fileManager fileExistsAtPath:filePath isDirectory:NULL];
+        if (result == YES) {
+            return [NSURL fileURLWithPath:filePath];
+        } else {
+            return nil;
+        }
+    } else {
+        return nil;
+    }
+    
+    /*
     NSString *path = [ZFQGeneralService documentURLString];
     //创建doc文件夹
     NSString *docPath = [path stringByAppendingPathComponent:@"doc"];
@@ -65,7 +102,7 @@
         } else {
             return nil;
         }
-    }
+    }*/
 }
 
 - (NSString *)previewItemTitle

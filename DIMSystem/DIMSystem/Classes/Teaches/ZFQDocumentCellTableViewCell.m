@@ -9,6 +9,15 @@
 #import "ZFQDocumentCellTableViewCell.h"
 #import "ZFQMecroDefine.h"
 #import "ZFQDocument.h"
+#import "ZFQProgressView.h"
+#import "ZFQGeneralService.h"
+
+@interface ZFQDocumentCellTableViewCell()
+
+@property (nonatomic,strong) ZFQProgressView *progressView;
+@property (nonatomic,strong) UILabel *alterLabel;
+
+@end
 
 @implementation ZFQDocumentCellTableViewCell
 
@@ -19,6 +28,13 @@
         [self.contentView addSubview:self.fileNameLabel];
         [self.contentView addSubview:self.fileSizeLabel];
         [self.contentView addSubview:self.thumbImgView];
+        [self.contentView addSubview:self.progressView];
+        self.progressView.hidden = YES;
+
+        [self.contentView addSubview:self.alterLabel];
+        
+        _isExist = NO;
+        
     }
     return self;
 }
@@ -64,6 +80,14 @@
     originFrame = self.fileSizeLabel.frame;
     originFrame.origin = CGPointMake(self.fileNameLabel.frame.origin.x, contentHeight - marginTop - originFrame.size.height);
     self.fileSizeLabel.frame = originFrame;
+    
+    //设置progressView位置
+    CGFloat progressViewWidth = 30;
+    self.progressView.bounds = CGRectMake(0, 0, progressViewWidth, progressViewWidth);
+    self.progressView.center = CGPointMake(self.contentView.frame.size.width - progressViewWidth -8 , self.contentView.center.y);
+    
+    [self.alterLabel sizeToFit];
+    self.alterLabel.center = self.progressView.center;
 }
 
 - (UILabel *)fileNameLabel
@@ -92,6 +116,24 @@
         _thumbImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
     }
     return _thumbImgView;
+}
+
+- (ZFQProgressView *)progressView
+{
+    if (_progressView == nil) {
+        _progressView = [[ZFQProgressView alloc] initWithFrame:CGRectZero];
+    }
+    return _progressView;
+}
+
+- (UILabel *)alterLabel
+{
+    if (_alterLabel == nil) {
+        _alterLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _alterLabel.font = [UIFont systemFontOfSize:13];
+        _alterLabel.textColor = ZFQ_RGB(27, 152, 247, 1);
+    }
+    return _alterLabel;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -142,13 +184,36 @@
     
     self.fileSizeLabel.text = [self stringFromFileSize:zfqDocument.fileSize];
     
+    //判断文件是否存在
+    if ([self isExistWithFileName:zfqDocument.name]) {
+        self.alterLabel.text = @"已下载";
+        _isExist = YES;
+    } else {
+        _isExist = NO;
+        self.alterLabel.text = @"未下载";
+    }
+    
     [self layoutIfNeeded];
+}
+
+- (BOOL)isExistWithFileName:(NSString *)fileName
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *filePath = [NSString stringWithFormat:@"%@/doc/%@",[ZFQGeneralService documentURLString],fileName];
+    BOOL isDir = NO;
+    BOOL isExist = [manager fileExistsAtPath:filePath isDirectory:&isDir];
+    if (isExist && isDir == NO) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (NSString *)stringFromFileSize:(double)fileSize
 {
+    fileSize = fileSize * 1000;
     NSString *sizeString = nil;
-    if (fileSize <1000) {
+    if (fileSize < 1000) {
         sizeString = [NSString stringWithFormat:@"%.0lfB",fileSize];
     } else if (fileSize >=1000 && fileSize < 1024) {
         sizeString = [NSString stringWithFormat:@"%.2lfKB",fileSize/1024.0];
@@ -166,6 +231,26 @@
     return sizeString;
 }
 
+- (void)setttingAlert:(NSString *)text
+{
+    self.alterLabel.text = text;
+    [self.alterLabel sizeToFit];
+    self.alterLabel.center = self.progressView.center;
+}
+
+- (void)settingProgress:(CGFloat)progress
+{
+    if (progress >= 1) {
+        self.progressView.hidden = YES;
+        self.alterLabel.hidden = NO;
+        [self setttingAlert:@"已下载"];
+        _isExist = YES;
+    } else {
+        self.alterLabel.hidden = YES;
+        self.progressView.hidden = NO;
+        self.progressView.currProgress = progress;
+    }
+}
 @end
 
 
