@@ -26,6 +26,7 @@
 + (NSString *)documentURLString;
 
 + (NSString *)documentsDirectory;
++ (NSString *)docsURLWithName:(NSString *)docName;  //判断文件是否在本地有缓存，若没有，则返回nil
 
 //--------获取accessId,用来判断是否登陆------
 + (NSString *)accessId;

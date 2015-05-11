@@ -142,6 +142,20 @@
     return documentsDirectory;
 }
 
++ (NSString *)docsURLWithName:(NSString *)docName
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *fileURLStr = [NSString stringWithFormat:@"%@/doc/%@",[self documentURLString],docName];
+//    NSString *fileURLStr = [[self documentURLString] stringByAppendingPathComponent:docName];
+    BOOL isDir = NO;
+    BOOL result = [manager fileExistsAtPath:fileURLStr isDirectory:&isDir];
+    if (result == YES && isDir == NO) {
+        return fileURLStr;
+    } else {
+        return nil;
+    }
+}
+
 + (NSString *)accessId
 {
     NSString *accessId = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessId];
