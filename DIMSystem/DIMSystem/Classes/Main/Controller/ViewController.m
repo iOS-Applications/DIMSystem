@@ -19,9 +19,10 @@
 #import "ZFQTeacherEditController.h"
 #import "ZFQTeacherInfoController.h"
 #import "ZFQTeacherHomeController.h"
+#import "ZFQGeneralService.h"
 #import "LoginViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UIAlertViewDelegate>
 
 @end
 
@@ -77,9 +78,15 @@
 //教师信息模块
 - (IBAction)teachersInfo:(id)sender
 {
-    ZFQTeacherHomeController *homeVC = [[ZFQTeacherHomeController alloc] init];
-    UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:homeVC];
-    [self presentViewController:naVC animated:YES completion:nil];
+    NSString *accessId = [ZFQGeneralService accessId];
+    if (accessId == nil || [accessId isEqualToString:@""]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"你还没有登录，请先登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
+    } else {
+        ZFQTeacherHomeController *homeVC = [[ZFQTeacherHomeController alloc] init];
+        UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:homeVC];
+        [self presentViewController:naVC animated:YES completion:nil];
+    }
 }
 
 //学生信息模块
@@ -104,5 +111,15 @@
 
 //学术资源
 - (IBAction)scholarismResource:(id)sender {
+}
+
+#pragma mark - UIAletView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //登录
+    LoginViewController *loginVC = [[LoginViewController alloc] initWithLoginSuccessBlock:^{
+        NSLog(@"登陆成功");
+    }];
+    [self presentViewController:loginVC animated:YES completion:nil];
 }
 @end
