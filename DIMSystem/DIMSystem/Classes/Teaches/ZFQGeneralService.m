@@ -126,6 +126,27 @@
     return avatarPath;
 }
 
+//doc文件夹 ，不存在会创建
++ (NSString *)docDirPath
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *docDirPath = [[self documentURLString] stringByAppendingPathComponent:@"doc"];
+    BOOL isDir = NO;
+    BOOL result = [manager fileExistsAtPath:docDirPath isDirectory:&isDir];
+    if (result == NO) {
+        //创建doc文件夹
+        result = [manager createDirectoryAtPath:docDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+        if (result == YES) {
+            return docDirPath;
+        } else {
+            return nil;
+        }
+    } else {
+        return docDirPath;
+    }
+
+}
+
 + (NSString *)documentURLString
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -142,17 +163,37 @@
     return documentsDirectory;
 }
 
-+ (NSString *)docsURLWithName:(NSString *)docName
+//获取doc文件夹下的文件的路径，如果doc文件夹不存在，会自动创建
++ (NSString *)docFilePathWithName:(NSString *)docName
 {
     NSFileManager *manager = [NSFileManager defaultManager];
-    NSString *fileURLStr = [NSString stringWithFormat:@"%@/doc/%@",[self documentURLString],docName];
-//    NSString *fileURLStr = [[self documentURLString] stringByAppendingPathComponent:docName];
+    NSString *docDirPath = [[self documentURLString] stringByAppendingPathComponent:@"doc"];
     BOOL isDir = NO;
-    BOOL result = [manager fileExistsAtPath:fileURLStr isDirectory:&isDir];
-    if (result == YES && isDir == NO) {
-        return fileURLStr;
+    BOOL result = [manager fileExistsAtPath:docDirPath isDirectory:&isDir];
+    if (result == NO) {
+        //创建文件夹
+        result = [manager createDirectoryAtPath:docDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+        if (result == YES) {
+            //拼接字符串
+            return [docDirPath stringByAppendingPathComponent:docName];
+        } else {
+            return nil;
+        }
     } else {
-        return nil;
+        return [docDirPath stringByAppendingPathComponent:docName];;
+    }
+}
+
++ (BOOL)deleteDocWithName:(NSString *)docName
+{
+    NSString *filePath = [self docFilePathWithName:docName];
+    if (filePath != nil) {
+        NSFileManager *manager = [NSFileManager defaultManager];
+        NSError *error;
+        BOOL result = [manager removeItemAtPath:filePath error:&error];
+        return  result;
+    } else {
+        return YES;
     }
 }
 

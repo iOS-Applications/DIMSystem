@@ -26,7 +26,9 @@
 + (NSString *)documentURLString;
 
 + (NSString *)documentsDirectory;
-+ (NSString *)docsURLWithName:(NSString *)docName;  //判断文件是否在本地有缓存，若没有，则返回nil
+
++ (NSString *)docFilePathWithName:(NSString *)docName;  //返回文件的路径，如果文件不存在，返回nil
++ (BOOL)deleteDocWithName:(NSString *)docName;
 
 //--------获取accessId,用来判断是否登陆------
 + (NSString *)accessId;

@@ -7,7 +7,7 @@
 //
 
 #import "ZFQDocumentsController.h"
-#import "ZFQDocumentCellTableViewCell.h"
+#import "ZFQDocumentCell.h"
 #import "ZFQDocument.h"
 #import "ZFQGeneralService.h"
 #import "AFNetworking.h"
@@ -20,9 +20,10 @@
 
 NSString * const zfqDocCellID = @"zfqDocCellID";
 
-@interface ZFQDocumentsController () <UITableViewDataSource,UITableViewDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate> 
+@interface ZFQDocumentsController () <UITableViewDataSource,UITableViewDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate,UIActionSheetDelegate>
 {
-    NSArray *docs;     //保存文档信息list
+    NSMutableArray *docs;     //保存文档信息list
+    NSInteger deleteRow;   //要删除的行的索引
 }
 @end
 
@@ -38,10 +39,11 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
     _myTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _myTableView.dataSource = self;
     _myTableView.delegate = self;
+    
     [self.view addSubview:_myTableView];
     
     //注册cell
-    [_myTableView registerClass:[ZFQDocumentCellTableViewCell class] forCellReuseIdentifier:zfqDocCellID];
+    [_myTableView registerClass:[ZFQDocumentCell class] forCellReuseIdentifier:zfqDocCellID];
     
     //加载数据
     ZFQDocumentsController * __weak weakSelf = self;
@@ -50,12 +52,12 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
         if (1) {  //isReachable
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             NSString *getURL = [kHost stringByAppendingString:@"/teacherDocs"];
-            NSDictionary *param = @{@"idNum":[ZFQGeneralService accessId]};
+            NSDictionary *param = @{@"idNum":@"234"};  //[ZFQGeneralService accessId]
             [manager GET:getURL parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *dic = responseObject;
                 NSNumber *status = dic[@"status"];
                 if (status.integerValue == 200) {
-                    docs = dic[@"files"];
+                    docs = [[NSMutableArray alloc] initWithArray:dic[@"files"]];
                     if (docs.count == 0) {
                         [weakSelf showPlaceHolderView];
                     }
@@ -100,9 +102,8 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ZFQDocumentCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:zfqDocCellID];
+    ZFQDocumentCell *cell = [tableView dequeueReusableCellWithIdentifier:zfqDocCellID];
     [cell bindModel:[[ZFQDocument alloc] initWithDocInfo:docs[indexPath.row]]];
-//    [cell settingProgress:0.6];
     return cell;
 }
 
@@ -124,7 +125,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
     ZFQDocument *doc = [[ZFQDocument alloc] initWithDocInfo:dic];
 
     //获取当前cell
-    ZFQDocumentCellTableViewCell *cell = (ZFQDocumentCellTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    ZFQDocumentCell *cell = (ZFQDocumentCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.isExist) {
         if ([QLPreviewController canPreviewItem:doc]) {
             [self.navigationController pushViewController:previewController animated:YES];
@@ -136,11 +137,11 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 
     //去下载
     NSDictionary *docInfo = docs[indexPath.row];
-    NSString *fileName = docInfo[@"file_name"];     //docInfo[@"file_name"]
+    NSString *fileName = docInfo[@"file_name"];
     NSString *idNum = [ZFQGeneralService accessId];
     
     [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
-        if (1) {  //isReachable
+        if (isReachable) {  //isReachable
             
             NSString *urlStr = [NSString stringWithFormat:@"%@/downloadTeacherDocs?idNum=%@&fileName=%@",kHost,idNum,fileName];
             NSString *encodingStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -153,8 +154,8 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
             AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
             
             //获取要写的文件路径
-            NSString *docPath = [[ZFQGeneralService documentURLString] stringByAppendingString:@"/doc"];
-            NSString *destPath = [docPath stringByAppendingPathComponent:fileName];
+            NSString *destPath = [ZFQGeneralService docFilePathWithName:fileName];
+//            NSString *destPath = [docPath stringByAppendingPathComponent:fileName];
             operation.outputStream = [NSOutputStream outputStreamToFileAtPath:destPath append:NO];
             
             [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
@@ -178,7 +179,61 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 
 }
 
-//#pragma mark - QLPreviewDatasource
+#pragma mark 滑动删除代理
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    deleteRow = indexPath.row;
+    NSString *title = @"确定删除?会连同删除服务器端的文件";
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:nil, nil];
+    [actionSheet showInView:self.view];
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:deleteRow inSection:0];
+    
+    if (buttonIndex == 0) {
+        NSDictionary *docInfo = docs[indexPath.row];
+        NSString *fileName = docInfo[@"file_name"];
+        
+        //设置cell状态
+        ZFQDocumentCell *cell = (ZFQDocumentCell *)[_myTableView cellForRowAtIndexPath:indexPath];
+        [cell setttingAlert:@"正在删除"];
+
+        //先从服务器端删除
+        ZFQDocumentsController * __weak weakSelf = self;
+        
+        NSString *postURL = [kHost stringByAppendingString:@"/deleteTeacherDocs"];
+        NSDictionary *param = @{@"idNum":[ZFQGeneralService accessId],@"fileName":fileName};
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager POST:postURL parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *dic = responseObject;
+            NSNumber *status = dic[@"status"];
+            if (status.integerValue == 200) {
+                [ZFQGeneralService deleteDocWithName:fileName];
+                //删除cell
+                [docs removeObjectAtIndex:deleteRow];
+                [weakSelf.myTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                [SVProgressHUD showSuccessWithStatus:@"已成功删除"];
+            }else {
+                [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:@"删除失败"];
+        }];
+        
+    }
+}
+
+#pragma mark - QLPreviewDatasource
 - (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller
 {
     return 1;
