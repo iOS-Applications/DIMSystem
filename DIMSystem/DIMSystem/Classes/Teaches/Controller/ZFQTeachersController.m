@@ -48,15 +48,14 @@
     
     //添加searchBar
     _myTableView.tableHeaderView = self.mySearchBar;
-    self.mySearchBar.delegate = self;
     [self.view addSubview:_myTableView];
     
     ZFQTeachersController * __weak weakSelf = self;
     searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:self.mySearchBar contentsController:self];
-    searchResultController = [[ZFQSearchController alloc] initWithSearchDisplayController:searchDisplayController didSelectRow:^(UITableView *tableView, NSIndexPath *indexPath) {
+    searchResultController = [[ZFQSearchController alloc] initWithSearchDisplayController:searchDisplayController didSelectRow:^(UITableView *tableView, NSIndexPath *indexPath, NSString *idNum) {
         ZFQTeacherInfoController *teacherInfo = [[ZFQTeacherInfoController alloc] init];
         teacherInfo.showEditItem = NO;
-        teacherInfo.idNum = @"4123";
+        teacherInfo.idNum = idNum;
         [weakSelf.navigationController pushViewController:teacherInfo animated:YES];
     }];
     

@@ -65,7 +65,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
                     [SVProgressHUD dismiss];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                [SVProgressHUD showErrorWithStatus:@"请求失败"];
+                [SVProgressHUD showErrorWithStatus:error.localizedDescription];
             }];
         } else {
             [SVProgressHUD showErrorWithStatus:@"网络不给力"];
@@ -255,6 +255,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
     }
 }
 
+#pragma mark - 处理共享文件
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

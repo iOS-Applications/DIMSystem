@@ -19,7 +19,6 @@
 + (UITextField *)textFieldWithWidth:(CGFloat)width;
 + (UITextField *)textFieldWithPlaceholder:(NSString *)placeholder width:(CGFloat)width;
 
-
 + (void)setRoundCornerRadiusForView:(UIView *)view;
 
 + (NSString *)avatarURLString;

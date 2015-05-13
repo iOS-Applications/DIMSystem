@@ -13,6 +13,8 @@
 #import "ZFQGeneralService.h"
 #import "SVProgressHUD.h"
 
+#import <MobileCoreServices/MobileCoreServices.h>
+
 NSString * const cellID = @"cellID";
 
 @interface ZFQTeacherHomeController () <UITableViewDataSource,UITableViewDelegate>
@@ -122,6 +124,5 @@ NSString * const cellID = @"cellID";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end
