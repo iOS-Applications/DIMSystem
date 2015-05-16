@@ -101,9 +101,21 @@
     textField.attributedPlaceholder = attrStr;
     
     UIView *underLine = [[UIView alloc] initWithFrame:CGRectMake(0, textFieldHeight - 1, width, 1)];
-    underLine.backgroundColor = [UIColor lightGrayColor];
+    underLine.backgroundColor = [UIColor colorWithRed:0.76 green:0.76 blue:0.76 alpha:0.6];
     [textField addSubview:underLine];
     return textField;
+}
+
++ (void)showEmotionOnView:(UIView *)view emotion:(NSString *)emotion title:(NSString *)title
+{
+    EmotionView  *emotionView = [[EmotionView alloc] init];
+    [view addSubview:emotionView];
+    
+    emotionView.hidden = NO;
+    emotionView.emotionStr = emotion;
+    emotionView.title = title;
+    
+    emotionView.center = CGPointMake(ZFQ_ScreenWidth/2, (ZFQ_ScreenHeight - emotionView.frame.size.height)/2.0f);
 }
 
 + (void)setRoundCornerRadiusForView:(UIView *)view
@@ -167,7 +179,11 @@
 + (NSString *)docFilePathWithName:(NSString *)docName
 {
     NSFileManager *manager = [NSFileManager defaultManager];
-    NSString *docDirPath = [[self documentURLString] stringByAppendingPathComponent:@"doc"];
+    NSString *idNumDirPath = [self idNumPath];
+    if (idNumDirPath == nil) {
+        return nil;
+    }
+    NSString *docDirPath = [idNumDirPath stringByAppendingPathComponent:@"doc"];
     BOOL isDir = NO;
     BOOL result = [manager fileExistsAtPath:docDirPath isDirectory:&isDir];
     if (result == NO) {
@@ -182,6 +198,117 @@
     } else {
         return [docDirPath stringByAppendingPathComponent:docName];;
     }
+}
+
++ (NSString *)idNumPath
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *idDirPath = [[self documentURLString] stringByAppendingPathComponent:[ZFQGeneralService accessId]];
+    BOOL isDir = NO;
+    BOOL result = [manager fileExistsAtPath:idDirPath isDirectory:&isDir];
+    if (result == NO) {
+        //创建文件夹
+        result = [manager createDirectoryAtPath:idDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+        if (result == YES) {
+            //拼接字符串
+            return idDirPath;
+        } else {
+            return nil;
+        }
+    } else {
+        return idDirPath;
+    }
+}
+
++ (UIImage *)avatarFileWithName:(NSString *)idNumName
+{
+    if (idNumName == nil || [idNumName isEqualToString:@""]) {
+        return nil;
+    }
+    NSString *idNumPath = [[self idNumPath] stringByAppendingPathComponent:@"avatar"];
+    BOOL isDir = NO;
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:idNumPath isDirectory:&isDir] && isDir) {
+        //获取idNum文件夹下第一个文件
+        NSError* error = nil;
+        NSArray* files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:idNumPath
+                                                                             error:&error];
+        for (NSString *path in files) {
+            if ([path rangeOfString:idNumName].length > 0 ) {
+                NSString *imgPath = [idNumPath stringByAppendingPathComponent:path];
+                UIImage *img = [UIImage imageWithContentsOfFile:imgPath];
+                if (img != nil)
+                {
+                    return img;
+                }
+            }
+        }
+//        if (error == nil)
+//        {
+//            if (files.count > 0)
+//            {
+//                NSString *path = files[0];
+//                NSString *imgPath = [idNumPath stringByAppendingPathComponent:path];
+//                UIImage *img = [UIImage imageWithContentsOfFile:imgPath];
+//                if (img != nil)
+//                {
+//                    return img;
+//                }
+//            }
+//            
+//        }
+    }
+    return nil;
+}
+
++ (NSString *)avatarPathWithName:(NSString *)idNum
+{
+    if (idNum == nil || [idNum isEqualToString:@""]) {
+        return nil;
+    }
+    NSString *idNumPath = [[self idNumPath] stringByAppendingPathComponent:@"avatar"];
+    //创建idNum文件夹
+    BOOL isDir = NO;
+    NSString *avatarPath = nil;
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:idNumPath isDirectory:&isDir]) {
+        if (isDir) {
+            //在文件夹idNum创建名为idNum的文件
+            NSString *avatarName = [idNum stringByAppendingString:@".png"];
+            avatarPath = [idNumPath stringByAppendingPathComponent:avatarName];
+
+            BOOL result = [manager createFileAtPath:avatarPath contents:nil attributes:nil];
+            if (result == NO) {
+                avatarPath = nil;
+            }
+        } else {
+            //创建idNum文件夹
+            BOOL result = [manager createDirectoryAtPath:idNumPath withIntermediateDirectories:NO attributes:nil error:nil];
+            if (result == YES) {
+                //在文件夹idNum创建名为idNum的文件
+                NSString *avatarName = [idNum stringByAppendingString:@".png"];
+                avatarPath = [idNumPath stringByAppendingPathComponent:avatarName];
+
+                result = [manager createFileAtPath:avatarPath contents:nil attributes:nil];
+                if (result == NO) {
+                    avatarPath = nil;
+                }
+            }
+        }
+    } else {
+        //创建idNum文件夹
+        BOOL result = [manager createDirectoryAtPath:idNumPath withIntermediateDirectories:NO attributes:nil error:nil];
+        if (result == YES) {
+            //在文件夹idNum创建名为idNum的文件
+            NSString *avatarName = [idNum stringByAppendingString:@".png"];
+            avatarPath = [idNumPath stringByAppendingPathComponent:avatarName];
+            result = [manager createFileAtPath:avatarPath contents:nil attributes:nil];
+            if (result == NO) {
+                avatarPath = nil;
+            }
+        }
+    }
+    return avatarPath;
 }
 
 + (BOOL)deleteDocWithName:(NSString *)docName
@@ -201,5 +328,10 @@
 {
     NSString *accessId = [[NSUserDefaults standardUserDefaults] objectForKey:kAccessId];
     return accessId;
+}
+
++ (void)logout
+{
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kAccessId];
 }
 @end
