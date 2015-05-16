@@ -141,7 +141,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
     NSString *idNum = [ZFQGeneralService accessId];
     
     [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
-        if (isReachable) {  //isReachable
+        if (reachable(isReachable)) {  //isReachable
             
             NSString *urlStr = [NSString stringWithFormat:@"%@/downloadTeacherDocs?idNum=%@&fileName=%@",kHost,idNum,fileName];
             NSString *encodingStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -155,7 +155,6 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
             
             //获取要写的文件路径
             NSString *destPath = [ZFQGeneralService docFilePathWithName:fileName];
-//            NSString *destPath = [docPath stringByAppendingPathComponent:fileName];
             operation.outputStream = [NSOutputStream outputStreamToFileAtPath:destPath append:NO];
             
             [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
