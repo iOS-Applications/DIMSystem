@@ -16,6 +16,7 @@ NSString * const zfqSearchCellID = @"cell";
 @interface ZFQSearchController()
 {
     AFHTTPRequestOperation *operation;
+    NSInteger scopeIndex;
 }
 
 @end
@@ -84,8 +85,7 @@ NSString * const zfqSearchCellID = @"cell";
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *urlStr = [kHost stringByAppendingString:@"/searchTeacherInfo"];
-//    NSString *url = [NSString stringWithFormat:@"%@/searchTeacherInfo?searchKey=%@",kHost,key];
-    NSDictionary *dic = @{@"searchKey":key};
+    NSDictionary *dic = @{@"searchKey":key,@"searchType":@(scopeIndex)};
     operation = [manager GET:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *dic = responseObject;
         NSNumber *status = dic[@"status"];
@@ -101,8 +101,7 @@ NSString * const zfqSearchCellID = @"cell";
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }];
-    
-    
+ 
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -113,6 +112,10 @@ NSString * const zfqSearchCellID = @"cell";
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    scopeIndex = selectedScope;
+}
 - (void)dealloc
 {
     NSLog(@"release search");
