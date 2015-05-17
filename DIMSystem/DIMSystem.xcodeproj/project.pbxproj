@@ -44,6 +44,7 @@
 		12724BE41AE0E26100356E0C /* NSObject+MJMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 12724BDB1AE0E26100356E0C /* NSObject+MJMember.m */; };
 		B11B2B191AF5120C004BF09A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B11B2B171AF5120C004BF09A /* LoginViewController.m */; };
 		B11B2B1A1AF5120C004BF09A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B11B2B181AF5120C004BF09A /* LoginViewController.xib */; };
+		B11BC64A1B038B1A00C51D54 /* ZFQTeacherNameListController.m in Sources */ = {isa = PBXBuildFile; fileRef = B11BC6491B038B1A00C51D54 /* ZFQTeacherNameListController.m */; };
 		B130D4F41AF9B5F8000A48AB /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B130D4E21AF9B5F8000A48AB /* AFHTTPRequestOperation.m */; };
 		B130D4F51AF9B5F8000A48AB /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B130D4E41AF9B5F8000A48AB /* AFHTTPRequestOperationManager.m */; };
 		B130D4F61AF9B5F8000A48AB /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B130D4E61AF9B5F8000A48AB /* AFHTTPSessionManager.m */; };
@@ -66,6 +67,9 @@
 		B162A7F41AEF2900004B1BE7 /* ZFQMajor.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F01AEF2900004B1BE7 /* ZFQMajor.plist */; };
 		B162A7F51AEF2900004B1BE7 /* ZFQJob.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F11AEF2900004B1BE7 /* ZFQJob.plist */; };
 		B162A7F61AEF2900004B1BE7 /* ZFQDepartInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = B162A7F21AEF2900004B1BE7 /* ZFQDepartInfo.plist */; };
+		B170AE3B1B078AB4006236D4 /* header_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B170AE3A1B078AB4006236D4 /* header_background@2x.png */; };
+		B182F4211B05D6A500CF15EA /* ZFQAdminHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B182F4201B05D6A500CF15EA /* ZFQAdminHomeController.m */; };
+		B182F4241B05F87B00CF15EA /* ZFQAddTeacherController.m in Sources */ = {isa = PBXBuildFile; fileRef = B182F4231B05F87B00CF15EA /* ZFQAddTeacherController.m */; };
 		B196D21B1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = B196D21A1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m */; };
 		B196D21E1AF1C6470064650E /* ZFQDocumentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B196D21D1AF1C6470064650E /* ZFQDocumentsController.m */; };
 		B196D2211AF1C8830064650E /* ZFQDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = B196D2201AF1C8830064650E /* ZFQDocument.m */; };
@@ -223,6 +227,8 @@
 		B11B2B161AF5120C004BF09A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B11B2B171AF5120C004BF09A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B11B2B181AF5120C004BF09A /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		B11BC6481B038B1A00C51D54 /* ZFQTeacherNameListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQTeacherNameListController.h; sourceTree = "<group>"; };
+		B11BC6491B038B1A00C51D54 /* ZFQTeacherNameListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQTeacherNameListController.m; sourceTree = "<group>"; };
 		B130D4E11AF9B5F8000A48AB /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		B130D4E21AF9B5F8000A48AB /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		B130D4E31AF9B5F8000A48AB /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -259,6 +265,11 @@
 		B162A7F01AEF2900004B1BE7 /* ZFQMajor.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZFQMajor.plist; sourceTree = "<group>"; };
 		B162A7F11AEF2900004B1BE7 /* ZFQJob.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZFQJob.plist; sourceTree = "<group>"; };
 		B162A7F21AEF2900004B1BE7 /* ZFQDepartInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ZFQDepartInfo.plist; sourceTree = "<group>"; };
+		B170AE3A1B078AB4006236D4 /* header_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header_background@2x.png"; sourceTree = "<group>"; };
+		B182F41F1B05D6A500CF15EA /* ZFQAdminHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQAdminHomeController.h; sourceTree = "<group>"; };
+		B182F4201B05D6A500CF15EA /* ZFQAdminHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQAdminHomeController.m; sourceTree = "<group>"; };
+		B182F4221B05F87B00CF15EA /* ZFQAddTeacherController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQAddTeacherController.h; sourceTree = "<group>"; };
+		B182F4231B05F87B00CF15EA /* ZFQAddTeacherController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFQAddTeacherController.m; sourceTree = "<group>"; };
 		B196D2191AF1C1730064650E /* SVProgressHUD+ZFQCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD+ZFQCustom.h"; sourceTree = "<group>"; };
 		B196D21A1AF1C1730064650E /* SVProgressHUD+ZFQCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD+ZFQCustom.m"; sourceTree = "<group>"; };
 		B196D21C1AF1C6470064650E /* ZFQDocumentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFQDocumentsController.h; sourceTree = "<group>"; };
@@ -614,6 +625,7 @@
 		B162A7E41AEF28CC004B1BE7 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				B170AE3A1B078AB4006236D4 /* header_background@2x.png */,
 				B196D22D1AF1D98B0064650E /* zfq_icon_zip.png */,
 				B196D2271AF1D97D0064650E /* zfq_icon_xls.png */,
 				B196D2281AF1D97D0064650E /* zfq_icon_doc.png */,
@@ -990,6 +1002,8 @@
 				B162A7DE1AEF26EB004B1BE7 /* ZFQTeacherHomeController.m */,
 				B162A7E01AEF2701004B1BE7 /* ZFQTeachersController.h */,
 				B162A7E11AEF2701004B1BE7 /* ZFQTeachersController.m */,
+				B11BC6481B038B1A00C51D54 /* ZFQTeacherNameListController.h */,
+				B11BC6491B038B1A00C51D54 /* ZFQTeacherNameListController.m */,
 				B1D9D99A1AF0AB310065714B /* ZFQSearchController.h */,
 				B1D9D99B1AF0AB310065714B /* ZFQSearchController.m */,
 				B196D21C1AF1C6470064650E /* ZFQDocumentsController.h */,
@@ -1003,6 +1017,10 @@
 				CCDBA9111AE0E8B900A735FE /* ZFQTeacherViewController.h */,
 				CCDBA9121AE0E8B900A735FE /* ZFQTeacherViewController.m */,
 				CCDBA9131AE0E8B900A735FE /* ZFQTeacherViewController.xib */,
+				B182F41F1B05D6A500CF15EA /* ZFQAdminHomeController.h */,
+				B182F4201B05D6A500CF15EA /* ZFQAdminHomeController.m */,
+				B182F4221B05F87B00CF15EA /* ZFQAddTeacherController.h */,
+				B182F4231B05F87B00CF15EA /* ZFQAddTeacherController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1139,6 +1157,7 @@
 				CCAE2C9C1AD55B8E004E9173 /* Images.xcassets in Resources */,
 				12724BAF1AE0E23800356E0C /* StuInfoCheckVC.xib in Resources */,
 				CCDBA93A1AE0E8B900A735FE /* SVProgressHUD.bundle in Resources */,
+				B170AE3B1B078AB4006236D4 /* header_background@2x.png in Resources */,
 				B196D22B1AF1D97D0064650E /* zfq_icon_doc.png in Resources */,
 				CCDBA9331AE0E8B900A735FE /* ZFQTeacherViewController.xib in Resources */,
 				B162A7EC1AEF28E1004B1BE7 /* buddy_header_arrow.png in Resources */,
@@ -1199,6 +1218,7 @@
 				CC665FD91AD1261B003F86FE /* AppDelegate.m in Sources */,
 				B130D4F91AF9B5F8000A48AB /* AFURLConnectionOperation.m in Sources */,
 				12724BBE1AE0E23800356E0C /* DMStudentCell.m in Sources */,
+				B182F4241B05F87B00CF15EA /* ZFQAddTeacherController.m in Sources */,
 				CCAE2CA81AD5656E004E9173 /* newsCell.m in Sources */,
 				12724BC41AE0E23800356E0C /* StuProjectClassCell.m in Sources */,
 				12724BE41AE0E26100356E0C /* NSObject+MJMember.m in Sources */,
@@ -1207,6 +1227,7 @@
 				12724BBC1AE0E23800356E0C /* DMStudent.m in Sources */,
 				CC0251251ADB798C00F65C95 /* DIMTextHeight.m in Sources */,
 				CCDBA9351AE0E8B900A735FE /* DropDownListView.m in Sources */,
+				B182F4211B05D6A500CF15EA /* ZFQAdminHomeController.m in Sources */,
 				CC5E915B1AD791E7007908EB /* NewsDetaileViewController.m in Sources */,
 				CCAE2CA31AD563F8004E9173 /* newsModel.m in Sources */,
 				CC6DCDE11ADE317F006CB380 /* PracShiXun.m in Sources */,
@@ -1234,6 +1255,7 @@
 				12724BE11AE0E26100356E0C /* MJTypeEncoding.m in Sources */,
 				B1C6F4D21AFF81860065766C /* ZFQProgressView.m in Sources */,
 				CCDBA9381AE0E8B900A735FE /* SQBBaseView.m in Sources */,
+				B11BC64A1B038B1A00C51D54 /* ZFQTeacherNameListController.m in Sources */,
 				B130D4FA1AF9B5F8000A48AB /* AFURLRequestSerialization.m in Sources */,
 				12724BB01AE0E23800356E0C /* StuActionVC.m in Sources */,
 				B162A7DC1AEF2697004B1BE7 /* ZFQDepartmentHeaderView.m in Sources */,
