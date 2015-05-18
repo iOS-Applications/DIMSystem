@@ -26,11 +26,12 @@
 }
 
 //#pragma mark - tabBarController.tabBar重现方法
-//- (void)viewWillDisappear:(BOOL)animated {
-//    if (self.navigationController.viewControllers.count > 1) {
-//        self.parentViewController.tabBarController.tabBar.hidden = YES;
-//    }
-//}
+- (void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"%d",self.navigationController.viewControllers.count);
+    if (self.navigationController.viewControllers.count > 1) {
+        self.parentViewController.tabBarController.tabBar.hidden = YES;
+    }
+}
 
 #pragma mark //初始化所有自控制器
 - (void)setupAllChildViewControllers

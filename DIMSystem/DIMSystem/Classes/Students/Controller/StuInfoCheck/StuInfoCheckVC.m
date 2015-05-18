@@ -48,6 +48,21 @@
     return _studentsArray;
 }
 
+#pragma mark - tabBarController.tabBar重现方法
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    if (self.navigationController.viewControllers.count > 1) {
+        self.parentViewController.tabBarController.tabBar.hidden = YES;
+    }
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    if (self.navigationController.viewControllers.count < 2) {
+        self.parentViewController.tabBarController.tabBar.hidden = NO;
+    }
+}
+
 #pragma mark //返回按钮点击事件
 - (void)backToHome
 {
