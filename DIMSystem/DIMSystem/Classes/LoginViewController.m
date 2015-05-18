@@ -11,16 +11,17 @@
 #import "Reachability.h"
 #import "commenConst.h"
 #import "SVProgressHUD+ZFQCustom.h"
+#import "ZFQMecroDefine.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 
-@property (nonatomic,copy) void (^successBlk)(void);
+@property (nonatomic,copy) void (^successBlk)(NSInteger loginType);
 
 @end
 
 @implementation LoginViewController
 
-- (instancetype)initWithLoginSuccessBlock:(void (^)(void))successBlk
+- (instancetype)initWithLoginSuccessBlock:(void (^)(NSInteger loginType))successBlk
 {
     self = [super init];
     if (self) {
@@ -70,16 +71,19 @@
     DLRadioButton *currSelectBtn = self.teacherBtn.selectedButton;
     
     NSDictionary *param = nil;
+    NSInteger loginType = 1;
     if ([currSelectBtn.currentTitle isEqualToString:@"教师"]) {
+        loginType = 1;
         param = @{@"idNum":name,@"pwd":pwd,@"login_type":@(1)};
     } else {
+        loginType = 2;
         param = @{@"idNum":name,@"pwd":pwd,@"login_type":@(2)};
     }
     
     //判断网络是否可用
     LoginViewController * __weak weakSelf = self;
     [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
-        if (isReachable == YES) {
+        if (reachable(isReachable)) {  //isReachable == YES
             [SVProgressHUD showZFQHUDWithStatus:@"请稍后..."];
             //post请求
             NSString *loginURL = [NSString stringWithFormat:@"%@/login",kHost];
@@ -92,17 +96,27 @@
                     NSString *msg = dic[@"msg"];
                     [SVProgressHUD showZFQErrorWithStatus:msg];
                 } else {
-                    //登陆成功，保存access_id
-                    NSString *accessId = dic[@"access_id"];
-                    [[NSUserDefaults standardUserDefaults] setObject:accessId forKey:kAccessId];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                    [SVProgressHUD dismiss];
                     
-                    [weakSelf.presentingViewController dismissViewControllerAnimated:YES completion:self.successBlk];
-                    
+                    if (loginType == 1) {   //教师登陆
+                        //登陆成功，保存access_id
+                        NSString *accessId = dic[@"access_id"];
+                        [[NSUserDefaults standardUserDefaults] setObject:accessId forKey:kAccessId];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        [SVProgressHUD dismiss];
+                        
+                        [weakSelf.presentingViewController dismissViewControllerAnimated:YES completion:^{
+                            weakSelf.successBlk(1);
+                        }];
+                    } else {      //管理员登陆
+                        [SVProgressHUD dismiss];
+                        [weakSelf.presentingViewController dismissViewControllerAnimated:YES completion:^{
+                            weakSelf.successBlk(2);
+                        }];
+                    }
+   
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                [SVProgressHUD showZFQErrorWithStatus:@"请求失败"];
+                [SVProgressHUD showZFQErrorWithStatus:error.localizedDescription];
             }];
         } else {
             [SVProgressHUD showZFQErrorWithStatus:@"网络不给力"];

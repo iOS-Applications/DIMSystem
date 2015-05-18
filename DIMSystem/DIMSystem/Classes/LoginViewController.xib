@@ -65,7 +65,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yG-PD-oBK" customClass="DLRadioButton">
-                    <rect key="frame" x="179" y="195" width="115" height="30"/>
+                    <rect key="frame" x="449" y="195" width="115" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="PPF-EJ-pBv"/>
                         <constraint firstAttribute="width" constant="115" id="S6l-Hf-WOM"/>
@@ -108,6 +108,7 @@
                 <constraint firstAttribute="centerX" secondItem="9yG-PD-oBK" secondAttribute="centerX" id="H99-Iu-BAD"/>
                 <constraint firstItem="10e-2B-ytn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="36" id="L4g-jc-tQN"/>
                 <constraint firstItem="10e-2B-ytn" firstAttribute="top" secondItem="4kp-91-JNi" secondAttribute="bottom" constant="16" id="Q34-fo-Swc"/>
+                <constraint firstAttribute="trailing" secondItem="9yG-PD-oBK" secondAttribute="trailing" constant="36" id="Y3v-f3-DlA"/>
                 <constraint firstItem="4kp-91-JNi" firstAttribute="top" secondItem="0uE-QR-kBA" secondAttribute="bottom" constant="15" id="asT-LU-wbu"/>
                 <constraint firstItem="Rys-as-aMq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="iCx-vh-4tm"/>
                 <constraint firstItem="0uE-QR-kBA" firstAttribute="top" secondItem="k0q-NQ-lXQ" secondAttribute="bottom" constant="40" id="kXI-S0-8fK"/>
@@ -123,6 +124,7 @@
                 <mask key="constraints">
                     <exclude reference="EMn-5e-jV1"/>
                     <exclude reference="Bwo-sP-cpO"/>
+                    <exclude reference="6nV-SU-1H2"/>
                     <exclude reference="H99-Iu-BAD"/>
                     <exclude reference="meX-sh-XCv"/>
                 </mask>
@@ -130,7 +132,7 @@
             <connections>
                 <outletCollection property="gestureRecognizers" destination="gXt-o4-gHh" appends="YES" id="Na7-cD-Ri9"/>
             </connections>
-            <point key="canvasLocation" x="765" y="403"/>
+            <point key="canvasLocation" x="581" y="412"/>
         </view>
         <tapGestureRecognizer id="gXt-o4-gHh">
             <connections>

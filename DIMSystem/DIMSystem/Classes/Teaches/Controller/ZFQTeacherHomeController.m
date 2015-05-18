@@ -13,6 +13,8 @@
 #import "ZFQGeneralService.h"
 #import "SVProgressHUD.h"
 
+#import <MobileCoreServices/MobileCoreServices.h>
+
 NSString * const cellID = @"cellID";
 
 @interface ZFQTeacherHomeController () <UITableViewDataSource,UITableViewDelegate>
@@ -24,10 +26,6 @@ NSString * const cellID = @"cellID";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //设置SVD颜色
-    [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
-    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
     //添加返回按钮
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -48,6 +46,7 @@ NSString * const cellID = @"cellID";
     [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellID];
     
     self.title = @"查看";
+    [ZFQGeneralService documentsDirectory];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -122,6 +121,5 @@ NSString * const cellID = @"cellID";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

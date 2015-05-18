@@ -21,6 +21,6 @@
 
 - (IBAction)dismissLoginViewController:(UIBarButtonItem *)sender;
 
-- (instancetype)initWithLoginSuccessBlock:(void (^)(void))successBlk;
+- (instancetype)initWithLoginSuccessBlock:(void (^)(NSInteger loginType))successBlk;
 
 @end

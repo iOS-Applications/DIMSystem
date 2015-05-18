@@ -20,6 +20,7 @@
 #import "AFNetworking.h"
 #import "Reachability.h"
 #import "commenConst.h"
+#import "ZFQTeachersController.h"
 
 @interface ZFQTeacherInfoController () <MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate>
 {
@@ -36,6 +37,7 @@
     UILabel *majorLabel;
     UILabel *jobLabel;
     
+    BOOL avatarIsNil;   //该教师是否没有头像，默认为YES,表示使用默认的
 }
 
 @property (nonatomic,strong,readwrite) NSMutableDictionary *teacherInfo;
@@ -49,18 +51,17 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _showEditItem = YES;
+        _showDeleteItem = NO;
+        avatarIsNil = YES;
     }
     return self;
 }
-/*
- - (void)loadView
- {
- self.view = [[SQBBaseView alloc] initWithFrame:[UIScreen mainScreen].bounds];
- }
- */
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     
     if (self.idNum == nil || [self.idNum isKindOfClass:[NSNull class]] || [self.idNum isEqualToString:@""]) {
         //加载当前登录的老师的信息
@@ -69,8 +70,8 @@
         //加载教工号为idNum的老师的信息
         [SVProgressHUD showZFQHUDWithStatus:@"正在加载..."];
         ZFQTeacherInfoController * __weak weakSelf = self;
-//        [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
-//            if (isReachable) {
+        [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
+            if (reachable(isReachable)) {
                 AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                 NSDictionary *param = @{@"idNum":weakSelf.idNum};
                 NSString *getURL = [kHost stringByAppendingString:@"/teacherInfo"];
@@ -83,15 +84,16 @@
                     //让编辑按钮可用
                     weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
                     [SVProgressHUD dismiss];
+                    
+                    //下载头像,获取idNum
+                    [self downloadAvatarWithIdNum:weakSelf.idNum];
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     [SVProgressHUD showZFQErrorWithStatus:@"请求失败"];
                 }];
-//            } else {
-//                [SVProgressHUD showZFQErrorWithStatus:@"网络不给力"];
-//            }
-//        }];
-        
-        
+            } else {
+                [SVProgressHUD showZFQErrorWithStatus:@"网络不给力"];
+            }
+        }];
     }
 
     if (self.showEditItem == YES) {
@@ -99,7 +101,44 @@
         UIBarButtonItem *editItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(tapEditItemAction:)];
         editItem.enabled = NO;
         self.navigationItem.rightBarButtonItem = editItem;
+    } else {
+        if (self.showDeleteItem == YES) {
+            //设置删除按钮
+            UIBarButtonItem *deleteItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStylePlain target:self action:@selector(tapDeleteItemAction)];
+            self.navigationItem.rightBarButtonItem = deleteItem;
+        }
     }
+}
+
+- (void)downloadAvatarWithIdNum:(NSString *)idNum
+{
+    //下载头像
+    NSString *urlStr = [NSString stringWithFormat:@"%@/avatar?idNum=%@",kHost,[ZFQGeneralService accessId]];
+    NSString *encodingStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL URLWithString:encodingStr];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:@"GET"];
+    [request setTimeoutInterval:30];
+    [request setValue:@"utf-8" forHTTPHeaderField:@"Accept-Encoding"];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    //获取要写的文件路径
+    NSString *fileName = [ZFQGeneralService avatarPathWithName:idNumLabel.text];
+    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:fileName append:NO];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //从文件夹中把图片搞出来
+        UIImage *img = [ZFQGeneralService avatarFileWithName:idNum];
+        if (img != nil) {
+            avatar.image = img;
+            avatarIsNil = NO;
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"下载失败"];
+    }];
+    [operation start];
+
 }
 
 - (void)addSubViewWithTeacher:(Teacher *)teacher
@@ -249,14 +288,32 @@
     ZFQTeacherEditController *teacherVC = [[ZFQTeacherEditController alloc] init];
     ZFQTeacherInfoController * __weak weakSelf = self;
     teacherVC.teacherInfo = self.teacherInfo;
-    teacherVC.completionBlk = ^(NSDictionary *myTeacherInfo) {
+    if (avatarIsNil == NO) {
+        teacherVC.myAvatar = avatar.image;
+    }
+    
+    teacherVC.completionBlk = ^(NSDictionary *myTeacherInfo,UIImage *avatarImg) {
         //设置信息
         [weakSelf settingTeacherInfo:myTeacherInfo];
         weakSelf.teacherInfo = [myTeacherInfo mutableCopy];
+        avatar.image = avatarImg;
+    };
+    teacherVC.cancelBlk = ^(UIImage *avatarImg) {
+        if (avatarImg != nil) {
+            avatar.image = avatarImg;
+        }
+        
     };
     
     UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:teacherVC];
     [self presentViewController:naVC animated:NO completion:nil];
+}
+
+- (void)tapDeleteItemAction
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"是否删除该教师信息?" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles: nil];
+    actionSheet.tag = 456;
+    [actionSheet showInView:self.view];
 }
 
 - (void)settingTeacherInfo:(NSDictionary *)myTeacherInfo
@@ -290,27 +347,55 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex < 2) {
-        if (buttonIndex == 0) {     //打电话
-            NSString *str = [NSString stringWithFormat:@"tel://%@",mobileLabel.text];
-            NSURL *mobileURL = [NSURL URLWithString:str];
-            if ([[UIApplication sharedApplication] canOpenURL:mobileURL] == YES) {
-                [[UIApplication sharedApplication] openURL:mobileURL];
+    if (actionSheet.tag == 456) {   //删除
+        [SVProgressHUD showWithStatus:@"请稍后..."];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *urlStr = [kHost stringByAppendingString:@"/deleteTeacher"];
+        NSDictionary *param = @{@"idNum":idNumLabel.text};
+        [manager POST:urlStr parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *dic = responseObject;
+            NSNumber *status = dic[@"status"];
+            if (status.integerValue == 200) {
+                [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+                
+                //pop到选择页面
+                for (UIViewController *vc in self.navigationController.viewControllers) {
+                    if ([vc isMemberOfClass:[ZFQTeachersController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                        break;
+                    }
+                }
+                
             } else {
-                [self showAlertViewWithTitle:@"设备不支持打电话"];
+                [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        }];
+        
+    } else {
+        if (buttonIndex < 2) {
+            if (buttonIndex == 0) {     //打电话
+                NSString *str = [NSString stringWithFormat:@"tel://%@",mobileLabel.text];
+                NSURL *mobileURL = [NSURL URLWithString:str];
+                if ([[UIApplication sharedApplication] canOpenURL:mobileURL] == YES) {
+                    [[UIApplication sharedApplication] openURL:mobileURL];
+                } else {
+                    [self showAlertViewWithTitle:@"设备不支持打电话"];
+                }
+                
+            } else if (buttonIndex == 1){   //发短信
+                if ([MFMessageComposeViewController canSendText]) {
+                    MFMessageComposeViewController *mmVC = [[MFMessageComposeViewController alloc] init];
+                    mmVC.recipients = @[mobileLabel.text];
+                    mmVC.messageComposeDelegate = self;
+                    [self presentViewController:mmVC animated:YES completion:nil];
+                } else {
+                    [self showAlertViewWithTitle:@"设备不支持发短信"];
+                }
             }
             
-        } else if (buttonIndex == 1){   //发短信
-            if ([MFMessageComposeViewController canSendText]) {
-                MFMessageComposeViewController *mmVC = [[MFMessageComposeViewController alloc] init];
-                mmVC.recipients = @[mobileLabel.text];
-                mmVC.messageComposeDelegate = self;
-                [self presentViewController:mmVC animated:YES completion:nil];
-            } else {
-                [self showAlertViewWithTitle:@"设备不支持发短信"];
-            }
         }
-        
     }
 }
 
@@ -339,9 +424,9 @@
         [alertView show];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
-    }
-    
+    }    
 }
+
 #pragma mark - 发邮件
 - (void)tapEmailBtnAction
 {
@@ -391,6 +476,11 @@
     if (alertView.tag == 201 || alertView.tag == 202) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kZFQDelNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

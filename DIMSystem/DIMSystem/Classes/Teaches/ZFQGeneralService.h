@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "EmotionView.h"
 
 @interface ZFQGeneralService : NSObject
 
@@ -18,7 +19,7 @@
 
 + (UITextField *)textFieldWithWidth:(CGFloat)width;
 + (UITextField *)textFieldWithPlaceholder:(NSString *)placeholder width:(CGFloat)width;
-
++ (void)showEmotionOnView:(UIView *)view emotion:(NSString *)emotion title:(NSString *)title;
 
 + (void)setRoundCornerRadiusForView:(UIView *)view;
 
@@ -28,9 +29,13 @@
 + (NSString *)documentsDirectory;
 
 + (NSString *)docFilePathWithName:(NSString *)docName;  //返回文件的路径，如果文件不存在，返回nil
++ (NSString *)avatarPathWithName:(NSString *)idNum;     //返回文件名为idNum的文件，若文件不存在，则创建
++ (UIImage *)avatarFileWithName:(NSString *)idNumName;  //文件夹idNum下的照片
+
 + (BOOL)deleteDocWithName:(NSString *)docName;
 
 //--------获取accessId,用来判断是否登陆------
 + (NSString *)accessId;
++ (void)logout;
 
 @end

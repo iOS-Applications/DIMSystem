@@ -34,7 +34,6 @@
 @property (nonatomic,strong) NSDictionary *departmentDic;;
 @property (nonatomic,strong) NSArray *jobs;
 @property (nonatomic,strong) NSArray *departmentInfo;
-//@property (nonatomic,strong) BOOL updateSuccess;        //是否更新成功，默认是NO
 
 @end
 
@@ -45,7 +44,6 @@
     [super viewDidLoad];
     
     preOffsetY = 0;
-//    self.updateSuccess = NO;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(tapCancelItemAction)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(tapCompleteItemAction)];
@@ -57,9 +55,6 @@
     _myScrollView.delegate = self;
     //添加键盘显示观察者
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
-    //添加kvo
-//    [self addObserver:self forKeyPath:@"updateSuccess" options:NSKeyValueObservingOptionNew context:NULL];
     
     CGRect originFrame = CGRectZero;
     //-------个人信息----------
@@ -75,19 +70,13 @@
     [avatarBtn setTitle:@"添加\n头像" forState:UIControlStateNormal];
     [avatarBtn setTitleColor:ZFQ_LinkColorNormal forState:UIControlStateNormal];
     [avatarBtn setTitleColor:ZFQ_LinkColorPressed forState:UIControlStateHighlighted];
+    [avatarBtn setImage:self.myAvatar forState:UIControlStateNormal];
     avatarBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     avatarBtn.titleLabel.numberOfLines = 0;
     avatarBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     avatarBtn.layer.borderWidth = 1;
     avatarBtn.layer.cornerRadius = 25.f;
     avatarBtn.clipsToBounds = YES;
-    
-    if ([_teacherInfo[@"avatar"] isKindOfClass:[NSNull class]] == NO) {
-        NSData *avatarData = _teacherInfo[@"avatar"];
-        if (avatarData != nil && avatarData.length > 0) {
-            [avatarBtn setImage:[[UIImage alloc] initWithData:avatarData] forState:UIControlStateNormal];
-        }
-    }
     
     [avatarBtn addTarget:self action:@selector(tapAvatarBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [_myScrollView addSubview:avatarBtn];
@@ -286,6 +275,9 @@
 
 - (void)tapCancelItemAction
 {
+    if (self.cancelBlk) {
+        self.cancelBlk(avatarBtn.imageView.image);
+    }
     [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 
@@ -297,7 +289,7 @@
     ZFQTeacherEditController * __weak weakSelf = self;
     
     [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
-        if (isReachable) {
+        if (reachable(isReachable)) {
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             NSString *postURL = [kHost stringByAppendingString:@"/updateTeacherInfo"];
             [manager POST:postURL parameters:teacherInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -326,28 +318,28 @@
 - (void)dismissEditViewControllerWithTeacherInfo:(NSDictionary *)teacherInfo
 {
     if (self.completionBlk != nil) {
-        self.completionBlk(teacherInfo);   //[self teacherInfoUsingEncoding:NO]
+        self.completionBlk(teacherInfo,avatarBtn.imageView.image);   //[self teacherInfoUsingEncoding:NO]
     }
     [self.presentingViewController dismissViewControllerAnimated:NO completion:NULL];
 }
+
 - (NSDictionary *)teacherInfoUsingEncoding:(BOOL)usingEcoding
 {
     if (usingEcoding == YES) {
-        //这里的图片应该进行base64编码
+        
         NSDictionary *teacherInfo = @{
-                                      @"t_name":[nameTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                      @"idNum":[teacherIDTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                      @"gender":[genderDropListView.currentTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                      @"mobile":[mobileTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                      @"qq":[qqTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                      @"email":[emailTextField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                      @"department":[departmentListView.currentTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                      @"major":[majorListView.currentTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                      @"job":[jobListView.currentTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                                      @"t_name":nameTextField.text,
+                                      @"idNum":teacherIDTextField.text,
+                                      @"gender":genderDropListView.currentTitle,
+                                      @"mobile":mobileTextField.text,
+                                      @"qq":qqTextField.text,
+                                      @"email":emailTextField.text,
+                                      @"department":departmentListView.currentTitle,
+                                      @"major":majorListView.currentTitle,
+                                      @"job":jobListView.currentTitle
                                       };
         return teacherInfo;
     } else {
-        NSData *avatarData = UIImagePNGRepresentation(avatarBtn.imageView.image);
         
         NSDictionary *teacherInfo = @{
                                       @"t_name":nameTextField.text,
@@ -360,12 +352,6 @@
                                       @"t_major":majorListView.currentTitle,
                                       @"t_job":jobListView.currentTitle
                                       };
-//        NSMutableDictionary *mutableInfo = [teacherInfo mutableCopy];
-//        if (avatarData == nil) {
-//            [mutableInfo setObject:[NSNull null] forKey:@"avatar"];
-//        } else {
-//            [mutableInfo setObject:avatarData forKey:@"avatar"];
-//        }
         
         return teacherInfo;
     }
@@ -413,17 +399,6 @@
         [_myScrollView setContentOffset:CGPointMake(0, _myScrollView.contentOffset.y+result+10) animated:YES];
     }
 }
-
-#pragma mark - kvo
-//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-//{
-//    if (object == self && [keyPath isEqualToString:@"updateSuccess"]) {
-//        NSNumber *result = change[NSKeyValueChangeNewKey];
-//        if (result.boolValue == YES) {
-//            <#statements#>
-//        }
-//    }
-//}
 
 #pragma mark - getter
 - (NSArray *)departments
@@ -545,6 +520,9 @@
         case 100: {          //性别
             //获取
             NSString *tempGender = _teacherInfo[@"t_gender"];
+            if (tempGender == nil || [tempGender isEqualToString:@""] || [tempGender isKindOfClass:[NSNull class]]) {
+                return 0;
+            }
             if ([tempGender isEqualToString:@"男"]) {
                 return 0;
             } else {
@@ -555,11 +533,17 @@
             
         case 101:   {         //学院
             NSString *departName = _teacherInfo[@"t_faculty"];
+            if (departName == nil || [departName isEqualToString:@""] || [departName isKindOfClass:[NSNull class]]) {
+                return 0;
+            }
             departIndex = [self indexOfDrowListTitle:departName];
             return departIndex;
         }
         case 102:  {         //专业
             NSString *majorName = _teacherInfo[@"t_major"];
+            if (majorName == nil || [majorName isEqualToString:@""] || [majorName isKindOfClass:[NSNull class]]) {
+                return 0;
+            }
             NSDictionary *info = self.departmentInfo[departIndex];
             NSArray *array = info[@"list"];
             NSInteger index = 0;
@@ -576,6 +560,9 @@
         }
         case 103: {          //职称
             NSString *jobName = _teacherInfo[@"t_job"];
+            if (jobName == nil || [jobName isEqualToString:@""] || [jobName isKindOfClass:[NSNull class]]) {
+                return 0;
+            }
             NSInteger index = 0;
             BOOL exist = NO;
             for (NSString *tempName in self.jobs) {

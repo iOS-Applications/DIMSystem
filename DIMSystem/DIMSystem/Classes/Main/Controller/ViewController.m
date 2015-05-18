@@ -21,6 +21,8 @@
 #import "ZFQTeacherHomeController.h"
 #import "ZFQGeneralService.h"
 #import "LoginViewController.h"
+#import "ZFQAdminHomeController.h"
+#import "SVProgressHUD.h"
 
 @interface ViewController () <UIAlertViewDelegate>
 
@@ -43,23 +45,38 @@
 -(void) showActionSheet:(id)sender forEvent:(UIEvent*)event
 {
     TSActionSheet *actionSheet = [[TSActionSheet alloc] initWithTitle:nil];
-    [actionSheet destructiveButtonWithTitle:@"注册登录" block:^{
-        LoginViewController *loginVC = [[LoginViewController alloc] initWithLoginSuccessBlock:^{
-            NSLog(@"登陆成功");
+    
+    NSString *accessId = [ZFQGeneralService accessId];
+    if (accessId == nil || [accessId isEqualToString:@""] || [accessId isKindOfClass:[NSNull class]]) {
+        //表示未登陆
+        [actionSheet destructiveButtonWithTitle:@"注册登录" block:^{
+            LoginViewController *loginVC = [[LoginViewController alloc] initWithLoginSuccessBlock:^(NSInteger loginType) {
+                if (loginType == 2) {
+                    ZFQAdminHomeController *adminVC = [[ZFQAdminHomeController alloc] init];
+                    [self.navigationController pushViewController:adminVC animated:YES];
+                }
+            }];
+            [self presentViewController:loginVC animated:YES completion:nil];
+            
         }];
-        [self presentViewController:loginVC animated:YES completion:nil];
         
-    }];
+        [actionSheet addButtonWithTitle:@"修改个人资料" block:^{
+            NSLog(@"pushed hoge1 button");
+            
+            
+        }];
+        [actionSheet addButtonWithTitle:@"应用设置" block:^{
+            NSLog(@"pushed hoge2 button");
+            
+        }];
 
-    [actionSheet addButtonWithTitle:@"修改个人资料" block:^{
-        NSLog(@"pushed hoge1 button");
-        
-        
-    }];
-    [actionSheet addButtonWithTitle:@"应用设置" block:^{
-        NSLog(@"pushed hoge2 button");
-        
-    }];
+    } else {
+        [actionSheet addButtonWithTitle:@"注销登录" block:^{
+            [ZFQGeneralService logout];
+            [SVProgressHUD showSuccessWithStatus:@"注销成功"];
+        }];
+    }
+    
     
     actionSheet.cornerRadius = 5;
     
@@ -81,6 +98,7 @@
     NSString *accessId = [ZFQGeneralService accessId];
     if (accessId == nil || [accessId isEqualToString:@""]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"你还没有登录，请先登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alertView.tag = 457;
         [alertView show];
     } else {
         ZFQTeacherHomeController *homeVC = [[ZFQTeacherHomeController alloc] init];
@@ -116,10 +134,16 @@
 #pragma mark - UIAletView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //登录
-    LoginViewController *loginVC = [[LoginViewController alloc] initWithLoginSuccessBlock:^{
-        NSLog(@"登陆成功");
-    }];
-    [self presentViewController:loginVC animated:YES completion:nil];
+    if (alertView.tag == 457) {
+        //登录
+        LoginViewController *loginVC = [[LoginViewController alloc] initWithLoginSuccessBlock:^(NSInteger loginType){
+            if (loginType == 2) {
+                ZFQAdminHomeController *adminVC = [[ZFQAdminHomeController alloc] init];
+                [self.navigationController pushViewController:adminVC animated:YES];
+            }
+        }];
+        [self presentViewController:loginVC animated:YES completion:nil];
+    }
+   
 }
 @end

@@ -12,11 +12,13 @@
 @interface ZFQSearchController : NSObject <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>
 {
     UISearchDisplayController *mySearchDisplayController;
+    NSArray *results;
 }
-@property (nonatomic,copy) void (^didSelectRow)(UITableView *tableView , NSIndexPath *indexPath);
+
+@property (nonatomic,copy) void (^didSelectRow)(UITableView *tableView , NSIndexPath *indexPath,NSString *idNum);
 
 
 - (instancetype)initWithSearchDisplayController:(UISearchDisplayController *)searchDisplayController
-                                   didSelectRow:(void (^)(UITableView *tableView , NSIndexPath *indexPath))didSelectRow;
+                                   didSelectRow:(void (^)(UITableView *tableView , NSIndexPath *indexPath, NSString *idNum))didSelectRow;
 
 @end

@@ -8,49 +8,22 @@
 
 #import "ZFQSearchController.h"
 #import "ZFQTeacherInfoController.h"
+#import "AFNetworking.h"
+#import "commenConst.h"
+#import "SVProgressHUD.h"
 
 NSString * const zfqSearchCellID = @"cell";
-
-/*
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+@interface ZFQSearchController()
 {
-    NSArray *array = @[
-                       @{
-                           @"name":@"张三",
-                           @"idNum":@"401106"
-                        },
-                       @{
-                           @"name":@"李四",
-                           @"idNum":@"401107"
-                        },
-                       @{
-                           @"name":@"王二",
-                           @"idNum":@"401109"
-                        },
-                       @{
-                           @"name":@"麻子",
-                           @"idNum":@"401110"
-                        },
-                       @{
-                           @"name":@"哈哈",
-                           @"idNum":@"401111"
-                           }
-                       ];
-    
-    self.results = [array copy];
-    
-    [[UIApplication sharedApplication].keyWindow endEditing:YES];
-    
-    //发起请求
-//    NSArray *arrray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:<#(NSURL *)#>] options:<#(NSJSONReadingOptions)#> error:<#(NSError *__autoreleasing *)#>]
-    [self.resultTableView reloadData];
+    AFHTTPRequestOperation *operation;
+    NSInteger scopeIndex;
 }
-*/
 
+@end
 @implementation ZFQSearchController
 
 - (instancetype)initWithSearchDisplayController:(UISearchDisplayController *)searchDisplayController
-                                   didSelectRow:(void (^)(UITableView *tableView , NSIndexPath *indexPath))didSelectRow
+                                   didSelectRow:(void (^)(UITableView *tableView , NSIndexPath *indexPath, NSString *idNum))didSelectRow
 {
     self = [super init];
     if (self) {
@@ -64,7 +37,7 @@ NSString * const zfqSearchCellID = @"cell";
     return self;
 }
 
-- (instancetype)initWithDidSelectRow:(void (^)(UITableView *tableView , NSIndexPath *indexPath))didSelectRow
+- (instancetype)initWithDidSelectRow:(void (^)(UITableView *tableView , NSIndexPath *indexPath, NSString *idNum))didSelectRow
 {
     self = [super init];
     if (self) {
@@ -76,40 +49,72 @@ NSString * const zfqSearchCellID = @"cell";
 #pragma mark - tableView datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return results == nil ? 0 : results.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:zfqSearchCellID];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:zfqSearchCellID];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:zfqSearchCellID];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
     }
-//    NSDictionary *dic = [self results][indexPath.row];
-//    cell.textLabel.text = dic[@"name"];
-    cell.textLabel.text = @"aa";
+    NSDictionary *dic = results[indexPath.row];
+    cell.textLabel.text = dic[@"name"];
+    cell.detailTextLabel.text = dic[@"major"];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.didSelectRow) {
-        self.didSelectRow(tableView,indexPath);
+        NSDictionary *dic = results[indexPath.row];
+        NSString *idNum = dic[@"idNum"];
+        self.didSelectRow(tableView,indexPath,idNum);
     }
 }
 
 #pragma mark - UISearchBar delegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    NSString *key = searchBar.text;
+    if (key == nil || [key isEqualToString:@""]) {
+        return;
+    }
     //开始请求 及显示等待动画
-    
-    //刷新数据
-    [mySearchDisplayController.searchResultsTableView reloadData];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *urlStr = [kHost stringByAppendingString:@"/searchTeacherInfo"];
+    NSDictionary *dic = @{@"searchKey":key,@"searchType":@(scopeIndex)};
+    operation = [manager GET:urlStr parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *status = dic[@"status"];
+        if (status.integerValue == 200) {
+            results = dic[@"data"];
+            //刷新数据
+            [mySearchDisplayController.searchResultsTableView reloadData];
+        } else {
+            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+        }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    }];
+ 
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     //取消请求 及等待动画
+    [operation cancel];
+    [SVProgressHUD dismiss];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    scopeIndex = selectedScope;
 }
 - (void)dealloc
 {

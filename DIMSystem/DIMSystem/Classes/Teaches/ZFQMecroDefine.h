@@ -33,4 +33,13 @@
 #define ZFQ_ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ZFQ_ScreenHeight  [UIScreen mainScreen].bounds.size.height
 
+#define zfq_test 1
+#ifdef zfq_test
+#define reachable(r) (1)
+#else
+#define reachable(r) (r)
+#endif
+
+#define kZFQDelNotification @"kZFQDelNotification"
+
 #endif

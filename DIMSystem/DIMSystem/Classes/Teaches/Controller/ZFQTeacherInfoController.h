@@ -14,6 +14,7 @@
 @property (nonatomic,strong,readonly) NSMutableDictionary *teacherInfo;
 
 @property (nonatomic) BOOL showEditItem;      //是否显示编辑按钮，默认是YES
+@property (nonatomic) BOOL showDeleteItem;    //是否显示删除按钮, 默认是NO
 @property (nonatomic) NSString *idNum;        //教工号,
 
 @end

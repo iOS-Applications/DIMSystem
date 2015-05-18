@@ -12,6 +12,7 @@
 #import "ZFQSearchController.h"
 #import "ZFQTeacherInfoController.h"
 #import "ZFQGeneralService.h"
+#import "ZFQTeacherNameListController.h"
 
 @interface ZFQTeachersController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -30,6 +31,15 @@
 
 @implementation ZFQTeachersController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _showDeleteItem = NO;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -47,20 +57,46 @@
     _myTableView.tag = 1012;
     
     //添加searchBar
+    
     _myTableView.tableHeaderView = self.mySearchBar;
-    self.mySearchBar.delegate = self;
     [self.view addSubview:_myTableView];
     
     ZFQTeachersController * __weak weakSelf = self;
     searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:self.mySearchBar contentsController:self];
-    searchResultController = [[ZFQSearchController alloc] initWithSearchDisplayController:searchDisplayController didSelectRow:^(UITableView *tableView, NSIndexPath *indexPath) {
+    searchResultController = [[ZFQSearchController alloc] initWithSearchDisplayController:searchDisplayController didSelectRow:^(UITableView *tableView, NSIndexPath *indexPath, NSString *idNum) {
         ZFQTeacherInfoController *teacherInfo = [[ZFQTeacherInfoController alloc] init];
         teacherInfo.showEditItem = NO;
-        teacherInfo.idNum = @"4123";
+        teacherInfo.showDeleteItem = weakSelf.showDeleteItem;
+        teacherInfo.idNum = idNum;
         [weakSelf.navigationController pushViewController:teacherInfo animated:YES];
     }];
     
     self.title = @"选择";
+}
+
+- (UIView *)headerView
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ZFQ_ScreenWidth, 44)];
+    [headerView addSubview:self.mySearchBar];
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"教师",@"专业"]];
+    CGRect frame = segmentedControl.frame;
+    frame.size.width = 70;
+    segmentedControl.frame = frame;
+    frame = segmentedControl.frame;
+    segmentedControl.center = CGPointMake(_myTableView.frame.size.width - frame.size.width/2 - 8, 22);
+    segmentedControl.selectedSegmentIndex = 0;
+    [headerView addSubview:segmentedControl];
+    
+    //添加分割线
+    CGFloat searchBarHeight = _mySearchBar.frame.size.height;
+    CGFloat width = headerView.frame.size.width;
+    CALayer *separatorLayer = [CALayer layer];
+    separatorLayer.bounds = CGRectMake(0, searchBarHeight - 1, width, 1);
+    separatorLayer.position = CGPointMake(width/2, searchBarHeight - 0.5);
+    separatorLayer.backgroundColor = ZFQ_RGB(214, 214, 214, 1).CGColor;
+    [headerView.layer addSublayer:separatorLayer];
+    
+    return headerView;
 }
 
 - (UISearchBar *)mySearchBar
@@ -69,15 +105,18 @@
         _mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, _myTableView.frame.size.width, 44)];
         _mySearchBar.placeholder = @"输入关键字";
         _mySearchBar.searchBarStyle = UISearchBarStyleMinimal; //UISearchBarStyleProminent UISearchBarStyleMinimal
+        _mySearchBar.scopeButtonTitles = @[@"按教师名",@"按专业名"];
+        _mySearchBar.showsScopeBar = YES;
         
         //添加分割线
         CGFloat searchBarHeight = _mySearchBar.frame.size.height;
-        CGFloat searchBarWidth = _mySearchBar.frame.size.width;
+        CGFloat width = _mySearchBar.frame.size.width;
         CALayer *separatorLayer = [CALayer layer];
-        separatorLayer.bounds = CGRectMake(0, searchBarHeight - 1, searchBarWidth, 1);
-        separatorLayer.position = CGPointMake(searchBarWidth/2, searchBarHeight - 0.5);
+        separatorLayer.bounds = CGRectMake(0, searchBarHeight - 1, width, 1);
+        separatorLayer.position = CGPointMake(width/2, searchBarHeight - 0.5);
         separatorLayer.backgroundColor = ZFQ_RGB(214, 214, 214, 1).CGColor;
         [_mySearchBar.layer addSublayer:separatorLayer];
+
     }
     return _mySearchBar;
 }
@@ -126,10 +165,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 1012) {
-        //
+        //查询出相关专业的所有教师
+        NSDictionary *dic = departs[indexPath.section];
+        NSArray *array = [dic objectForKey:@"list"];
+        NSString *major = array[indexPath.row];
+        ZFQTeacherNameListController *listVC = [[ZFQTeacherNameListController alloc] init];
+        listVC.major = major;
+        listVC.showDelItem = self.showDeleteItem;
+        [self.navigationController pushViewController:listVC animated:YES];
     } else {
         ZFQTeacherInfoController *teacherInfo = [[ZFQTeacherInfoController alloc] init];
         teacherInfo.showEditItem = NO;
+        teacherInfo.showDeleteItem = self.showDeleteItem;
         teacherInfo.idNum = [ZFQGeneralService accessId];
         [self.navigationController pushViewController:teacherInfo animated:YES];
         [self.navigationController setNavigationBarHidden:NO];

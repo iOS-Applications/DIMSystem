@@ -22,9 +22,10 @@
     DropDownListView *jobListView;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
+@property (nonatomic,strong) UIImage *myAvatar;
 @property (nonatomic,strong) NSDictionary *teacherInfo;
 //修改数据成功后的回调
-@property (nonatomic,copy) void (^completionBlk)(NSDictionary *teacherInfo);
-
+@property (nonatomic,copy) void (^completionBlk)(NSDictionary *teacherInfo,UIImage *avatarImg);
+@property (nonatomic,copy) void (^cancelBlk)(UIImage *avatarImg);
 
 @end

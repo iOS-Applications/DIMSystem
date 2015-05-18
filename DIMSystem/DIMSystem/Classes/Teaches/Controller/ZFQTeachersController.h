@@ -11,5 +11,6 @@
 @interface ZFQTeachersController : UIViewController 
 
 @property (nonatomic,strong) UITableView *myTableView;
+@property (nonatomic) BOOL showDeleteItem;  //是否显示删除按钮 默认是NO
 
 @end
