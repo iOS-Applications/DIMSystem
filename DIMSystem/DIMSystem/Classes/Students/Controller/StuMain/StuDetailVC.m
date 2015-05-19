@@ -17,7 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //设置返回按钮
+#warning TODO
+    UITabBarItem *lefItem = [[UITabBarItem alloc] init];
     //注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"StuDetailCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"StuDetailCell"];
     

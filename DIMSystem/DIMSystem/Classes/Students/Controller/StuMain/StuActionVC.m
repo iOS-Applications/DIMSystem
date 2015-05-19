@@ -25,7 +25,6 @@
 }
 - (IBAction)carryOutTask:(UIButton *)sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
     NSInteger tag = sender.tag;
     switch (tag) {
         case 1:
@@ -51,6 +50,7 @@
         default:
             break;
     }
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma  mark //与学生的一些交互
@@ -128,11 +128,13 @@
 - (void)displayDetailInfo
 {
     StuDetailVC *detailInfoVC = [[StuDetailVC alloc] init];
-    
-    NSLog(@"%@",self.navigationController.viewControllers[0]);
-    UIViewController *superVC = self.navigationController.viewControllers[0];
-    [superVC.navigationController pushViewController:detailInfoVC animated:YES];
-    
+//    
+//    NSLog(@"%@",self.navigationController.viewControllers[0]);
+//    
+//    UIViewController *superVC = self.navigationController.viewControllers[0];
+//    [superVC.navigationController pushViewController:detailInfoVC animated:YES];
+
+    [self.navigationController pushViewController:detailInfoVC animated:YES];
 }
 
 /**
@@ -170,5 +172,11 @@
     NSLog(@"%d", result);
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark // 点击其他地方返回
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end

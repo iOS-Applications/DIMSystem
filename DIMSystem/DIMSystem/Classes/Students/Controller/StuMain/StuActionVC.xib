@@ -132,7 +132,7 @@
                 <constraint firstItem="dru-Vp-hMu" firstAttribute="leading" secondItem="LfQ-A6-Rs8" secondAttribute="leading" id="ohr-jA-J47"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <point key="canvasLocation" x="340" y="447"/>
+            <point key="canvasLocation" x="197" y="428"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
