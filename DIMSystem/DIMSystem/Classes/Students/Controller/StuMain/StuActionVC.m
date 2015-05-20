@@ -30,14 +30,17 @@
         case 1:
             //打电话
             [self callStudent];
+            [self.navigationController popViewControllerAnimated:NO];
             break;
         case 2:
             //发信息
             [self sendMessageToStudent];
+            [self.navigationController popViewControllerAnimated:NO];
             break;
         case 3:
             //发邮件
             [self sendEmailToStudent];
+            [self.navigationController popViewControllerAnimated:NO];
             break;
         case 4:
             //更多资料
@@ -46,11 +49,12 @@
         case 5:
             //添加到项目
             [self addStudentToProject];
+            [self.navigationController popViewControllerAnimated:NO];
             break;
         default:
             break;
     }
-    [self.navigationController popViewControllerAnimated:NO];
+    
 }
 
 #pragma  mark //与学生的一些交互
@@ -128,13 +132,11 @@
 - (void)displayDetailInfo
 {
     StuDetailVC *detailInfoVC = [[StuDetailVC alloc] init];
-//    
+    
 //    NSLog(@"%@",self.navigationController.viewControllers[0]);
-//    
-//    UIViewController *superVC = self.navigationController.viewControllers[0];
-//    [superVC.navigationController pushViewController:detailInfoVC animated:YES];
-
-    [self.navigationController pushViewController:detailInfoVC animated:YES];
+    
+    UIViewController *superVC = self.navigationController.viewControllers[0];
+    [superVC.navigationController pushViewController:detailInfoVC animated:YES];
 }
 
 /**

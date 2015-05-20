@@ -18,13 +18,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //设置返回按钮
-#warning TODO
-    UITabBarItem *lefItem = [[UITabBarItem alloc] init];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+    self.navigationItem.leftBarButtonItem = leftItem;
     //注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"StuDetailCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"StuDetailCell"];
     
 }
 
+#pragma mark //在此页跳转到StuProjectVC界面
+- (void)goBack
+{
+    UIViewController *superVC = self.navigationController.viewControllers[0];
+    [self.navigationController popToViewController:superVC animated:YES];
+}
 /**
  *  懒加载
  */
