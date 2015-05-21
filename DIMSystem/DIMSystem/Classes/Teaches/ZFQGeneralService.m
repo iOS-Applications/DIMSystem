@@ -196,7 +196,20 @@
             return nil;
         }
     } else {
-        return [docDirPath stringByAppendingPathComponent:docName];;
+        return [docDirPath stringByAppendingPathComponent:docName];
+    }
+}
+
++ (BOOL)docFileIsExist:(NSString *)docName
+{
+    NSString *docFilePath = [self docFilePathWithName:docName];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    BOOL isDir = NO;
+    BOOL result = [manager fileExistsAtPath:docFilePath isDirectory:&isDir];
+    if (result == YES && isDir == NO) {
+        return YES;
+    } else {
+        return NO;
     }
 }
 

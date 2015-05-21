@@ -31,7 +31,7 @@
 + (NSString *)docFilePathWithName:(NSString *)docName;  //返回文件的路径，如果文件不存在，返回nil
 + (NSString *)avatarPathWithName:(NSString *)idNum;     //返回文件名为idNum的文件，若文件不存在，则创建
 + (UIImage *)avatarFileWithName:(NSString *)idNumName;  //文件夹idNum下的照片
-
++ (BOOL)docFileIsExist:(NSString *)docName;             //判断文档文件是否存在
 + (BOOL)deleteDocWithName:(NSString *)docName;
 
 //--------获取accessId,用来判断是否登陆------

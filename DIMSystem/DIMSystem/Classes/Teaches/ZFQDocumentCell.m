@@ -185,7 +185,7 @@
     self.fileSizeLabel.text = [self stringFromFileSize:zfqDocument.fileSize];
     
     //判断文件是否存在
-    if ([self isExistWithFileName:zfqDocument.name]) {
+    if ([ZFQGeneralService docFileIsExist:zfqDocument.name]) {         //[self isExistWithFileName:zfqDocument.name]
         self.alterLabel.text = @"已下载";
         _isExist = YES;
     } else {
