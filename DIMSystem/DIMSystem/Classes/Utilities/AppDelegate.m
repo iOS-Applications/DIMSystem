@@ -45,11 +45,16 @@
 {
     if (buttonIndex == 1) {
         [SVProgressHUD showWithStatus:@"请稍后..."];
+        //获取文件大小
+        NSFileManager *manager = [NSFileManager defaultManager];
+        NSError *error;
+        NSDictionary *dic = [manager attributesOfItemAtPath:docURL.absoluteString error:&error];
+      
         //上传
         NSString *urlStr = [kHost stringByAppendingString:@"/uploadTeacherDocs"];
         NSString *idNum = [ZFQGeneralService accessId];
         NSDictionary *param = @{@"idNum":idNum};
-    
+        
         AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
         NSMutableURLRequest *request = [serializer multipartFormRequestWithMethod:@"POST"
                                                                         URLString:urlStr
@@ -60,8 +65,6 @@
                                                                             error:nil];
         
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-//        NSInputStream *inputStream = [NSInputStream inputStreamWithURL:docURL];
-//        [operation setInputStream:inputStream];
         
         [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
             CGFloat progress = totalBytesWritten/(CGFloat)totalBytesExpectedToWrite;
