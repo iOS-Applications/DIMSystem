@@ -52,7 +52,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
         if (1) {  //isReachable
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             NSString *getURL = [kHost stringByAppendingString:@"/teacherDocs"];
-            NSDictionary *param = @{@"idNum":@"234"};  //[ZFQGeneralService accessId]
+            NSDictionary *param = @{@"idNum":[ZFQGeneralService accessId]};  //[ZFQGeneralService accessId]
             [manager GET:getURL parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *dic = responseObject;
                 NSNumber *status = dic[@"status"];
@@ -114,7 +114,9 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //先判断本地是否有这个文件，没有就去下载
+    //先判断本地是否有这个文件，
+    
+    //没有就去下载
     QLPreviewController *previewController = [[QLPreviewController alloc] init];
     previewController.dataSource = self;
     previewController.delegate = self;
@@ -129,6 +131,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
     if (cell.isExist) {
         if ([QLPreviewController canPreviewItem:doc]) {
             [self.navigationController pushViewController:previewController animated:YES];
+            return;
         } else {
             [SVProgressHUD showErrorWithStatus:@"不支持的文件类型"];
             return;
@@ -164,7 +167,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
             }];
             [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
                 
-//                    [SVProgressHUD showSuccessWithStatus:@"下载成功"];
+                    [SVProgressHUD showSuccessWithStatus:@"下载成功"];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [SVProgressHUD showErrorWithStatus:@"下载失败"];
             }];
@@ -220,6 +223,8 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
                 //删除cell
                 [docs removeObjectAtIndex:deleteRow];
                 [weakSelf.myTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                //把本地数据删除
+                [ZFQGeneralService deleteDocWithName:fileName];
                 [SVProgressHUD showSuccessWithStatus:@"已成功删除"];
             }else {
                 [SVProgressHUD showErrorWithStatus:dic[@"msg"]];

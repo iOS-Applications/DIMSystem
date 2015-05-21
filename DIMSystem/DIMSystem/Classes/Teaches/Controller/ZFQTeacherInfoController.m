@@ -61,8 +61,6 @@
 {
     [super viewDidLoad];
     
-    
-    
     if (self.idNum == nil || [self.idNum isKindOfClass:[NSNull class]] || [self.idNum isEqualToString:@""]) {
         //加载当前登录的老师的信息
         [SVProgressHUD showZFQHUDWithStatus:@"您尚未登陆，请登陆"];
@@ -124,6 +122,9 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     //获取要写的文件路径
+    if (idNumLabel.text == nil) {
+        return;
+    }
     NSString *fileName = [ZFQGeneralService avatarPathWithName:idNumLabel.text];
     operation.outputStream = [NSOutputStream outputStreamToFileAtPath:fileName append:NO];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -144,6 +145,7 @@
 - (void)addSubViewWithTeacher:(Teacher *)teacher
 {
     CGRect originFrame = CGRectZero;
+    CGFloat SCWidth = ZFQ_ScreenWidth;
     //-------个人信息----------
     UILabel *infoLabel = [ZFQGeneralService labelWithTitle:@"个人信息" fontSize:14];
     originFrame = infoLabel.frame;
@@ -151,8 +153,13 @@
     infoLabel.frame = originFrame;
     [_myScrollView addSubview:infoLabel];
     
+    UIImage *bcgImg = [UIImage imageNamed:@"header_background"];
+    UIImageView *bcgImg1 = [[UIImageView alloc] initWithImage:bcgImg];
+    bcgImg1.frame = CGRectMake(CGRectGetMinX(infoLabel.frame), CGRectGetMaxY(infoLabel.frame) - 5, SCWidth - infoLabel.frame.origin.x, bcgImg.size.height);
+    [_myScrollView insertSubview:bcgImg1 belowSubview:infoLabel];
+    
     //1.头像
-    avatar = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10 + CGRectGetMaxY(infoLabel.frame), 50, 50)];
+    avatar = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20 + CGRectGetMaxY(infoLabel.frame), 50, 50)];
     avatar.layer.borderColor = [UIColor lightGrayColor].CGColor;
     avatar.layer.borderWidth = 1;
     avatar.layer.cornerRadius = 25.f;
@@ -201,6 +208,9 @@
     originFrame.origin = CGPointMake(avatar.frame.origin.x, CGRectGetMaxY(idNumLabel.frame) + paddingV);
     contactLabel.frame = originFrame;
     [_myScrollView addSubview:contactLabel];
+    UIImageView *bcgImg2 = [[UIImageView alloc] initWithImage:bcgImg];
+    bcgImg2.frame = CGRectMake(CGRectGetMinX(contactLabel.frame), CGRectGetMaxY(contactLabel.frame) - 5, SCWidth - contactLabel.frame.origin.x, bcgImg.size.height);
+    [_myScrollView insertSubview:bcgImg2 belowSubview:contactLabel];
     
     //1.手机号
     mobileLabel = [ZFQGeneralService underLineLabelWithTitle:teacher.mobile width:idNumLabel.frame.size.width];
@@ -251,6 +261,9 @@
     originFrame.origin = CGPointMake(contactLabel.frame.origin.x, CGRectGetMaxY(emailLabel.frame) + paddingV);
     jobInfoLabel.frame = originFrame;
     [_myScrollView addSubview:jobInfoLabel];
+    UIImageView *bcgImg3 = [[UIImageView alloc] initWithImage:bcgImg];
+    bcgImg3.frame = CGRectMake(CGRectGetMinX(jobInfoLabel.frame), CGRectGetMaxY(jobInfoLabel.frame) - 5, SCWidth - jobInfoLabel.frame.origin.x, bcgImg.size.height);
+    [_myScrollView insertSubview:bcgImg3 belowSubview:jobInfoLabel];
     
     //1.学院
     CGRect departmentFrame = CGRectMake(emailLabel.frame.origin.x, CGRectGetMaxY(jobInfoLabel.frame) + 10, emailLabel.frame.size.width + 20, labelHeight);
@@ -296,7 +309,9 @@
         //设置信息
         [weakSelf settingTeacherInfo:myTeacherInfo];
         weakSelf.teacherInfo = [myTeacherInfo mutableCopy];
-        avatar.image = avatarImg;
+        if (avatarImg != nil) {
+            avatar.image = avatarImg;
+        }
     };
     teacherVC.cancelBlk = ^(UIImage *avatarImg) {
         if (avatarImg != nil) {

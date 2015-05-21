@@ -12,12 +12,14 @@
 #import "ZFQTeachersController.h"
 #import "ZFQGeneralService.h"
 #import "SVProgressHUD.h"
+#import "AFNetworking.h"
+#import "commenConst.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
 NSString * const cellID = @"cellID";
 
-@interface ZFQTeacherHomeController () <UITableViewDataSource,UITableViewDelegate>
+@interface ZFQTeacherHomeController () <UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
 @end
 
@@ -66,11 +68,14 @@ NSString * const cellID = @"cellID";
             } else if (indexPath.row == 1) {
                 cell.textLabel.text = @"查看教学资料";
             }
-            
             break;
         }
         case 1: {
             cell.textLabel.text = @"查看其他教师信息";
+            break;
+        }
+        case 2: {
+            cell.textLabel.text = @"修改登录密码";
             break;
         }
         default:
@@ -90,7 +95,7 @@ NSString * const cellID = @"cellID";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 #pragma mark - tableView delegate
@@ -108,7 +113,56 @@ NSString * const cellID = @"cellID";
     } else if (indexPath.section == 1) {
         ZFQTeachersController *teachersVC = [[ZFQTeachersController alloc] init];
         [self.navigationController pushViewController:teachersVC animated:YES];
+    } else if (indexPath.section == 2) {
+        [self showSettingPwdView];
     }
+}
+
+- (void)showSettingPwdView
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请输入新密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    alertView.delegate = self;
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        
+        NSString *newPwd = [alertView textFieldAtIndex:0].text;
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSString *postURL = [kHost stringByAppendingString:@"/updateTeacherPwd"];
+        NSDictionary *param = @{@"idNum":[ZFQGeneralService accessId],@"newPwd":newPwd};
+        [manager POST:postURL parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *dic = responseObject;
+            NSNumber *status = dic[@"status"];
+            if (status.integerValue == 200) {
+                [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+            } else {
+                NSString *msg = dic[@"msg"];
+                [SVProgressHUD showErrorWithStatus:msg];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        }];
+        
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [_myTableView deselectRowAtIndexPath:[_myTableView indexPathForSelectedRow] animated:YES];
+}
+
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    UITextField *textField = [alertView textFieldAtIndex:0];
+    if ([textField.text isEqualToString:@""]) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)tapBackItemAction

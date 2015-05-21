@@ -66,7 +66,9 @@
     NSString *docPath = [self docPath];
     if (docPath != nil) {
         //判断文件是否存在
-        NSString *filePath = [docPath stringByAppendingPathComponent:self.name];
+//        NSString *filePath
+        NSString *filePath = [ZFQGeneralService docFilePathWithName:self.name];
+//        NSString *filePath = [docPath stringByAppendingPathComponent:self.name];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         BOOL result = [fileManager fileExistsAtPath:filePath isDirectory:NULL];
         if (result == YES) {
@@ -77,32 +79,6 @@
     } else {
         return nil;
     }
-    
-    /*
-    NSString *path = [ZFQGeneralService documentURLString];
-    //创建doc文件夹
-    NSString *docPath = [path stringByAppendingPathComponent:@"doc"];
-    NSString *filePath = [docPath stringByAppendingPathComponent:self.name];
-    //判断doc文件夹是否存在
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL isDirectory = NO;
-    BOOL result = [fileManager fileExistsAtPath:docPath isDirectory:&isDirectory];
-    if (isDirectory == YES) {
-        //再判断文件是否存在
-        result = [fileManager fileExistsAtPath:filePath isDirectory:NULL];
-        if (result == YES) {
-            return [NSURL fileURLWithPath:filePath];
-        } else {
-            return nil;
-        }
-    } else {
-        result = [fileManager createDirectoryAtPath:docPath withIntermediateDirectories:NO attributes:nil error:NULL];
-        if (result == YES) {
-            return [NSURL fileURLWithPath:[docPath stringByAppendingString:self.name]];
-        } else {
-            return nil;
-        }
-    }*/
 }
 
 - (NSString *)previewItemTitle
