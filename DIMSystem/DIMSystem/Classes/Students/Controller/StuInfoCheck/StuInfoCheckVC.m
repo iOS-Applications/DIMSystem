@@ -28,13 +28,6 @@
     //注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"DMStudentCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"student"];
     
-//    //添加操作视图
-//    StuActionView *actionView = [[NSBundle mainBundle] loadNibNamed:@"StuActionView" owner:nil options:0][0];
-//    actionView.bounds = self.tableView.bounds;
-//    actionView.hidden = YES;
-//    self.actionView = actionView;
-//    [self.view addSubview:actionView];
-
 }
 
 /**

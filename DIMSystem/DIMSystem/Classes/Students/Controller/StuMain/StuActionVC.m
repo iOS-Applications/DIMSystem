@@ -133,6 +133,7 @@
 {
     StuDetailVC *detailInfoVC = [[StuDetailVC alloc] init];
     
+    detailInfoVC.studnet = self.studnet;
 //    NSLog(@"%@",self.navigationController.viewControllers[0]);
     
     UIViewController *superVC = self.navigationController.viewControllers[0];
