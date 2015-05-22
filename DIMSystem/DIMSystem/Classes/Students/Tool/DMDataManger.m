@@ -17,14 +17,16 @@ static FMDatabase *_db;
 + (void)initialize
 {
     //1.打开数据库
-    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"hallyuData.sqlite"];
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"dimData.sqlite"];
     NSLog(@"sqlite's path>>>>%@",path);
     _db = [FMDatabase databaseWithPath:path];
     [_db open];
     
     //2.创建表
-    [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_news (news_id integer PRIMARY KEY,news blob NOT NULL,theme text,title text)"];
-    [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_status (id integer PRIMARY KEY,status blob NOT NULL,status_id integer NOT NULL,user_id integer NOT NULL)"];
+    //学生表
+    [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_news (id integer PRIMARY KEY,stu_major text,stu_class text,stu_post text,Stu_info blob NOT NULL"];
+    //项目学生表
+    [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_status (id integer PRIMARY KEY,praPrj_sign,pro_info blob)"];
 }
 
 
