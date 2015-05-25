@@ -23,10 +23,12 @@ static FMDatabase *_db;
     [_db open];
     
     //2.创建表
-    //学生表
-    [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_news (id integer PRIMARY KEY,stu_major text,stu_class text,stu_post text,Stu_info blob NOT NULL"];
+    //学生信息表
+    [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS dim_student (id integer PRIMARY KEY,stu_num text,stu_major text,stu_sclass text,stu_post text,student blob NOT NULL)"];
     //项目学生表
-    [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_status (id integer PRIMARY KEY,praPrj_sign,pro_info blob)"];
+    [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS dim_pro_stu (id integer PRIMARY KEY,pro_id text,pro_name text,pro_student blob,pro_info blob)"];
+    //通讯记录表
+    [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS dim_recordInfo (id integer PRIMARY KEY,rec_time text,rec_students blob,rec_type integer)"];
 }
 
 
