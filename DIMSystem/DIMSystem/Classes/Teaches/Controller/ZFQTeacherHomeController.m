@@ -131,7 +131,7 @@ NSString * const cellID = @"cellID";
     if (buttonIndex == 1) {
         
         NSString *newPwd = [alertView textFieldAtIndex:0].text;
-        
+        [SVProgressHUD showWithStatus:@"请稍后..."];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSString *postURL = [kHost stringByAppendingString:@"/updateTeacherPwd"];
         NSDictionary *param = @{@"idNum":[ZFQGeneralService accessId],@"newPwd":newPwd};

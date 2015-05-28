@@ -363,6 +363,9 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (actionSheet.tag == 456) {   //删除
+        if (buttonIndex !=0 ) {
+            return;
+        }
         [SVProgressHUD showWithStatus:@"请稍后..."];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSString *urlStr = [kHost stringByAppendingString:@"/deleteTeacher"];

@@ -983,14 +983,14 @@
 		CCDBA9091AE0E8B900A735FE /* Teaches */ = {
 			isa = PBXGroup;
 			children = (
+				CCDBA91F1AE0E8B900A735FE /* SVProgressHUD */,
 				B162A7F91AEF30E9004B1BE7 /* Util */,
 				B162A7F81AEF29B1004B1BE7 /* Catogray */,
 				B162A7F71AEF298E004B1BE7 /* View */,
 				B162A7E31AEF28B8004B1BE7 /* Resource */,
 				CCDBA90A1AE0E8B900A735FE /* Controller */,
-				CCDBA9141AE0E8B900A735FE /* DropDownList */,
 				CCDBA91A1AE0E8B900A735FE /* Model */,
-				CCDBA91F1AE0E8B900A735FE /* SVProgressHUD */,
+				CCDBA9141AE0E8B900A735FE /* DropDownList */,
 			);
 			path = Teaches;
 			sourceTree = "<group>";

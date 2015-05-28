@@ -10,6 +10,10 @@
 #import "ZFQAddTeacherController.h"
 #import "ZFQTeachersController.h"
 #import "ZFQMecroDefine.h"
+#import "SVProgressHUD.h"
+#import "AFNetworking.h"
+#import "commenConst.h"
+#import "ZFQGeneralService.h"
 
 NSString * const zfqAdminCellID = @"cell";
 
@@ -53,6 +57,10 @@ NSString * const zfqAdminCellID = @"cell";
             cell.textLabel.text = @"删除教师信息";
             break;
         }
+        case 2: {
+            cell.textLabel.text = @"重置教师登陆密码";
+            break;
+        }
         default:
             break;
     }
@@ -70,7 +78,7 @@ NSString * const zfqAdminCellID = @"cell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 #pragma mark - tableView delegate
@@ -82,19 +90,65 @@ NSString * const zfqAdminCellID = @"cell";
     } else if (indexPath.section == 1) {
         ZFQTeachersController *teachersVC = [[ZFQTeachersController alloc] init];
         teachersVC.showDeleteItem = YES;
-        
-//        NSNotification *notification = [NSNotification notificationWithName:kZFQDelNotification object:nil];
-//        [[NSNotificationCenter defaultCenter] postNotification:notification];
-//
-        
         [self.navigationController pushViewController:teachersVC animated:YES];
-//        ZFQTeacherInfoController *infoVC = [[ZFQTeacherInfoController alloc] init];
-//        infoVC.showDeleteItem = YES;
-//        infoVC.showEditItem = NO;
-//        infoVC.idNum =
+    } else if (indexPath.section == 2) {
+        [self showSettingPwdView];
     }
 }
 
+- (void)showSettingPwdView
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"重置登陆密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    alertView.delegate = self;
+    UITextField *idNumTextField = [alertView textFieldAtIndex:0];
+    idNumTextField.placeholder = @"教工号";
+    UITextField *pwdTextField = [alertView textFieldAtIndex:1];
+    pwdTextField.placeholder = @"新密码";
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        return;
+    }
+    UITextField *idNumTextField = [alertView textFieldAtIndex:0];
+    UITextField *pwdTextField = [alertView textFieldAtIndex:1];
+    
+    [SVProgressHUD showWithStatus:@"请稍后..."];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *postURL = [kHost stringByAppendingString:@"/updateTeacherPwd"];
+    NSDictionary *param = @{
+                            @"idNum":idNumTextField.text,
+                            @"newPwd":pwdTextField.text
+                            };
+    [manager POST:postURL parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        NSNumber *status = dic[@"status"];
+        if (status.integerValue == 200) {
+            [SVProgressHUD showSuccessWithStatus:@"重置成功，请牢记密码"];
+        } else {
+            NSString *msg = dic[@"msg"];
+            [SVProgressHUD showErrorWithStatus:msg];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
+}
+
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    UITextField *idNumTextField = [alertView textFieldAtIndex:0];
+    UITextField *pwdTextField = [alertView textFieldAtIndex:1];
+    if (idNumTextField.text == nil || [idNumTextField.text isEqualToString:@""]) {
+        return NO;
+    }
+    if (pwdTextField.text == nil || [pwdTextField.text isEqualToString:@""]) {
+        return NO;
+    }
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

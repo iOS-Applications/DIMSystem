@@ -283,8 +283,6 @@
 
 - (void)tapCompleteItemAction
 {
-    //0.将图片保存到Documents中
-    
     NSDictionary *teacherInfo = [self teacherInfoUsingEncoding:NO];
     ZFQTeacherEditController * __weak weakSelf = self;
     
@@ -309,10 +307,6 @@
             [SVProgressHUD showZFQErrorWithStatus:@"网络不给力"];
         }
     }];
-    
-    
-    //1.先上传数据到服务器，若成功，则把数据直接给teacherInfoVC
-    //2.上传完成后再关闭该VC
 }
 
 - (void)dismissEditViewControllerWithTeacherInfo:(NSDictionary *)teacherInfo

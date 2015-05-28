@@ -15,6 +15,9 @@
 #import "commenConst.h"
 
 @interface ZFQAddTeacherController () <UITextFieldDelegate>
+{
+    UIButton *submitBtn;
+}
 @property (nonatomic,strong) UITextField *nameTextField;
 @property (nonatomic,strong) UITextField *idNumTextField;
 @property (nonatomic,strong) UITextField *pwdTextField;
@@ -73,7 +76,7 @@
     [_mySwitch addTarget:self action:@selector(switchAction) forControlEvents:UIControlEventValueChanged];
     
     //添加按钮
-    UIButton *submitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    submitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [submitBtn setTitle:@"提交" forState:UIControlStateNormal];
     [submitBtn setBackgroundColor:[UIColor colorWithRed:0.82 green:0.82 blue:0.82 alpha:1]];
     submitBtn.layer.cornerRadius = 4;
@@ -81,10 +84,29 @@
     submitBtn.bounds = CGRectMake(0, 0, width/2 + 50, 36);
     submitBtn.center = CGPointMake(width/2, CGRectGetMaxY(_pwdTextField.frame) + submitBtn.bounds.size.height/2 + 20);
     [_myScrollView addSubview:submitBtn];
+    submitBtn.enabled = NO;
     
+    //添加通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction:)];
     [_myScrollView addGestureRecognizer:tapGesture];
      
+}
+
+- (void)textChanged:(NSNotification *)notification
+{
+    BOOL b1 = [_nameTextField.text isEqualToString:@""];
+    BOOL b2 = [_idNumTextField.text isEqualToString:@""];
+    BOOL b3 = [_pwdTextField.text isEqualToString:@""];
+    
+    if (b1 || b2 || b3
+        || _nameTextField.text == nil
+        || _idNumTextField.text == nil
+        || _pwdTextField.text == nil) {
+        submitBtn.enabled = NO;
+    } else {
+        submitBtn.enabled = YES;
+    }
 }
 
 - (void)tapSubmitBtnAction

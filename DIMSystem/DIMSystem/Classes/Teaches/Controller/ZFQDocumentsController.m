@@ -22,8 +22,9 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 
 @interface ZFQDocumentsController () <UITableViewDataSource,UITableViewDelegate,QLPreviewControllerDataSource,QLPreviewControllerDelegate,UIActionSheetDelegate>
 {
-    NSMutableArray *docs;     //保存文档信息list
-    NSInteger deleteRow;   //要删除的行的索引
+    NSMutableArray *docs;       //保存文档信息list
+    NSInteger deleteRow;        //要删除的行的索引
+    NSInteger currSelectIndex;  //当前选中的行
 }
 @end
 
@@ -114,8 +115,8 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    currSelectIndex = indexPath.row;
     //先判断本地是否有这个文件，
-    
     //没有就去下载
     QLPreviewController *previewController = [[QLPreviewController alloc] init];
     previewController.dataSource = self;
@@ -123,7 +124,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary *dic = docs[_myTableView.indexPathForSelectedRow.row];
+    NSDictionary *dic = docs[indexPath.row];
     ZFQDocument *doc = [[ZFQDocument alloc] initWithDocInfo:dic];
 
     //获取当前cell
@@ -245,7 +246,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
 
 - (id <QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index
 {
-    NSDictionary *dic = docs[_myTableView.indexPathForSelectedRow.row];
+    NSDictionary *dic = docs[currSelectIndex];
     return [[ZFQDocument alloc] initWithDocInfo:dic];
 }
 
