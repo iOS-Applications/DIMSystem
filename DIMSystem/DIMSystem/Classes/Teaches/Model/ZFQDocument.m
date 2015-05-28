@@ -63,8 +63,8 @@
 
 - (NSURL *)previewItemURL
 {
-    NSString *docPath = [self docPath];
-    if (docPath != nil) {
+//    NSString *docPath = [self docPath];
+//    if (docPath != nil) {
         //判断文件是否存在
 //        NSString *filePath
         NSString *filePath = [ZFQGeneralService docFilePathWithName:self.name];
@@ -76,9 +76,9 @@
         } else {
             return nil;
         }
-    } else {
-        return nil;
-    }
+//    } else {
+//        return nil;
+//    }
 }
 
 - (NSString *)previewItemTitle

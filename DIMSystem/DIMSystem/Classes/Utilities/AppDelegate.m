@@ -45,14 +45,14 @@
 {
     if (buttonIndex == 1) {
         [SVProgressHUD showWithStatus:@"请稍后..."];
-        //获取文件大小
-        NSFileManager *manager = [NSFileManager defaultManager];
-        NSError *error;
-        NSDictionary *dic = [manager attributesOfItemAtPath:docURL.absoluteString error:&error];
       
         //上传
         NSString *urlStr = [kHost stringByAppendingString:@"/uploadTeacherDocs"];
         NSString *idNum = [ZFQGeneralService accessId];
+        if (idNum == nil) {
+            [SVProgressHUD showInfoWithStatus:@"你还没有登陆，请先登陆后再进行操作"];
+            return;
+        }
         NSDictionary *param = @{@"idNum":idNum};
         
         AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
