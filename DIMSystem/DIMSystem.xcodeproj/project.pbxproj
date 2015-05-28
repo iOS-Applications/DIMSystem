@@ -42,6 +42,7 @@
 		12724BE21AE0E26100356E0C /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 12724BD71AE0E26100356E0C /* NSObject+MJCoding.m */; };
 		12724BE31AE0E26100356E0C /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12724BD91AE0E26100356E0C /* NSObject+MJKeyValue.m */; };
 		12724BE41AE0E26100356E0C /* NSObject+MJMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 12724BDB1AE0E26100356E0C /* NSObject+MJMember.m */; };
+		68A6D4521B12B7280061825D /* DIMRecordInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A6D4511B12B7280061825D /* DIMRecordInfo.m */; };
 		68CC5B121B0C3C8500D755EC /* DMDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC5B111B0C3C8500D755EC /* DMDataManger.m */; };
 		68CC5B1F1B0C53B200D755EC /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC5B151B0C53B200D755EC /* FMDatabase.m */; };
 		68CC5B201B0C53B200D755EC /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC5B171B0C53B200D755EC /* FMDatabaseAdditions.m */; };
@@ -230,6 +231,8 @@
 		12724BD91AE0E26100356E0C /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
 		12724BDA1AE0E26100356E0C /* NSObject+MJMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJMember.h"; sourceTree = "<group>"; };
 		12724BDB1AE0E26100356E0C /* NSObject+MJMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJMember.m"; sourceTree = "<group>"; };
+		68A6D4501B12B7280061825D /* DIMRecordInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMRecordInfo.h; sourceTree = "<group>"; };
+		68A6D4511B12B7280061825D /* DIMRecordInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMRecordInfo.m; sourceTree = "<group>"; };
 		68CC5B101B0C3C8500D755EC /* DMDataManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMDataManger.h; sourceTree = "<group>"; };
 		68CC5B111B0C3C8500D755EC /* DMDataManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMDataManger.m; sourceTree = "<group>"; };
 		68CC5B141B0C53B200D755EC /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -525,6 +528,8 @@
 				12724B9A1AE0E23800356E0C /* DMStudent.m */,
 				12724B9B1AE0E23800356E0C /* DMStuProject.h */,
 				12724B9C1AE0E23800356E0C /* DMStuProject.m */,
+				68A6D4501B12B7280061825D /* DIMRecordInfo.h */,
+				68A6D4511B12B7280061825D /* DIMRecordInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1252,6 +1257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68A6D4521B12B7280061825D /* DIMRecordInfo.m in Sources */,
 				CC77D4E71AD164D000612506 /* UIBarButtonItem+DIM.m in Sources */,
 				12724BE01AE0E26100356E0C /* MJType.m in Sources */,
 				CCDBA9391AE0E8B900A735FE /* SVIndefiniteAnimatedView.m in Sources */,

@@ -16,23 +16,14 @@
 //缓存项目信息
 + (void)saveDMProjectsWithDicArray:(NSArray *)projectsArray;
 
-//缓存信息记录
-+ (void)saveMessageRecordWithDic:(NSDictionary *)infoDic;
+//缓存通讯记录
++ (void)saveRecordInfoWithDic:(NSDictionary *)infoDic;
 
-//删除信息记录
-+ (void)deleteMessageRecordWithMessageID:(NSString *)messageID;
+//删除通讯记录
++ (void)deleteRecordInfoWithRecID:(NSString *)recID;
 
-//从缓存中加载信息记录
-+ (NSArray *)checkMessageRecord;
-
-//缓存电话记录
-+ (void)savePhoneCallRecordWithDic:(NSDictionary *)phoneRecord;
-
-//删除电话记录
-+ (void)deletePhoneCallRecordWithPhoneCallID:(NSString *)phoneCallID;
-
-//从缓存中加载电话记录
-+ (NSArray *)checkPhoneCallRecord;
+//从缓存中加载通讯记录
++ (NSArray *)checkRecordInfo;
 
 //从缓存中加载学生信息
 + (NSArray *)checkDMStudents;
@@ -41,8 +32,7 @@
 + (NSArray *)checkDMProjects;
 
 //更新新项目信息（添加删除/删除记录）
-+ (void)upDataProjectWithDic:(NSDictionary *)stuDic;
-
++ (void)upDataProjectWithProject:(NSDictionary *)project;
 //清理缓存
 + (void)clearRecord;
 @end
