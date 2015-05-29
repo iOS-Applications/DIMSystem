@@ -84,6 +84,20 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - tabBarController.tabBar重现方法
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    if (self.navigationController.viewControllers.count > 1) {
+        self.parentViewController.tabBarController.tabBar.hidden = YES;
+    }
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    if (self.navigationController.viewControllers.count < 2) {
+        self.parentViewController.tabBarController.tabBar.hidden = NO;
+    }
+}
 
 #pragma mark - Table view data source
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>97750E4B-8EA7-4168-8C32-9ED8AC7F2CEE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DIMSystem</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B054B49E09DBC7682E57356869DD6FBC06F2A0F6</key>
+		<string>https://github.com/zztiDIM/DIMSystem.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DIMSystem/DIMSystem.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B054B49E09DBC7682E57356869DD6FBC06F2A0F6</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/zztiDIM/DIMSystem.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B054B49E09DBC7682E57356869DD6FBC06F2A0F6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B054B49E09DBC7682E57356869DD6FBC06F2A0F6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DIMSystem</string>
+		</dict>
+	</array>
+</dict>
+</plist>
