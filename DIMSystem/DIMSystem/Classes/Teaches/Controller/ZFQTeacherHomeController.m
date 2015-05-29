@@ -159,7 +159,13 @@ NSString * const cellID = @"cellID";
 - (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
 {
     UITextField *textField = [alertView textFieldAtIndex:0];
-    if ([textField.text isEqualToString:@""]) {
+    NSString *pattern = @"^\\w{6,}$";
+    NSRegularExpression *expression = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionAnchorsMatchLines error:NULL];
+    NSInteger num = [expression numberOfMatchesInString:textField.text
+                                                options:NSMatchingReportCompletion
+                                                  range:NSMakeRange(0, textField.text.length)];
+    
+    if (num == 0) {
         return NO;
     }
     return YES;
