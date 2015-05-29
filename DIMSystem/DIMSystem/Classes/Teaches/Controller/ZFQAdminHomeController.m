@@ -42,6 +42,12 @@ NSString * const zfqAdminCellID = @"cell";
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [_myTableView deselectRowAtIndexPath:[_myTableView indexPathForSelectedRow] animated:YES];
+}
+
 #pragma mark - tableView dataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -141,10 +147,21 @@ NSString * const zfqAdminCellID = @"cell";
 {
     UITextField *idNumTextField = [alertView textFieldAtIndex:0];
     UITextField *pwdTextField = [alertView textFieldAtIndex:1];
-    if (idNumTextField.text == nil || [idNumTextField.text isEqualToString:@""]) {
-        return NO;
-    }
-    if (pwdTextField.text == nil || [pwdTextField.text isEqualToString:@""]) {
+    
+    BOOL matchIdNum = [self isMatchString:idNumTextField.text withPattern:@"^\\d*$"];
+    BOOL matchPwd = [self isMatchString:pwdTextField.text withPattern:@"\\w{6,}$"];
+
+    return matchIdNum && matchPwd;
+}
+
+- (BOOL)isMatchString:(NSString *)desStr withPattern:(NSString *)pattern
+{
+    NSRegularExpression *expression = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionAnchorsMatchLines error:NULL];
+    NSInteger num = [expression numberOfMatchesInString:desStr
+                                                options:NSMatchingReportCompletion
+                                                  range:NSMakeRange(0, desStr.length)];
+    
+    if (num == 0) {
         return NO;
     }
     return YES;
