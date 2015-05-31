@@ -14,9 +14,10 @@
 {
     Teacher *teacher = [[Teacher alloc] init];
     NSDictionary *dataDic = [info objectForKey:@"data"];
+    if ([dataDic isKindOfClass:[NSNull class]]) {
+        return teacher;
+    }
     
-//    UIImage *avatarImg = [info objectForKey:@"avatar"];
-//    teacher.avatarData = UIImagePNGRepresentation(avatarImg);
     teacher.name = [dataDic objectForKey:@"t_name"];
     teacher.gender = [dataDic objectForKey:@"t_gender"];
     teacher.idNum = [dataDic objectForKey:@"t_id"];
