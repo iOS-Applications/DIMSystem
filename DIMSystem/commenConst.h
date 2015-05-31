@@ -13,8 +13,9 @@
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight  [UIScreen mainScreen].bounds.size.height
 
-#define kHost   @"http://localhost:8080/zztiDIM"
-//#define kHost @"http://192.168.1.106:8080/zztiDIM"
+//#define kHost   @"http://localhost:8080/zztiDIM"
+//#define kHost @"http://192.168.1.103:8080/zztiDIM"
+#define kHost @"http://2.zzti.sinaapp.com"
 #define kAccessId @"access_id"
 
 #endif
