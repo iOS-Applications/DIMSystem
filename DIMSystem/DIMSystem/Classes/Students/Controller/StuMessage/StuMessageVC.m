@@ -7,6 +7,8 @@
 //
 
 #import "StuMessageVC.h"
+#import "RecordInfoCell.h"
+#import "DMDataManger.h"
 
 @interface StuMessageVC ()
 
@@ -30,7 +32,8 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_press"] style:UIBarButtonItemStylePlain target:self action:@selector(backToHome)];
     self.navigationItem.leftBarButtonItem = leftItem;
 
-    
+    //注册cell
+    [self.tableView registerNib:[UINib nibWithNibName:@"RecordInfoCell" bundle:nil] forCellReuseIdentifier:@"RecordInfoCell"];
 }
 
 #pragma mark //返回按钮点击事件
@@ -47,20 +50,22 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return _dataArray.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    RecordInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecordInfoCell" forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[RecordInfoCell alloc] init];
+    }
     
-    // Configure the cell...
+    
     
     return cell;
 }
-*/
+
 @end

@@ -28,6 +28,9 @@
 //从缓存中加载学生信息
 + (NSArray *)checkDMStudents;
 
+#pragma mark //快速查询学生
++ (NSArray *)checkDMProjectsWithCheckString:(NSString *)checkStr;
+
 //从缓存中加载项目信息
 + (NSArray *)checkDMProjects;
 

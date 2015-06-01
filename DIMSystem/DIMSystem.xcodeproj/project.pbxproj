@@ -50,6 +50,10 @@
 		68CC5B221B0C53B200D755EC /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC5B1B1B0C53B200D755EC /* FMDatabaseQueue.m */; };
 		68CC5B231B0C53B200D755EC /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC5B1E1B0C53B200D755EC /* FMResultSet.m */; };
 		68CC5B251B0C544500D755EC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CC5B241B0C544500D755EC /* libsqlite3.dylib */; };
+		68F887F61B1BE2A3007A36F1 /* StuSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F887F41B1BE2A3007A36F1 /* StuSearchView.m */; };
+		68F887F71B1BE2A3007A36F1 /* StuSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F887F51B1BE2A3007A36F1 /* StuSearchView.xib */; };
+		68F887FB1B1BE2B5007A36F1 /* RecordInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F887F91B1BE2B5007A36F1 /* RecordInfoCell.m */; };
+		68F887FC1B1BE2B5007A36F1 /* RecordInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F887FA1B1BE2B5007A36F1 /* RecordInfoCell.xib */; };
 		B11B2B191AF5120C004BF09A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B11B2B171AF5120C004BF09A /* LoginViewController.m */; };
 		B11B2B1A1AF5120C004BF09A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B11B2B181AF5120C004BF09A /* LoginViewController.xib */; };
 		B11BC64A1B038B1A00C51D54 /* ZFQTeacherNameListController.m in Sources */ = {isa = PBXBuildFile; fileRef = B11BC6491B038B1A00C51D54 /* ZFQTeacherNameListController.m */; };
@@ -247,6 +251,12 @@
 		68CC5B1D1B0C53B200D755EC /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		68CC5B1E1B0C53B200D755EC /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		68CC5B241B0C544500D755EC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		68F887F31B1BE2A3007A36F1 /* StuSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuSearchView.h; sourceTree = "<group>"; };
+		68F887F41B1BE2A3007A36F1 /* StuSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuSearchView.m; sourceTree = "<group>"; };
+		68F887F51B1BE2A3007A36F1 /* StuSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuSearchView.xib; sourceTree = "<group>"; };
+		68F887F81B1BE2B5007A36F1 /* RecordInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordInfoCell.h; sourceTree = "<group>"; };
+		68F887F91B1BE2B5007A36F1 /* RecordInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordInfoCell.m; sourceTree = "<group>"; };
+		68F887FA1B1BE2B5007A36F1 /* RecordInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordInfoCell.xib; sourceTree = "<group>"; };
 		B11B2B161AF5120C004BF09A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B11B2B171AF5120C004BF09A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B11B2B181AF5120C004BF09A /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -537,6 +547,12 @@
 		12724B9E1AE0E23800356E0C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				68F887F81B1BE2B5007A36F1 /* RecordInfoCell.h */,
+				68F887F91B1BE2B5007A36F1 /* RecordInfoCell.m */,
+				68F887FA1B1BE2B5007A36F1 /* RecordInfoCell.xib */,
+				68F887F31B1BE2A3007A36F1 /* StuSearchView.h */,
+				68F887F41B1BE2A3007A36F1 /* StuSearchView.m */,
+				68F887F51B1BE2A3007A36F1 /* StuSearchView.xib */,
 				12724B9F1AE0E23800356E0C /* DMStudentCell.h */,
 				12724BA01AE0E23800356E0C /* DMStudentCell.m */,
 				12724BA11AE0E23800356E0C /* DMStudentCell.xib */,
@@ -1191,6 +1207,7 @@
 				B162A7F41AEF2900004B1BE7 /* ZFQMajor.plist in Resources */,
 				B196D22C1AF1D97D0064650E /* zfq_icon_ppt.png in Resources */,
 				12724BB51AE0E23800356E0C /* StuTabBarVC.xib in Resources */,
+				68F887FC1B1BE2B5007A36F1 /* RecordInfoCell.xib in Resources */,
 				12724BC71AE0E23800356E0C /* StuSearchHeaderView.xib in Resources */,
 				B162A7F31AEF2900004B1BE7 /* ZFQDepartment.plist in Resources */,
 				12724BB31AE0E23800356E0C /* StuDetailVC.xib in Resources */,
@@ -1225,6 +1242,7 @@
 				CCE0A5CF1ADAC6C0000AD1E2 /* newsDetailTableViewCell.xib in Resources */,
 				12724BBA1AE0E23800356E0C /* Projects.json in Resources */,
 				CCDBA9311AE0E8B900A735FE /* ZFQTeacherInfoController.xib in Resources */,
+				68F887F71B1BE2A3007A36F1 /* StuSearchView.xib in Resources */,
 				CC33E5951ADFC8050093D262 /* PracTabBarVC.xib in Resources */,
 				CC6DCDE71ADE4014006CB380 /* PracPrjDetail.xib in Resources */,
 				B196D2341AF1FCCE0064650E /* ZFQDocs.json in Resources */,
@@ -1287,6 +1305,7 @@
 				B196D21E1AF1C6470064650E /* ZFQDocumentsController.m in Sources */,
 				12724BC01AE0E23800356E0C /* ProjectHeaderView.m in Sources */,
 				12724BC61AE0E23800356E0C /* StuSearchHeaderView.m in Sources */,
+				68F887FB1B1BE2B5007A36F1 /* RecordInfoCell.m in Sources */,
 				12724BE31AE0E26100356E0C /* NSObject+MJKeyValue.m in Sources */,
 				B162A7DF1AEF26EB004B1BE7 /* ZFQTeacherHomeController.m in Sources */,
 				12724BDC1AE0E26100356E0C /* MJArgument.m in Sources */,
@@ -1324,6 +1343,7 @@
 				CCDBA9361AE0E8B900A735FE /* EmotionView.m in Sources */,
 				B130D4FC1AF9B5F8000A48AB /* AFURLSessionManager.m in Sources */,
 				CC33E58F1ADFA9A10093D262 /* PracMyBiSheDetail.m in Sources */,
+				68F887F61B1BE2A3007A36F1 /* StuSearchView.m in Sources */,
 				B1AF44F61AF5AFBA0017B01A /* DLRadioButton.m in Sources */,
 				12724BDD1AE0E26100356E0C /* MJIvar.m in Sources */,
 				CCE0A5CE1ADAC6C0000AD1E2 /* newsDetailTableViewCell.m in Sources */,

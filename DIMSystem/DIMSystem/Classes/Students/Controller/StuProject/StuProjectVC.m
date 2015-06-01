@@ -164,7 +164,7 @@
         } else {
             [headerView.headerButton setImage:[UIImage imageNamed:@"project_left"] forState:UIControlStateNormal];
         }
-        [headerView.headerButton setTitle:project.PraPrj_title forState:UIControlStateNormal];
+        [headerView.headerButton setTitle:project.pro_title forState:UIControlStateNormal];
         //**************************//想到了button的其他传参方式
         headerView.headerButton.titleLabel.tag = section;
         

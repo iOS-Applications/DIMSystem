@@ -10,4 +10,5 @@
 
 @interface StuMessageVC : UITableViewController
 
+@property (nonatomic , strong)NSArray *dataArray;
 @end

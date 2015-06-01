@@ -14,17 +14,12 @@
 /**
  *  项目id
  */
-@property (nonatomic , copy) NSString *PraPrj_id;
-
-/**
- *  教师id
- */
-@property (nonatomic , copy) NSString *tea_id;
+@property (nonatomic , copy) NSString *pro_id;
 
 /**
  *  项目名称
  */
-@property (nonatomic , copy) NSString *PraPrj_title;
+@property (nonatomic , copy) NSString *pro_title;
 
 /**
  *  项目状态
@@ -39,7 +34,7 @@
 /**
  *  项目类型
  */
-@property (nonatomic , copy) NSString *PraPrj_sign;
+@property (nonatomic , copy) NSString *pro_type;
 
 /**
  *  项目参与学生

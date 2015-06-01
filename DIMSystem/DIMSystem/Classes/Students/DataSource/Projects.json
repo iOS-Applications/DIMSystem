@@ -1,12 +1,11 @@
 {
     "data": [
              {
-             "PraPrj_id": "149",
-             "tea_id": "352432135",
-             "PraPrj_title": "基于iOS的教研室信息管理系统",
+             "pro_id": "149",
+             "pro_title": "基于iOS的教研室信息管理系统",
              "pro_state": "1",
              "pro_timeLimit": "2014_11~2015_6",
-             "PraPrj_sign": "1",
+             "pro_type": "1",
              "pro_stu": [
                          {
                          "stu_num": "201100834208",
@@ -67,12 +66,12 @@
                          ]
              },
              {
-             "PraPrj_id": "133",
+             "pro_id": "133",
              "tea_id": "352432135",
-             "PraPrj_title": "宝贝计划",
+             "pro_title": "宝贝计划",
              "pro_state": "1",
              "pro_timeLimit": "2014_11~2015_6",
-             "PraPrj_sign": "1",
+             "pro_type": "1",
              "pro_stu": [
                          {
                          "stu_num": "201100834208",
@@ -105,12 +104,11 @@
                          ]
              },
              {
-             "PraPrj_id": "155",
-             "tea_id": "352432135",
-             "PraPrj_title": "韩流圈",
+             "pro_id": "155",
+             "pro_title": "韩流圈",
              "pro_state": "1",
              "pro_timeLimit": "2014_11~2015_6",
-             "PraPrj_sign": "2",
+             "pro_type": "2",
              "pro_stu": [
                          {
                          "stu_num": "201100834208",
@@ -143,12 +141,11 @@
                          ]
              },
              {
-             "PraPrj_id": "132",
-             "tea_id": "352432135",
-             "PraPrj_title": "基于iOS的run 5K",
+             "pro_id": "132",
+             "pro_title": "基于iOS的run 5K",
              "pro_state": "1",
              "pro_timeLimit": "2014_11~2015_6",
-             "PraPrj_sign": "1",
+             "pro_type": "1",
              "pro_stu": [
                          {
                          "stu_num": "201100834208",
@@ -181,12 +178,11 @@
                          ]
              },
              {
-             "PraPrj_id": "149",
-             "tea_id": "352432135",
-             "PraPrj_title": "基于iOS的教研室信息管理系统",
+             "pro_id": "149",
+             "pro_title": "基于iOS的教研室信息管理系统",
              "pro_state": "1",
              "pro_timeLimit": "2014_11~2015_6",
-             "PraPrj_sign": "1",
+             "pro_type": "1",
              "pro_stu": [
                          {
                          "stu_num": "201100834208",
@@ -219,12 +215,11 @@
                          ]
              },
              {
-             "PraPrj_id": "149",
-             "tea_id": "352432135",
-             "PraPrj_title": "基于iOS的教研室信息管理系统",
+             "pro_id": "149",
+             "pro_title": "基于iOS的教研室信息管理系统",
              "pro_state": "1",
              "pro_timeLimit": "2014_11~2015_6",
-             "PraPrj_sign": "1",
+             "pro_type": "1",
              "pro_stu": [
                          {
                          "stu_num": "201100834208",
@@ -313,12 +308,11 @@
                          ]
              },
              {
-             "PraPrj_id": "149",
-             "tea_id": "352432135",
-             "PraPrj_title": "基于iOS的教研室信息管理系统",
+             "pro_id": "149",
+             "pro_title": "基于iOS的教研室信息管理系统",
              "pro_state": "1",
              "pro_timeLimit": "2014_11~2015_6",
-             "PraPrj_sign": "1",
+             "pro_type": "1",
              "pro_stu": [
                          {
                          "stu_num": "201100834208",
@@ -351,12 +345,11 @@
                          ]
              },
              {
-             "PraPrj_id": "149",
-             "tea_id": "352432135",
-             "PraPrj_title": "基于iOS的教研室信息管理系统",
+             "pro_id": "149",
+             "pro_title": "基于iOS的教研室信息管理系统",
              "pro_state": "1",
              "pro_timeLimit": "2014_11~2015_6",
-             "PraPrj_sign": "1",
+             "pro_type": "1",
              "pro_stu": [
                          {
                          "stu_num": "201100834208",

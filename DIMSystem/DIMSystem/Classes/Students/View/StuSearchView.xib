@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="bW1-tf-Mka" customClass="StuSearchView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入学院，班级， 职务查询..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Lbp-an-G5P">
+                    <rect key="frame" x="10" y="7" width="260" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZX-iB-Pvw">
+                    <rect key="frame" x="273" y="0.0" width="47" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="47" id="Aau-qJ-YtE"/>
+                        <constraint firstAttribute="height" constant="44" id="tgk-57-h6v"/>
+                    </constraints>
+                    <state key="normal" title="查询">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Lbp-an-G5P" firstAttribute="leading" secondItem="bW1-tf-Mka" secondAttribute="leading" constant="10" id="5JW-cz-TKR"/>
+                <constraint firstAttribute="bottom" secondItem="Lbp-an-G5P" secondAttribute="bottom" constant="7" id="EpW-gh-82t"/>
+                <constraint firstItem="wZX-iB-Pvw" firstAttribute="top" secondItem="bW1-tf-Mka" secondAttribute="top" id="GXO-Bl-bFe"/>
+                <constraint firstItem="Lbp-an-G5P" firstAttribute="top" secondItem="bW1-tf-Mka" secondAttribute="top" constant="7" id="J7a-hB-wLG"/>
+                <constraint firstAttribute="bottom" secondItem="wZX-iB-Pvw" secondAttribute="bottom" id="Oa7-YF-D9G"/>
+                <constraint firstItem="wZX-iB-Pvw" firstAttribute="leading" secondItem="Lbp-an-G5P" secondAttribute="trailing" constant="3" id="T3j-3e-WVx"/>
+                <constraint firstItem="wZX-iB-Pvw" firstAttribute="leading" secondItem="Lbp-an-G5P" secondAttribute="trailing" constant="3" id="b7K-4Z-zjg"/>
+                <constraint firstAttribute="trailing" secondItem="wZX-iB-Pvw" secondAttribute="trailing" id="zw3-og-sbe"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="searchButton" destination="wZX-iB-Pvw" id="BGa-UG-9YD"/>
+                <outlet property="searchTextField" destination="Lbp-an-G5P" id="WcM-H2-wxS"/>
+            </connections>
+            <point key="canvasLocation" x="291" y="190"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

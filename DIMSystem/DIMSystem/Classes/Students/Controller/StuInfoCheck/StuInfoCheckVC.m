@@ -11,6 +11,8 @@
 #import "MJExtension.h"
 #import "DMStudent.h"
 #import "StuActionVC.h"
+#import "StuSearchView.h"
+#import "DMDataManger.h"
 
 @interface StuInfoCheckVC ()
 @end
@@ -28,6 +30,8 @@
     //注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"DMStudentCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"student"];
     
+    //注册heardView
+    [self.tableView registerNib:[UINib nibWithNibName:@"StuSearchView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"searchHeader"];
 }
 
 /**
@@ -83,6 +87,33 @@
     return cell;
 }
 
+#pragma mark //searchBar
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    StuSearchView *searchView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"searchHeader"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30 ,30)];
+    imageView.image = [UIImage imageNamed:@"infoCheck"];
+    searchView.searchTextField.leftView = imageView;
+    [searchView.searchButton addTarget:self action:@selector(goSearch:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return searchView;
+}
+
+- (void)goSearch:(UIButton *)sender
+{
+    StuSearchView *searchView  = (StuSearchView *)sender.superview;
+    NSString *checkStr = searchView.searchTextField.text;
+    NSArray *stuArray = [DMDataManger checkDMProjectsWithCheckString:checkStr];
+    self.studentsArray = stuArray;
+    
+    //[self.view resignFirstResponder];
+    [self.tableView reloadData];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 44;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 80;

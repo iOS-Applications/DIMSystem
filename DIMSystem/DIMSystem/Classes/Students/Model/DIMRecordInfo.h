@@ -18,7 +18,10 @@
 @property (nonatomic, copy) NSString *rec_time;
 
 //记录学生
-@property (nonatomic, strong) NSArray *students;
+@property (nonatomic, strong) NSArray *rec_students;
+
+//信息记录
+@property (nonatomic, strong) NSArray *rec_messages;
 
 //记录类型
 @property (nonatomic, assign)NSInteger rec_type;
