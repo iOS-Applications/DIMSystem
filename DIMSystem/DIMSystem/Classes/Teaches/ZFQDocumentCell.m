@@ -15,7 +15,7 @@
 @interface ZFQDocumentCell()
 
 @property (nonatomic,strong) ZFQProgressView *progressView;
-@property (nonatomic,strong) UILabel *alterLabel;
+
 
 @end
 

@@ -167,7 +167,6 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
                 [cell settingProgress:progress];
             }];
             [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
                     [SVProgressHUD showSuccessWithStatus:@"下载成功"];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [SVProgressHUD showErrorWithStatus:@"下载失败"];
@@ -178,8 +177,6 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
             [SVProgressHUD showErrorWithStatus:@"网络不给力"];
         }
     }];     //end Reachability
-        
-
 }
 
 #pragma mark 滑动删除代理
@@ -207,6 +204,7 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
         
         //设置cell状态
         ZFQDocumentCell *cell = (ZFQDocumentCell *)[_myTableView cellForRowAtIndexPath:indexPath];
+        NSString *originAlert = cell.alterLabel.text;
         [cell setttingAlert:@"正在删除"];
 
         //先从服务器端删除
@@ -229,10 +227,12 @@ NSString * const zfqDocCellID = @"zfqDocCellID";
                 [SVProgressHUD showSuccessWithStatus:@"已成功删除"];
             }else {
                 [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+                [cell setttingAlert:originAlert];
             }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD showErrorWithStatus:@"删除失败"];
+            [cell setttingAlert:originAlert];
         }];
         
     }

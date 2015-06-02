@@ -14,6 +14,7 @@
 @property (nonatomic,strong) UILabel *fileNameLabel;        //文件名
 @property (nonatomic,strong) UILabel *fileSizeLabel;        //文件大小
 @property (nonatomic,strong) UIImageView *thumbImgView;     //缩略图
+@property (nonatomic,strong) UILabel *alterLabel;
 @property (nonatomic,readonly) BOOL isExist;                //文件是否已存在
 
 - (void)bindModel:(ZFQDocument *)zfqDocument;

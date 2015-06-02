@@ -66,15 +66,21 @@
         [SVProgressHUD showZFQHUDWithStatus:@"您尚未登陆，请登陆"];
     } else {
         //加载教工号为idNum的老师的信息
+        
         [SVProgressHUD showZFQHUDWithStatus:@"正在加载..."];
         ZFQTeacherInfoController * __weak weakSelf = self;
         [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
             if (reachable(isReachable)) {
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
                 AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                 NSDictionary *param = @{@"idNum":weakSelf.idNum};
                 NSString *getURL = [kHost stringByAppendingString:@"/teacherInfo"];
                 [manager GET:getURL parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSDictionary *dic = responseObject;
+                    NSNumber *status = dic[@"status"];
+                    if (status.integerValue == 2022) {
+                        [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+                    }
                     weakSelf.teacherInfo = dic[@"data"];
                     Teacher *teacher = [Teacher teacherFromInfo:dic];
                     //显示subView
@@ -82,11 +88,14 @@
                     //让编辑按钮可用
                     weakSelf.navigationItem.rightBarButtonItem.enabled = YES;
                     [SVProgressHUD dismiss];
-                    
+                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                     //下载头像,获取idNum
-                    [self downloadAvatarWithIdNum:weakSelf.idNum];
+                    NSString *idNum = [weakSelf.teacherInfo objectForKey:@"t_id"];
+                    [self downloadAvatarWithIdNum:idNum];
+                    
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     [SVProgressHUD showZFQErrorWithStatus:@"请求失败"];
+                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                 }];
             } else {
                 [SVProgressHUD showZFQErrorWithStatus:@"网络不给力"];
@@ -111,7 +120,7 @@
 - (void)downloadAvatarWithIdNum:(NSString *)idNum
 {
     //下载头像
-    NSString *urlStr = [NSString stringWithFormat:@"%@/avatar?idNum=%@",kHost,[ZFQGeneralService accessId]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/avatar?idNum=%@",kHost,idNum];
     NSString *encodingStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:encodingStr];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
@@ -120,7 +129,7 @@
     [request setValue:@"utf-8" forHTTPHeaderField:@"Accept-Encoding"];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     //获取要写的文件路径
     if (idNumLabel.text == nil) {
         return;
@@ -134,9 +143,10 @@
             avatar.image = img;
             avatarIsNil = NO;
         }
-        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"下载失败"];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }];
     [operation start];
 
@@ -367,6 +377,7 @@
             return;
         }
         [SVProgressHUD showWithStatus:@"请稍后..."];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSString *urlStr = [kHost stringByAppendingString:@"/deleteTeacher"];
         NSDictionary *param = @{@"idNum":idNumLabel.text};
@@ -387,8 +398,10 @@
             } else {
                 [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }];
         
     } else {

@@ -236,13 +236,12 @@
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     UIImage *smallImg = [image portraintWithSize:avatarBtn.bounds.size];
     NSData *imgData = UIImagePNGRepresentation(smallImg);
-    [avatarBtn setImage:smallImg forState:UIControlStateNormal];
     //获取cell
     
     [self dismissViewControllerAnimated:YES completion:^{
-    
         //上传图片
         [SVProgressHUD showZFQHUDWithStatus:@"正在上传"];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         NSString *postURL = [kHost stringByAppendingString:@"/uploadAvatar"];
         NSDictionary *param = @{@"idNum":[ZFQGeneralService accessId]};
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -253,12 +252,14 @@
             NSNumber *status = dic[@"status"];
             if (status.integerValue == 200) {
                 [SVProgressHUD showZFQSuccessWithStatus:@"上传成功"];
+                [avatarBtn setImage:smallImg forState:UIControlStateNormal];
             } else {
                 [SVProgressHUD showZFQSuccessWithStatus:@"上传失败"];
             }
-            
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD showZFQErrorWithStatus:@"上传失败"];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }];
         
     }];
@@ -288,6 +289,7 @@
     
     [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
         if (reachable(isReachable)) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             NSString *postURL = [kHost stringByAppendingString:@"/updateTeacherInfo"];
             [manager POST:postURL parameters:teacherInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -300,8 +302,10 @@
                     NSString *msg = dic[@"msg"];
                     [SVProgressHUD showZFQErrorWithStatus:msg];
                 }
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [SVProgressHUD showZFQErrorWithStatus:@"请求失败"];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }];
         } else {
             [SVProgressHUD showZFQErrorWithStatus:@"网络不给力"];
@@ -334,7 +338,6 @@
                                       };
         return teacherInfo;
     } else {
-        
         NSDictionary *teacherInfo = @{
                                       @"t_name":nameTextField.text,
                                       @"t_id":teacherIDTextField.text,
