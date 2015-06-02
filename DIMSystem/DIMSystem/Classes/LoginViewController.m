@@ -85,6 +85,7 @@
     [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
         if (reachable(isReachable)) {  //isReachable == YES
             [SVProgressHUD showZFQHUDWithStatus:@"请稍后..."];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
             //post请求
             NSString *loginURL = [NSString stringWithFormat:@"%@/login",kHost];
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -115,8 +116,10 @@
                     }
    
                 }
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [SVProgressHUD showZFQErrorWithStatus:error.localizedDescription];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }];
         } else {
             [SVProgressHUD showZFQErrorWithStatus:@"网络不给力"];
