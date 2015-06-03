@@ -57,7 +57,6 @@
     _myTableView.tag = 1012;
     
     //添加searchBar
-    
     _myTableView.tableHeaderView = self.mySearchBar;
     [self.view addSubview:_myTableView];
     
@@ -72,6 +71,10 @@
     }];
     
     self.title = @"选择";
+    //修改搜索框背景颜色
+    if (self.searchBarBcgColor != nil) {
+        searchResultController.searchBarBcgColor = self.searchBarBcgColor;
+    }
 }
 
 - (UIView *)headerView

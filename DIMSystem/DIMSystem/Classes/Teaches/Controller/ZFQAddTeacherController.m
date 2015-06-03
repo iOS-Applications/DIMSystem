@@ -118,8 +118,10 @@
                             };
     
     [SVProgressHUD showWithStatus:@"请稍后..."];
+    
     [Reachability isReachableWithHostName:kHost complition:^(BOOL isReachable) {
         if (reachable(isReachable)) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             NSString *urlStr = [kHost stringByAppendingString:@"/adminAddTeacherInfo"];
             [manager POST:urlStr parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -128,14 +130,19 @@
                 NSNumber *status = dic[@"status"];
                 if (status.integerValue == 200) {
                     [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                    [self.navigationController popViewControllerAnimated:YES];
                 } else {
                     NSString *msg = dic[@"msg"];
                     [SVProgressHUD showErrorWithStatus:msg];
+                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                 }
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }];
+            
         } else {
             [SVProgressHUD showErrorWithStatus:@"网络不给力"];
         }

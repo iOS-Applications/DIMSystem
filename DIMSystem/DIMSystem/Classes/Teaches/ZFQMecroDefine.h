@@ -41,5 +41,6 @@
 #endif
 
 #define kZFQDelNotification @"kZFQDelNotification"
+#define kZFQChangeSearchBarBcgColorNotification @"ZFQChangeSearchBarBcgColorNotification"
 
 #endif

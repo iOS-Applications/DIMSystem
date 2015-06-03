@@ -39,7 +39,6 @@ NSString * const zfqAdminCellID = @"cell";
     [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:zfqAdminCellID];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kZFQDelNotification object:nil];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -96,6 +95,7 @@ NSString * const zfqAdminCellID = @"cell";
     } else if (indexPath.section == 1) {
         ZFQTeachersController *teachersVC = [[ZFQTeachersController alloc] init];
         teachersVC.showDeleteItem = YES;
+        teachersVC.searchBarBcgColor = [UIColor whiteColor];
         [self.navigationController pushViewController:teachersVC animated:YES];
     } else if (indexPath.section == 2) {
         [self showSettingPwdView];

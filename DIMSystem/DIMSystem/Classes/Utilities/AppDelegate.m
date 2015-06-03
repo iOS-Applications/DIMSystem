@@ -26,7 +26,6 @@
     //设置SVD颜色
     [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
-    
     return YES;
 }
 

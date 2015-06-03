@@ -16,6 +16,7 @@
 }
 
 @property (nonatomic,copy) void (^didSelectRow)(UITableView *tableView , NSIndexPath *indexPath,NSString *idNum);
+@property (nonatomic,strong) UIColor *searchBarBcgColor;    //搜索框背景色 默认是nil
 
 
 - (instancetype)initWithSearchDisplayController:(UISearchDisplayController *)searchDisplayController

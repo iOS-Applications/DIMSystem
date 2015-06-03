@@ -75,6 +75,28 @@ NSString * const zfqSearchCellID = @"cell";
 }
 
 #pragma mark - UISearchBar delegate
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    //修改颜色
+    if (self.searchBarBcgColor != nil) {
+        [self settingBcgColor:searchBar];
+    }
+}
+
+- (void)settingBcgColor:(UIView *)searchBar
+{
+    NSArray *subViews = searchBar.subviews;
+    for (UIView *subView in subViews) {
+        if ([subView isKindOfClass:[UITextField class]]) {
+            UITextField  *textField = (UITextField *)subView;
+            textField.textColor = self.searchBarBcgColor;
+            return;
+        } else {
+            [self settingBcgColor:subView];
+        }
+    }
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSString *key = searchBar.text;
