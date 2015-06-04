@@ -8,6 +8,8 @@
 
 #import "NewsDetaileViewController.h"
 #import "newsDetailTableViewCell.h"
+#import "UIImageView+WebCache.h"
+
 @interface NewsDetaileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *titleView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -24,7 +26,10 @@
    
     self.tableView.tableHeaderView = [[[NSBundle mainBundle] loadNibNamed:@"newsDetaileHeaderView" owner:self options:nil] firstObject];
     
-    self.titleView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.model.newsicon_url]];
+    //转码
+    NSString * encodingString = [self.model.newsicon_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL URLWithString:encodingString];
+    [self.titleView sd_setImageWithURL:url];
     
     self.timeLabel.text = self.model.news_createtime;
     
@@ -35,6 +40,7 @@
     UIBarButtonItem *back = [[UIBarButtonItem alloc] init];
     back.title = @"back";
     self.navigationItem.backBarButtonItem = back;
+  
    
 }
 

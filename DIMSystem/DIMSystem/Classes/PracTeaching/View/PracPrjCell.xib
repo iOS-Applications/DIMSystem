@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,14 +14,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pracPrj" translatesAutoresizingMaskIntoConstraints="NO" id="qgP-75-0Zf">
-                        <rect key="frame" x="10" y="13" width="38" height="33.5"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qgP-75-0Zf">
+                        <rect key="frame" x="10" y="13" width="38" height="34"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="EPA-S6-rPt"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="指导老师：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRH-Kc-lhj">
-                        <rect key="frame" x="58" y="35" width="60" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="指导老师：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRH-Kc-lhj">
+                        <rect key="frame" x="58" y="35" width="60" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="g5A-Ha-s3C"/>
                         </constraints>
@@ -29,8 +29,8 @@
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJK-cA-X7R">
-                        <rect key="frame" x="118" y="35" width="52" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJK-cA-X7R">
+                        <rect key="frame" x="118" y="35" width="52" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="52" id="Y0P-hA-uOR"/>
                         </constraints>
@@ -38,8 +38,8 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学生人数：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ib6-Lg-AFt">
-                        <rect key="frame" x="174" y="35" width="60" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="学生人数：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ib6-Lg-AFt">
+                        <rect key="frame" x="174" y="35" width="60" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="1X1-ca-9c4"/>
                         </constraints>
@@ -47,8 +47,8 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdQ-a4-sOS">
-                        <rect key="frame" x="234" y="35" width="42" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdQ-a4-sOS">
+                        <rect key="frame" x="234" y="35" width="42" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="42" id="Zbn-C2-rrL"/>
                         </constraints>
@@ -81,14 +81,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="pracIcon" destination="qgP-75-0Zf" id="uya-95-CvW"/>
                 <outlet property="prjTitle" destination="60j-1m-5H9" id="Esn-vl-ZV9"/>
                 <outlet property="stuNum" destination="IdQ-a4-sOS" id="0TZ-GU-UTS"/>
                 <outlet property="teacherName" destination="pJK-cA-X7R" id="YIC-vV-lng"/>
             </connections>
-            <point key="canvasLocation" x="238" y="298"/>
+            <point key="canvasLocation" x="222" y="278"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="pracPrj" width="64" height="64"/>
-    </resources>
 </document>

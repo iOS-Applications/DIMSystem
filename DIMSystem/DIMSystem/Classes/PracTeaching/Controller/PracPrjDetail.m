@@ -9,6 +9,7 @@
 #import "PracPrjDetail.h"
 
 @interface PracPrjDetail ()
+
 @property (strong, nonatomic) IBOutlet UILabel *prj_title;
 @property (strong, nonatomic) IBOutlet UILabel *prj_source;
 @property (strong, nonatomic) IBOutlet UILabel *prj_type;
@@ -29,6 +30,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:40/255.0 green:178/255.0 blue:255/255.0 alpha:1.0];
     [self setData:self.model];
 }
+
 - (void)setData:(PracProjectsModel *)model
 {
     self.prj_title.text = model.PraPrj_title;

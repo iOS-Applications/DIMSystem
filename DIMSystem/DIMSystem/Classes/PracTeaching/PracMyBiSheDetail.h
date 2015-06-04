@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PracProjectsModel.h"
 
 @interface PracMyBiSheDetail : UIViewController
+@property (nonatomic,strong) PracProjectsModel *model;
 
 @end

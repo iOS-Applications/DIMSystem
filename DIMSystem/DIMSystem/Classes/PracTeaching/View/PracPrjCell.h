@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 @class PracProjectsModel;
+
 @interface PracPrjCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *pracIcon;
 @property (strong, nonatomic) IBOutlet UILabel *prjTitle;
 @property (strong, nonatomic) IBOutlet UILabel *teacherName;
 @property (strong, nonatomic) IBOutlet UILabel *stuNum;

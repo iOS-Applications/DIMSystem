@@ -14,7 +14,9 @@
 {
     self = [super init];
     if (self) {
-        self.PraPrj_id = [info[@"PraPrj_id"] integerValue];
+        self.PraPrj_id = info[@"PraPrj_id"];
+        self.PraPrj_teaID = info[@"PraPrj_teaID"];
+        self.praPrj_sign = info[@"PraPrj_sign"];//类型
         self.PraPrj_title = info[@"PraPrj_title"];
         self.PraPrj_source = info[@"PraPrj_source"];
         self.PraPrj_type = info[@"PraPrj_type"];

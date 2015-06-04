@@ -11,6 +11,7 @@
 #import "pracScientific.h"
 #import "PracShiXun.h"
 
+
 @interface PracTabBarVC ()
 
 @end
@@ -54,14 +55,14 @@
 {
     //1.设置控制器的属性
     childVC.title = title;
-    UIImage *selectImage = [UIImage imageNamed:imageName];
-    [selectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    childVC.tabBarItem.image = selectImage;
     
-    childVC.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     //2.包装一个导航控制器
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:childVC];
     [nav.navigationBar setBarTintColor:[UIColor colorWithRed:11/255.0 green:81/255.0 blue:144/255.0 alpha:1.0]];
+    UIImage *selectImage = [UIImage imageNamed:imageName];
+    [selectImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:selectImage selectedImage:selectImage];
+
     [self addChildViewController:nav];
 }
 

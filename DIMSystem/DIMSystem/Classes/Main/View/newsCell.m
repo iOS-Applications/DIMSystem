@@ -8,6 +8,8 @@
 
 #import "newsCell.h"
 #import "newsModel.h"
+#import "UIImageView+WebCache.h"
+
 @implementation newsCell
 
 - (void)awakeFromNib {
@@ -21,7 +23,11 @@
 }
 - (void)setCellData:(newsModel *)model
 {
-    self.newsImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",model.newsicon_url]];
+    
+    NSString * encodingString = [model.newsicon_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL URLWithString:encodingString];
+    [self.newsImage sd_setImageWithURL:url];
+
     self.title.text = model.news_title;
     self.title.font = [UIFont boldSystemFontOfSize:15];
     self.time.text = model.news_createtime;

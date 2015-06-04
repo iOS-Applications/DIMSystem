@@ -10,8 +10,10 @@
 
 @interface PracProjectsModel : NSObject
 
-@property (nonatomic,assign) NSInteger PraPrj_id;
+@property (nonatomic,strong) NSString *PraPrj_id;
+@property (nonatomic,strong) NSString *PraPrj_teaID;
 @property (nonatomic,strong) NSString *PraPrj_title;
+@property (nonatomic,strong) NSString *praPrj_sign;
 @property (nonatomic,strong) NSString *PraPrj_source;
 @property (nonatomic,strong) NSString *PraPrj_type;
 @property (nonatomic,strong) NSString *PraPrj_teacher;
